@@ -1,12 +1,14 @@
-NAME	:= Game
+NAME	:= so_long
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+SRCDDIR	:= ./src/
+BINDIR	:= ./bin/
 LIBMLX	:= ./lib/MLX42
 LIBFT	:= ./lib/libft
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include
-LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS	:= $(shell find ./src -iname "*.c")
-OBJS	:= $(SRCS:.c=.o)
+LIBS	:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
+SRCS	:= main.c
+OBJS	:= $(addprefix  $(BINDIR), $(SRCS:.c=.o))
 
 all: libmlx libft $(NAME)
 
@@ -16,16 +18,19 @@ libmlx:
 libft:
 	$(MAKE) -C $(LIBFT)
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
+$(BINDIR)%.o: $(SRCDDIR)%.c
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
-$(NAME): $(OBJS)
+$(NAME): $(BINDIR) $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
+$(BINDIR) :
+	mkdir $(BINDIR)
+
 clean:
-	@rm -f $(OBJS)
-	@rm -r $(LIBMLX)/build
+	@rm -r $(BINDIR)
 	$(MAKE) -C $(LIBFT) fclean
+	@rm -r $(LIBMLX)/build
 
 fclean: clean
 	@rm -f $(NAME)
