@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/17 19:31:43 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:36:10 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static t_gamestate	g_state;
 static mlx_image_t	*g_framebuffer;
 
 // Exit the program as failure.
@@ -22,41 +21,25 @@ static void	ft_error(void)
 	exit(EXIT_FAILURE);
 }
 
-// Print the window width and height.
-static void	sl_tick(void	*param)
+void	keys(mlx_key_data_t keydata, void *param)
 {
-	if (mlx_is_key_down(param, MLX_KEY_W))
-		g_state.ply.pos.y -= 1;
-	if (mlx_is_key_down(param, MLX_KEY_S))
-		g_state.ply.pos.y += 1;
-	if (mlx_is_key_down(param, MLX_KEY_A))
-		g_state.ply.pos.x -= 1;
-	if (mlx_is_key_down(param, MLX_KEY_D))
-		g_state.ply.pos.x += 1;
+	sl_keys(keydata, param);
 }
 
-static void	sl_draw(void *param)
+void	tick(void *param)
 {
-	const mlx_t	*mlx = param;
-
-	(void)mlx;
-	mlx_put_pixel(g_framebuffer, g_state.ply.pos.x, g_state.ply.pos.y, 0xFF0000FF);
+	sl_tick(param);
 }
 
-void	sl_keys(mlx_key_data_t keydata, void *param)
+void	draw(void *param)
 {
-	(void)param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		exit(EXIT_SUCCESS);
+	sl_draw(g_framebuffer, param);
 }
 
 int32_t	main(void)
 {
 	mlx_t	*mlx;
 
-	g_state.NumColl = 0;
-	g_state.ply.pos.x = 0;
-	g_state.ply.pos.y = 0;
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx = mlx_init(WIDTH, HEIGHT, "So Long", true);
 	if (!mlx)
@@ -64,10 +47,12 @@ int32_t	main(void)
 	g_framebuffer = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!g_framebuffer || (mlx_image_to_window(mlx, g_framebuffer, 0, 0) < 0))
 		ft_error();
-	mlx_key_hook(mlx, &sl_keys, NULL);
-	mlx_loop_hook(mlx, sl_tick, mlx);
-	mlx_loop_hook(mlx, sl_draw, mlx);
+	mlx_key_hook(mlx, &keys, NULL);
+	mlx_loop_hook(mlx, tick, mlx);
+	mlx_loop_hook(mlx, draw, mlx);
+	sl_init();
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
+	sl_exit();
 	return (EXIT_SUCCESS);
 }

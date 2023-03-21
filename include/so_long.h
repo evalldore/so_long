@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/17 02:01:33 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/21 02:17:46 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,27 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <libft.h>
+# include <stddef.h>
+# include <ecs.h>
 # define WIDTH 512
 # define HEIGHT 512
+# define TILE_SIZE 32
 
-typedef struct s_vector
+typedef struct
 {
-    unsigned int x;
-    unsigned int y;
-}   t_vector;
+	unsigned int num_coll;
+}	map_t;
 
-typedef struct s_player
+typedef struct 
 {
-    t_vector pos;
-}   t_player;
+    ent_id_t	player;
+	map_t		map;
+}   gamestate_t;
 
-typedef struct s_gamestate 
-{
-    unsigned int    NumColl;
-    t_player        ply;
-}   t_gamestate;
+void	sl_init(void);
+void	sl_keys(mlx_key_data_t keydata, void *params);
+void	sl_tick(void *params);
+void	sl_draw(mlx_image_t *buffer, void *param);
+void	sl_exit();
 
 #endif

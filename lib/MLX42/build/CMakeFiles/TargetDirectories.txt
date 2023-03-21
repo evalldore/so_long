@@ -1,0 +1,3 @@
+/home/niceguy/c/solong/lib/MLX42/build/CMakeFiles/mlx42.dir
+/home/niceguy/c/solong/lib/MLX42/build/CMakeFiles/edit_cache.dir
+/home/niceguy/c/solong/lib/MLX42/build/CMakeFiles/rebuild_cache.dir
