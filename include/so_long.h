@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/21 02:17:46 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/23 02:35:43 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,14 @@ typedef struct
 	map_t		map;
 }   gamestate_t;
 
-void	sl_init(void);
+void	sl_init(mlx_t *mlx;);
 void	sl_keys(mlx_key_data_t keydata, void *params);
 void	sl_tick(void *params);
 void	sl_draw(mlx_image_t *buffer, void *param);
 void	sl_exit();
+
+void	sys_controls(mlx_key_data_t keydata, void *params);
+void	sys_movement(double dt);
+void	sys_sprites(double dt);
 
 #endif

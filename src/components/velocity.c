@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.c                                         :+:      :+:    :+:   */
+/*   velocity.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:16:41 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 01:35:46 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/23 01:36:22 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-void	*control_new(va_list args)
+void	*velocity_new(va_list args)
 {
-	(void)args;
-	return (malloc(sizeof(comp_ctrl_t)));
+	comp_vel_t	*vel;
+
+	vel = malloc(sizeof(comp_vel_t));
+	if (!vel)
+		return (NULL);
+	vel->curr.x = va_arg(args, double);
+	vel->curr.y = va_arg(args, double);
+	vel->last.x = vel->curr.x;
+	vel->last.y = vel->curr.y;
+	return (vel);
 }
 
-void	control_free(void	*ptr)
+void	velocity_free(void	*ptr)
 {
 	free(ptr);
 }
 
-void	comp_ctrl_reg()
+void	comp_vel_reg()
 {
-	ecs_comp_register(COMP_CTRL, &control_new, &control_free);
+	ecs_comp_register(COMP_VEL, &velocity_new, &velocity_free);
 }

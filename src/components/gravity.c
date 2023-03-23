@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.c                                         :+:      :+:    :+:   */
+/*   gravity.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 21:16:41 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 01:35:46 by niceguy          ###   ########.fr       */
+/*   Created: 2023/03/22 02:51:53 by niceguy           #+#    #+#             */
+/*   Updated: 2023/03/23 01:36:38 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-void	*control_new(va_list args)
+void	*gravity_new(va_list args)
 {
-	(void)args;
-	return (malloc(sizeof(comp_ctrl_t)));
+	comp_grav_t	*grav;
+
+	grav = malloc(sizeof(comp_grav_t));
+	if (!grav)
+		return (NULL);
+	grav->scale = va_arg(args, double);
+	return (grav);
 }
 
-void	control_free(void	*ptr)
+void	gravity_free(void	*ptr)
 {
 	free(ptr);
 }
 
-void	comp_ctrl_reg()
+void	comp_grav_reg(void)
 {
-	ecs_comp_register(COMP_CTRL, &control_new, &control_free);
+	ecs_comp_register(COMP_GRAV, &gravity_new, &gravity_free);
 }

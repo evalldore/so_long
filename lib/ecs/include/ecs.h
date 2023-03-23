@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 03:33:14 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/20 20:47:51 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/23 01:24:52 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 # define MAX_ENTS 256
 # define MAX_COMP 32
 # include <stdlib.h>
+# include <stdarg.h>
 
 typedef unsigned int ent_id_t;
-typedef void *(*constructor_t)(ent_id_t);
-typedef void (*destructor_t)(ent_id_t);
+typedef void *(*constructor_t)(va_list);
+typedef void (*destructor_t)(void	*);
 
 typedef struct
 {
@@ -29,7 +30,7 @@ typedef struct
 
 ent_id_t	ecs_create(void);
 ent_id_t	ecs_num(void);
-void		*ecs_comp_add(ent_id_t ent_id, int comp);
+void		*ecs_comp_add(ent_id_t ent_id, int comp, int argc, ...);
 void		ecs_comp_remove(ent_id_t ent_id, int comp);
 void		ecs_comp_register(int comp, constructor_t c, destructor_t d);
 void		*ecs_comp_get(ent_id_t ent_id, int comp);

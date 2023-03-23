@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.c                                         :+:      :+:    :+:   */
+/*   assets.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 21:16:41 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 01:35:46 by niceguy          ###   ########.fr       */
+/*   Created: 2023/03/22 05:07:51 by niceguy           #+#    #+#             */
+/*   Updated: 2023/03/23 00:39:31 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "entities.h"
+#ifndef ASSETS_H
+# define ASSETS_H
+# define MAX_ASSETS 64
+# include <MLX42/MLX42.h>
+# include <stdlib.h>
 
-void	*control_new(va_list args)
+enum	e_asset
 {
-	(void)args;
-	return (malloc(sizeof(comp_ctrl_t)));
-}
+	ASSET_NONE,
+	ASSET_SAM_IDLE,
+	ASSET_SAM_WALK1,
+	ASSET_SAM_WALK2,
+	ASSET_SAM_WALK3
+};
 
-void	control_free(void	*ptr)
+typedef struct s_assets
 {
-	free(ptr);
-}
+	mlx_texture_t	*textures[MAX_ASSETS];
+	mlx_image_t		*images[MAX_ASSETS];
+}	t_assets;
 
-void	comp_ctrl_reg()
-{
-	ecs_comp_register(COMP_CTRL, &control_new, &control_free);
-}
+mlx_image_t	*assets_get(enum e_asset ID);
+void		assets_init(mlx_t *mlx);
+
+#endif

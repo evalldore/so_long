@@ -6,29 +6,29 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:16:41 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/19 06:39:33 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/23 01:36:14 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-void	*position_new(ent_id_t ent_id)
+void	*position_new(va_list args)
 {
-	comp_pos_t	*comp;
+	comp_pos_t	*pos;
 
-	if (ent_id >= MAX_ENTS)
+	pos = malloc(sizeof(comp_pos_t));
+	if (!pos)
 		return (NULL);
-	comp = malloc(sizeof(comp_pos_t));
-	if (!comp)
-		return (NULL);
-	return (comp);
+	pos->curr.x = va_arg(args, double);
+	pos->curr.y = va_arg(args, double);
+	pos->last.x = pos->curr.x;
+	pos->last.y = pos->curr.y;
+	return (pos);
 }
 
-void	position_free(ent_id_t ent_id)
+void	position_free(void	*ptr)
 {
-	if (ent_id >= MAX_ENTS)
-		return ;
-	free(ecs_comp_get(COMP_POS, ent_id));
+	free(ptr);
 }
 
 void	comp_pos_reg()
