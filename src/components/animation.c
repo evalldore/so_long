@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.c                                         :+:      :+:    :+:   */
+/*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 21:16:41 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 15:49:42 by evallee-         ###   ########.fr       */
+/*   Created: 2023/03/23 16:47:27 by evallee-          #+#    #+#             */
+/*   Updated: 2023/03/23 18:24:46 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-void	*control_new(va_list args)
+void	*animation_new(va_list args)
 {
-	(void)args;
-	return (malloc(sizeof(comp_ctrl_t)));
+	comp_anim_t	*anim;
+
+	anim = malloc(sizeof(comp_anim_t));
+	if (!anim)
+		return (NULL);
+	anim->index = va_arg(args, int32_t);
+	anim->frame = 0;
+	return (anim);
 }
 
-void	control_free(void	*ptr)
+void	animation_free(void	*ptr)
 {
 	free(ptr);
 }
 
-void	comp_ctrl_reg(void)
+void	comp_anim_reg(void)
 {
-	ecs_comp_register(COMP_CTRL, &control_new, &control_free);
+	ecs_comp_register(COMP_ANIM, &animation_new, &animation_free);
 }

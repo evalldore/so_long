@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 02:40:38 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/23 20:09:17 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void	sl_tick(void *param)
 	const mlx_t	*mlx;
 
 	mlx = param;
+	sys_controls_tick(mlx->delta_time);
 	sys_movement(mlx->delta_time);
+	sys_animation(mlx->delta_time);
 	sys_sprites(mlx->delta_time);
 }
 

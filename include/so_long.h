@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 02:41:38 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/23 20:09:08 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ void	sl_init(mlx_t *mlx);
 void	sl_keys(mlx_key_data_t keydata, void *params);
 void	sl_tick(void *params);
 void	sl_draw(mlx_image_t *buffer, void *param);
-void	sl_exit();
+void	sl_exit(void);
 
 void	sys_controls(mlx_key_data_t keydata, void *params);
+void	sys_controls_tick(double dt);
 void	sys_movement(double dt);
 void	sys_sprites(double dt);
+void	sys_animation(double dt);
 
 #endif

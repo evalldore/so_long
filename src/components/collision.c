@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.c                                         :+:      :+:    :+:   */
+/*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 21:16:41 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 15:49:42 by evallee-         ###   ########.fr       */
+/*   Created: 2023/03/23 14:28:58 by evallee-          #+#    #+#             */
+/*   Updated: 2023/03/23 14:56:04 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-void	*control_new(va_list args)
+void	*collision_new(va_list args)
 {
-	(void)args;
-	return (malloc(sizeof(comp_ctrl_t)));
+	comp_coll_t	*coll;
+
+	coll = malloc(sizeof(comp_coll_t));
+	if (!coll)
+		return (NULL);
+	coll->width = va_arg(args, unsigned int);
+	coll->height = va_arg(args, unsigned int);
+	coll->offset.x = va_arg(args, double);
+	coll->offset.y = va_arg(args, double);
+	return (coll);
 }
 
-void	control_free(void	*ptr)
+void	collision_free(void	*ptr)
 {
 	free(ptr);
 }
 
-void	comp_ctrl_reg(void)
+void	comp_coll_reg(void)
 {
-	ecs_comp_register(COMP_CTRL, &control_new, &control_free);
+	ecs_comp_register(COMP_COLLISION, &collision_new, &collision_free);
 }
