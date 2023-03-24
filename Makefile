@@ -8,8 +8,8 @@ ECS		:= ./lib/ecs
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include -I $(ECS)/include
 LIBS	:= $(ECS)/ecs.a $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
-SRCS	:= main.c entities.c so_long.c controls.c movement.c assets.c sprites.c animation.c\
-		components/controls.c components/position.c components/gravity.c components/velocity.c components/sprite.c components/collision.c components/animation.c
+SRCS	:= main.c entities.c so_long.c controls.c movement.c assets.c sprites.c animation.c state.c\
+		components/controls.c components/position.c components/gravity.c components/velocity.c components/sprite.c components/collision.c components/animation.c components/state.c
 OBJS	:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
 
 all: libmlx libft ecs $(NAME)

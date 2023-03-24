@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 23:24:22 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 01:47:34 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,5 @@ void	sl_keys(mlx_key_data_t keydata, void *params);
 void	sl_tick(void *params);
 void	sl_draw(mlx_image_t *buffer, void *param);
 void	sl_exit(void);
-
-void	sys_controls(mlx_key_data_t keydata, void *params);
-void	sys_controls_tick(double dt);
-void	sys_movement(double dt);
-void	sys_sprites(mlx_t *mlx);
-void	sys_animation(double dt);
 
 #endif

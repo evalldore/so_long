@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 06:05:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 23:43:38 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 02:03:13 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	entities_init(void)
 	comp_sprite_reg();
 	comp_coll_reg();
 	comp_anim_reg();
+	comp_state_reg();
 }
 
 ent_id_t	entities_player(double x, double y)
@@ -35,7 +36,8 @@ ent_id_t	entities_player(double x, double y)
 	ecs_comp_add(ent, COMP_GRAV, 1, 1.0);
 	ecs_comp_add(ent, COMP_SPRITE, 4, ASSET_SAM_IDLE, -20.0, -40.0);
 	ecs_comp_add(ent, COMP_COLLISION, 4, 16, 16, -8, -16);
-	ecs_comp_add(ent, COMP_ANIM, 1, ANIM_WALK);
+	ecs_comp_add(ent, COMP_ANIM, 1, ANIM_IDLE);
+	ecs_comp_add(ent, COMP_STATE, STATE_IDLE);
 	return (ent);
 }
 

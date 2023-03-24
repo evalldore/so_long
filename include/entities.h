@@ -14,8 +14,16 @@ typedef enum comp_e
 	COMP_GRAV,
 	COMP_SPRITE,
 	COMP_COLLISION,
-	COMP_ANIM
+	COMP_ANIM,
+	COMP_STATE
 }	compnum_t;
+
+enum e_state
+{
+	STATE_IDLE,
+	STATE_WALK,
+	STATE_JUMP
+};
 
 typedef struct
 {
@@ -71,9 +79,22 @@ typedef struct
 
 }	comp_anim_t;
 
+typedef struct
+{
+	int32_t	curr;
+	int32_t last;
+}	comp_state_t;
+
 void		entities_init(void);
 ent_id_t	entities_player(double x, double y);
 ent_id_t	entities_collectible(double x, double y);
+void		animation_set(ent_id_t ent, int32_t index, int32_t frame);
+void		state_set(ent_id_t ent, int32_t next);
+void		sys_controls(mlx_key_data_t keydata, void *params);
+void		sys_controls_tick(double dt);
+void		sys_movement(double dt);
+void		sys_sprites(mlx_t *mlx);
+void		sys_animation(double dt);
 
 void		comp_ctrl_reg(void);
 void		comp_pos_reg(void);
@@ -82,5 +103,6 @@ void		comp_grav_reg(void);
 void		comp_sprite_reg(void);
 void		comp_coll_reg(void);
 void		comp_anim_reg(void);
+void		comp_state_reg(void);
 
 #endif

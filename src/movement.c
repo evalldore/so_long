@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:55:37 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 20:23:10 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/24 02:04:21 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void	sys_movement(double dt)
 		{
 			pos->curr.x += vel->curr.x * dt;
 			pos->curr.y += vel->curr.y * dt;
+			if (vel->curr.x != 0.0)
+				state_set(ent, STATE_WALK);
+			else
+				state_set(ent, STATE_IDLE);
 			if (pos->curr.y < 0)
 				pos->curr.y = 0;
 			if (pos->curr.y > 512)
