@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 01:21:37 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 01:56:16 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 03:21:15 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	*state_new(va_list args)
 	if (!state)
 		return (NULL);
 	state->curr = va_arg(args, int32_t);
+	state->last = state->curr;
 	return (state);
 }
 

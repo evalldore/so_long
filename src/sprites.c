@@ -6,14 +6,13 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 02:30:19 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 01:18:54 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 03:33:49 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include "assets.h"
 #include "entities.h"
-
 
 void	sys_sprites(mlx_t *mlx)
 {
@@ -33,7 +32,8 @@ void	sys_sprites(mlx_t *mlx)
 			if (sprite->last_asset != sprite->asset)
 			{
 				img = assets_get(sprite->last_asset);
-				img->instances[sprite->insts[sprite->last_asset]].enabled = false;
+				if (sprite->insts[sprite->last_asset] >= 0)
+					img->instances[sprite->insts[sprite->last_asset]].enabled = false;
 			}
 			img = assets_get(sprite->asset);
 			inst = sprite->insts[sprite->asset];

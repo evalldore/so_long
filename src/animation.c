@@ -6,17 +6,18 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:54:01 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/24 02:01:38 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 03:23:11 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libft.h>
 #include "entities.h"
 #include "assets.h"
 
 static int32_t g_anims[MAX_ANIM][4] = {
 	{ASSET_SAM_IDLE, ASSET_NONE, ASSET_NONE, ASSET_NONE},
 	{ASSET_SAM_WALK1, ASSET_SAM_WALK2, ASSET_SAM_WALK3, ASSET_NONE},
-	{ASSET_SAM_WALK2, ASSET_NONE, ASSET_NONE, ASSET_NONE}
+	{ASSET_SAM_WALK3, ASSET_NONE, ASSET_NONE, ASSET_NONE}
 };
 
 void	animation_set(ent_id_t ent, int32_t index, int32_t frame)
@@ -24,6 +25,10 @@ void	animation_set(ent_id_t ent, int32_t index, int32_t frame)
 	comp_anim_t		*anim;
 	comp_sprite_t	*sprt;
 
+	if (!g_anims[index])
+		return ;
+	if (!g_anims[index][frame])
+		return ;
 	anim = ecs_comp_get(ent, COMP_ANIM);
 	sprt = ecs_comp_get(ent, COMP_SPRITE);
 	if (sprt && anim)

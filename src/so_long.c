@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 00:26:43 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 03:04:00 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	sl_tick(void *param)
 	mlx = param;
 	sys_controls_tick(mlx->delta_time);
 	sys_movement(mlx->delta_time);
+	sys_state();
 	sys_animation(mlx->delta_time);
 	sys_sprites(mlx);
 }

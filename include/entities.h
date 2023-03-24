@@ -95,6 +95,7 @@ void		sys_controls_tick(double dt);
 void		sys_movement(double dt);
 void		sys_sprites(mlx_t *mlx);
 void		sys_animation(double dt);
+void		sys_state(void);
 
 void		comp_ctrl_reg(void);
 void		comp_pos_reg(void);
