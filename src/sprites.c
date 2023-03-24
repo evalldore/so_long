@@ -6,21 +6,23 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 02:30:19 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 02:35:50 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 01:17:15 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libft.h>
 #include "assets.h"
 #include "entities.h"
 
-void	sys_sprites(double dt)
+
+void	sys_sprites(mlx_t *mlx)
 {
 	comp_pos_t		*pos;
 	comp_sprite_t	*sprite;
 	ent_id_t		ent;
 	mlx_image_t		*img;
+	int32_t			inst;
 
-	(void)dt;
 	ent = 0;
 	while (ent < ecs_num())
 	{
@@ -28,9 +30,23 @@ void	sys_sprites(double dt)
 		sprite = ecs_comp_get(ent, COMP_SPRITE);
 		if (pos && sprite)
 		{
+			if (sprite->last_asset != sprite->asset)
+			{
+				img = assets_get(sprite->last_asset);
+				img->instances[sprite->insts[sprite->last_asset]].enabled = false;
+			}
 			img = assets_get(sprite->asset);
-			img->instances[sprite->inst].x = pos->curr.x + sprite->offset.x;
-			img->instances[sprite->inst].y = pos->curr.y + sprite->offset.y;
+			inst = sprite->insts[sprite->asset];
+			if (inst < 0)
+			{
+				inst = mlx_image_to_window(mlx, img, pos->curr.x + sprite->offset.x, pos->curr.y + sprite->offset.y);
+				sprite->insts[sprite->asset] = inst;
+				continue ;
+			}
+			img->instances[inst].enabled = true;
+			img->instances[inst].x = pos->curr.x + sprite->offset.x;
+			img->instances[inst].y = pos->curr.y + sprite->offset.y;
+			sprite->last_asset = sprite->asset;
 		}
 		ent++;
 	}

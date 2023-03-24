@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 20:09:08 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/23 23:24:22 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	sl_exit(void);
 void	sys_controls(mlx_key_data_t keydata, void *params);
 void	sys_controls_tick(double dt);
 void	sys_movement(double dt);
-void	sys_sprites(double dt);
+void	sys_sprites(mlx_t *mlx);
 void	sys_animation(double dt);
 
 #endif

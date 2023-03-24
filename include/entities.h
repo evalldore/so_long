@@ -43,6 +43,7 @@ typedef struct
 typedef struct
 {
 	int32_t		asset;
+	int32_t		last_asset;
 	vector_t	offset;
 	int32_t		*insts;
 }	comp_sprite_t;
@@ -65,13 +66,13 @@ typedef struct
 typedef struct
 {
 	int32_t		index;
-	uint32_t	frame;
+	int32_t		frame;
 	double		time;
 
 }	comp_anim_t;
 
 void		entities_init(void);
-ent_id_t	entities_player(mlx_t *mlx, double x, double y);
+ent_id_t	entities_player(double x, double y);
 ent_id_t	entities_collectible(double x, double y);
 
 void		comp_ctrl_reg(void);

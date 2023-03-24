@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:53:17 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 20:38:59 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/24 00:37:39 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@
 void	*sprite_new(va_list args)
 {
 	comp_sprite_t	*sprite;
+	int32_t			inst;
 
 	sprite = malloc(sizeof(comp_sprite_t));
 	if (!sprite)
 		return (NULL);
 	sprite->asset = va_arg(args, int32_t);
+	sprite->last_asset = sprite->asset;
 	sprite->offset.x = va_arg(args, double);
 	sprite->offset.y = va_arg(args, double);
-	sprite->insts = malloc((MAX_ASSETS - 1) * sizeof(int32_t));
+	sprite->insts = malloc(MAX_ASSETS * sizeof(int32_t));
+	inst = 0;
+	while (inst < MAX_ASSETS)
+		sprite->insts[inst++] = -1;
 	return (sprite);
 }
 
