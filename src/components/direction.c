@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   direction.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 14:45:58 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/24 18:03:21 by evallee-         ###   ########.fr       */
+/*   Created: 2023/03/24 17:10:30 by evallee-          #+#    #+#             */
+/*   Updated: 2023/03/24 18:06:32 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "entities.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+void	*direction_new(va_list args)
 {
-	size_t	i;
+	comp_dir_t	*dir;
 
-	if (!dst || !src)
-		return (0);
-	if (dstsize > 0)
-	{
-		i = 0;
-		while (src[i] != '\0' && i < (dstsize - 1))
-			*dst++ = src[i++];
-		*dst = '\0';
-	}
-	return (ft_strlen(src));
+	dir = malloc(sizeof(comp_dir_t));
+	if (!dir)
+		return (NULL);
+	dir->curr = va_arg(args, int);
+	return (dir);
+}
+
+void	direction_free(void	*ptr)
+{
+	free(ptr);
+}
+
+void	comp_dir_reg(void)
+{
+	ecs_comp_register(COMP_DIRECTION, &direction_new, &direction_free);
 }

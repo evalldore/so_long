@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assets.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 05:07:51 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 02:28:20 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 17:44:32 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,25 @@
 enum	e_asset
 {
 	ASSET_NONE,
-	ASSET_SAM_IDLE,
-	ASSET_SAM_WALK1,
-	ASSET_SAM_WALK2,
-	ASSET_SAM_WALK3,
+	ASSET_SAM_IDLE_R,
+	ASSET_SAM_WALK_R_1,
+	ASSET_SAM_WALK_R_2,
+	ASSET_SAM_WALK_R_3,
+	ASSET_SAM_IDLE_L,
+	ASSET_SAM_WALK_L_1,
+	ASSET_SAM_WALK_L_2,
+	ASSET_SAM_WALK_L_3,
 	MAX_ASSETS
 };
 
 enum	e_anim
 {
-	ANIM_IDLE,
-	ANIM_WALK,
-	ANIM_JUMP,
+	ANIM_IDLE_R,
+	ANIM_WALK_R,
+	ANIM_JUMP_R,
+	ANIM_IDLE_L,
+	ANIM_WALK_L,
+	ANIM_JUMP_L,
 	MAX_ANIM
 };
 

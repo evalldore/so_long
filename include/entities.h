@@ -15,7 +15,8 @@ typedef enum comp_e
 	COMP_SPRITE,
 	COMP_COLLISION,
 	COMP_ANIM,
-	COMP_STATE
+	COMP_STATE,
+	COMP_DIRECTION
 }	compnum_t;
 
 enum e_state
@@ -81,6 +82,13 @@ typedef struct
 
 typedef struct
 {
+	bool	last;
+	bool	curr;
+
+}	comp_dir_t;
+
+typedef struct
+{
 	int32_t	curr;
 	int32_t last;
 }	comp_state_t;
@@ -105,5 +113,6 @@ void		comp_sprite_reg(void);
 void		comp_coll_reg(void);
 void		comp_anim_reg(void);
 void		comp_state_reg(void);
+void		comp_dir_reg(void);
 
 #endif

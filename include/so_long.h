@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 01:47:34 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 20:59:39 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,25 @@
 
 typedef struct
 {
-	unsigned int num_coll;
+	uint32_t	num_coll;
 }	map_t;
 
 typedef struct 
 {
-    ent_id_t	player;
+	ent_id_t	player;
 	map_t		map;
-}   gamestate_t;
+}	gamestate_t;
 
+typedef struct
+{
+	bool		has_exit;
+	bool		has_start;
+	uint32_t	collectibles;
+	uint32_t	x;
+	uint32_t	y;
+}	t_mapcheck;
+
+bool	map_load(map_t *map_data, const char *path);
 void	sl_init(mlx_t *mlx);
 void	sl_keys(mlx_key_data_t keydata, void *params);
 void	sl_tick(void *params);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 03:04:00 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 20:03:23 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	sl_init(mlx_t *mlx)
 {
 	assets_init(mlx);
 	entities_init();
+	map_load(NULL, "maps/test.ber");
 	g_gamestate.player = entities_player(256.0, 256.0);
 }
 

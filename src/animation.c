@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:54:01 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/24 03:23:11 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 17:49:30 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 #include "assets.h"
 
 static int32_t g_anims[MAX_ANIM][4] = {
-	{ASSET_SAM_IDLE, ASSET_NONE, ASSET_NONE, ASSET_NONE},
-	{ASSET_SAM_WALK1, ASSET_SAM_WALK2, ASSET_SAM_WALK3, ASSET_NONE},
-	{ASSET_SAM_WALK3, ASSET_NONE, ASSET_NONE, ASSET_NONE}
+	{ASSET_SAM_IDLE_R, ASSET_NONE, ASSET_NONE, ASSET_NONE},
+	{ASSET_SAM_WALK_R_1, ASSET_SAM_WALK_R_2, ASSET_SAM_WALK_R_3, ASSET_NONE},
+	{ASSET_SAM_WALK_R_3, ASSET_NONE, ASSET_NONE, ASSET_NONE},
+	{ASSET_SAM_IDLE_L, ASSET_NONE, ASSET_NONE, ASSET_NONE},
+	{ASSET_SAM_WALK_L_1, ASSET_SAM_WALK_L_2, ASSET_SAM_WALK_L_3, ASSET_NONE},
+	{ASSET_SAM_WALK_L_3, ASSET_NONE, ASSET_NONE, ASSET_NONE}
 };
 
 void	animation_set(ent_id_t ent, int32_t index, int32_t frame)
@@ -45,7 +48,6 @@ void	sys_animation(double dt)
 	ent_id_t		ent;
 	comp_anim_t		*anim;
 	comp_sprite_t	*sprt;
-	int32_t			nextframe;
 
 	ent = 0;
 	while (ent < ecs_num())
@@ -57,8 +59,7 @@ void	sys_animation(double dt)
 			anim->time += dt;
 			if (anim->time > 0.1)
 			{
-				nextframe = g_anims[anim->index][anim->frame + 1];
-				if (nextframe)
+				if (g_anims[anim->index][anim->frame + 1])
 				{
 					animation_set(ent, anim->index, anim->frame + 1);
 					continue ;
@@ -68,5 +69,4 @@ void	sys_animation(double dt)
 		}
 		ent++;
 	}
-
 }

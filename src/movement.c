@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:55:37 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 02:49:27 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 17:48:41 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-static float	g_grav = 360;
+static float	g_grav = 480;
 
 static void	gravity(ent_id_t ent, double dt)
 {
@@ -22,7 +22,12 @@ static void	gravity(ent_id_t ent, double dt)
 	grav = ecs_comp_get(ent, COMP_GRAV);
 	vel = ecs_comp_get(ent, COMP_VEL);
 	if (grav && vel)
+	{
+		grav->scale += dt * 3;
+		if (grav->scale > 1)
+			grav->scale = 1;
 		vel->curr.y += (g_grav * dt) * grav->scale;
+	}
 }
 
 void	sys_movement(double dt)

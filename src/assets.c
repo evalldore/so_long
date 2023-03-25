@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 05:06:31 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 23:40:24 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/24 17:49:48 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ mlx_image_t	*assets_get(int32_t	asset)
 
 void	assets_init(mlx_t *mlx)
 {
-	assets_load(mlx, ASSET_SAM_IDLE, "assets/idle.png");
-	assets_load(mlx, ASSET_SAM_WALK1, "assets/walk_1.png");
-	assets_load(mlx, ASSET_SAM_WALK2, "assets/walk_2.png");
-	assets_load(mlx, ASSET_SAM_WALK3, "assets/walk_3.png");
+	assets_load(mlx, ASSET_SAM_IDLE_R, "assets/idle_r.png");
+	assets_load(mlx, ASSET_SAM_WALK_R_1, "assets/walk_r_1.png");
+	assets_load(mlx, ASSET_SAM_WALK_R_2, "assets/walk_r_2.png");
+	assets_load(mlx, ASSET_SAM_WALK_R_3, "assets/walk_r_3.png");
+	assets_load(mlx, ASSET_SAM_IDLE_L, "assets/idle_l.png");
+	assets_load(mlx, ASSET_SAM_WALK_L_1, "assets/walk_l_1.png");
+	assets_load(mlx, ASSET_SAM_WALK_L_2, "assets/walk_l_2.png");
+	assets_load(mlx, ASSET_SAM_WALK_L_3, "assets/walk_l_3.png");
 }
