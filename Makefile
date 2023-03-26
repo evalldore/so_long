@@ -1,5 +1,5 @@
 NAME	:= so_long
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -lm
 SRCDDIR	:= ./src/
 BINDIR	:= ./bin/
 LIBMLX	:= ./lib/MLX42
@@ -8,7 +8,7 @@ ECS		:= ./lib/ecs
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include -I $(ECS)/include
 LIBS	:= $(ECS)/ecs.a $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
-SRCS	:= main.c parsing.c map.c entities.c so_long.c controls.c movement.c assets.c sprites.c animation.c state.c\
+SRCS	:= main.c coordinates.c collision.c parsing.c map.c entities.c so_long.c controls.c movement.c assets.c sprites.c animation.c state.c\
 		components/controls.c components/position.c components/gravity.c components/velocity.c components/sprite.c components/collision.c components/animation.c components/state.c components/direction.c
 OBJS	:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
 

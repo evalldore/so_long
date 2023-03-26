@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:14:25 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/26 06:14:27 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/26 06:46:20 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct
 	vector_t		offset;
 	unsigned int	width;
 	unsigned int	height;
+	uint32_t		flags;
 }	comp_coll_t;
 
 typedef struct
@@ -118,6 +119,7 @@ void		sys_movement(double dt);
 void		sys_sprites(mlx_t *mlx);
 void		sys_animation(double dt);
 void		sys_state(void);
+void		sys_collision(double dt);
 
 void		comp_ctrl_reg(void);
 void		comp_pos_reg(void);

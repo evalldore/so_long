@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/26 06:12:06 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/26 06:42:55 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <libft.h>
 # include <stddef.h>
 # include <ecs.h>
+# include <math.h>
 # define WIDTH 512
 # define HEIGHT 512
 # define TILE_SIZE 32
@@ -53,6 +54,7 @@ typedef struct s_linecheck
 	size_t		len;
 }	t_mapcheck;
 
+t_coord	pos_to_coords(double x, double y);
 t_list  *parse_file(char *path);
 bool	map_load(char *path);
 t_map	map_get();
