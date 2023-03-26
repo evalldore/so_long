@@ -6,11 +6,12 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 14:28:58 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/26 06:18:05 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/26 07:32:53 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
+#include "libft.h"
 
 void	*collision_new(va_list args)
 {
@@ -19,10 +20,12 @@ void	*collision_new(va_list args)
 	coll = malloc(sizeof(comp_coll_t));
 	if (!coll)
 		return (NULL);
-	coll->width = va_arg(args, unsigned int);
-	coll->height = va_arg(args, unsigned int);
+	coll->width = va_arg(args, uint32_t);
+	coll->height = va_arg(args, uint32_t);
 	coll->offset.x = va_arg(args, double);
 	coll->offset.y = va_arg(args, double);
+	coll->flags = va_arg(args, int32_t);
+	printf("w: %d\nh: %d\noffsetx: %f\noffsety: %f\nflags: %d\n", coll->width, coll->height, coll->offset.x, coll->offset.y, coll->flags);
 	return (coll);
 }
 

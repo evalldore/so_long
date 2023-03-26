@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/26 06:50:05 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/26 07:16:08 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool	check_world(comp_pos_t *pos, comp_vel_t *vel, comp_coll_t *coll)
 	coll_pos.y = pos->curr.y + coll->offset.y;
 	coords = pos_to_coords(coll_pos.x, coll_pos.y);
 	//ft_printf("coords x: %d\ncoords y: %d\n", coords.x, coords.y);
-	return (map.data[coords.y][coords.x] == '1');	
+	return (map.data[coords.y][coords.x] == '1');
 }
 
 void	sys_collision(double dt)
@@ -43,9 +43,9 @@ void	sys_collision(double dt)
 		coll = ecs_comp_get(ent, COMP_COLLISION);
 		if (!pos || !vel || !coll)
 			continue ;
-		if (check_world(pos, vel, coll))
+		if ((coll->flags & COLL_FLAG_WORLD) && check_world(pos, vel, coll))
 		{
-			vel->curr.x = 0.0f;
+			//vel->curr.x = 0.0f;
 			vel->curr.y = 0.0f;
 		}
 		ent++;
