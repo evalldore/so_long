@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 20:59:39 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/26 06:12:06 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,39 +24,39 @@
 # define HEIGHT 512
 # define TILE_SIZE 32
 
-typedef struct
+typedef struct s_coord
+{
+	uint32_t	x;
+	uint32_t	y;
+}	t_coord;
+
+typedef struct s_map
 {
 	uint32_t	num_coll;
 	char		**data;
 	uint32_t	dim_x;
 	uint32_t	dim_y;
-}	map_t;
+	t_coord		start;
+	t_coord		end;
+}	t_map;
 
-typedef struct 
+typedef struct s_gamestate
 {
 	ent_id_t	player;
-	map_t		map;
 }	gamestate_t;
 
-typedef struct
+typedef struct s_linecheck
 {
 	bool		has_exit;
 	bool		has_start;
 	uint32_t	collectibles;
 	size_t		len;
-}	t_linecheck;
-
-typedef struct
-{
-	bool		has_exit;
-	bool		has_start;
-	uint32_t	collectibles;
-	uint32_t	x;
-	uint32_t	y;
 }	t_mapcheck;
 
-bool	map_load(map_t *map_data, const char *path);
-void	sl_init(mlx_t *mlx);
+t_list  *parse_file(char *path);
+bool	map_load(char *path);
+t_map	map_get();
+void	sl_init(mlx_t *mlx, char *path);
 void	sl_keys(mlx_key_data_t keydata, void *params);
 void	sl_tick(void *params);
 void	sl_draw(mlx_image_t *buffer, void *param);

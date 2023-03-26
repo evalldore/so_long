@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 21:12:13 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/26 06:10:11 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static bool	check_line(t_linecheck *check, char	*line)
+static t_map	g_map;
+
+static bool	check_line(t_mapcheck *check, char	*line)
 {
 	check->len = 0;
 	while(line[check->len] && line[check->len] != '\n')
@@ -38,56 +40,61 @@ static bool	check_line(t_linecheck *check, char	*line)
 	return (true);
 }
 
-static bool	map_init(map_t *map_data, t_list *list)
+static bool	map_init(t_list *list)
 {
 	size_t	index;
 
 	index = 0;
-	map_data->dim_x = ft_strlen(list->content);
-	map_data->dim_y = ft_lstsize(list);
-	map_data->data = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
+	g_map.dim_x = ft_strlen(list->content);
+	g_map.dim_y = ft_lstsize(list);
+	g_map.data = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
 	while (list)
 	{
-		map_data->data[index++] = list->content;
+		g_map.data[index] = list->content;
+		if (ft_strchr(list->content, 'P'))
+		{
+			g_map.start.x = ft_strchr(list->content, 'P') - (char *)(list->content);
+			g_map.start.y = index;
+		}
+		if (ft_strchr(list->content, 'E'))
+		{
+			g_map.end.x = ft_strchr(list->content, 'E') - (char *)(list->content);
+			g_map.end.y = index;
+		}
+		index++;
 		list = list->next;
 	}
-	map_data->data[index] = NULL;
-	ft_printf("dim x: %d\ndim y: %d\n", map_data->dim_x, map_data->dim_y);
+	g_map.data[index] = NULL;
+	ft_printf("dim x: %d\ndim y: %d\nstart x: %d\nstart y: %d\nend x :%d\nend y:%d\n", g_map.dim_x, g_map.dim_y, g_map.start.x, g_map.start.y);
 	return (true);
 }
 
-bool	map_load(map_t *map_data, const char	*path)
+t_map	map_get()
 {
-	static t_linecheck	check;
-	int					fd;
-	char				*line;
-	t_list				*list;
-	t_list				*new;
+	return (g_map);
+}
 
-	fd = open(path, O_RDONLY);
-	list = NULL;
-	if (fd < 0)
-		return (NULL);
-	while (1)
+bool	map_load(char *path)
+{
+	static t_mapcheck	check;
+	t_list				*list;
+	t_list				*curr;
+
+	list = parse_file(path);
+	if (!list)
+		return (false);
+	curr = list;
+	while (curr)
 	{
-		line = ft_get_next_line(fd);
-		if (!line)
-			break ;
-		if (check_line(&check, line))
+		if (check_line(&check, curr->content))
 		{
-			new = ft_lstnew(line);
-			if (new)
-			{
-				ft_lstadd_back(&list, new);
-				continue ;
-			}
+			curr = curr->next;
+			continue ;
 		}
-		free(line);
 		ft_lstclear(&list, &free);
 		break;
 	}
-	close(fd);
 	if (list)
-		return (map_init(map_data, list));
+		return (map_init(list));
 	return (false);
 }

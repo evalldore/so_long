@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 02:39:59 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/26 05:47:29 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ void	loop(void *param)
 	sl_draw(g_framebuffer, param);
 }
 
-int32_t	main(void)
+int32_t	main(int argc, char	**argv)
 {
 	mlx_t	*mlx;
-
+	if (argc < 2)
+		ft_error();
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx = mlx_init(WIDTH, HEIGHT, "So Long", true);
 	if (!mlx)
@@ -40,7 +41,7 @@ int32_t	main(void)
 		ft_error();
 	mlx_key_hook(mlx, sl_keys, NULL);
 	mlx_loop_hook(mlx, loop, mlx);
-	sl_init(mlx);
+	sl_init(mlx, argv[1]);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	sl_exit();

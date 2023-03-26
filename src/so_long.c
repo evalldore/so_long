@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 20:03:23 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/26 06:12:38 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,35 @@
 
 static gamestate_t	g_gamestate;
 
-void	sl_init(mlx_t *mlx)
+void	sl_init(mlx_t *mlx, char *path)
 {
-	uint32_t	coord_x;
-	uint32_t	coord_y;
+	t_coord		coords;
 	int32_t		asset;
+	t_map		map;
 
-	if (map_load(&g_gamestate.map, "maps/test.ber"))
+	if (map_load(path))
 	{
-		coord_y = 0;
+		map = map_get();
+		coords.y = 0;
 		assets_init(mlx);
 		entities_init();
-		while (g_gamestate.map.data[coord_y])
+		while (map.data[coords.y])
 		{
-			coord_x = 0;
-			while (g_gamestate.map.data[coord_y][coord_x] && g_gamestate.map.data[coord_y][coord_x] != '\n')
+			coords.x = 0;
+			while (map.data[coords.y][coords.x] && map.data[coords.y][coords.x] != '\n')
 			{
 				asset = 0;
-				if (g_gamestate.map.data[coord_y][coord_x] == '0')
+				if (map.data[coords.y][coords.x] == '0' || map.data[coords.y][coords.x] == 'C')
 					asset = ASSET_TILE_EMPTY;
-				if (g_gamestate.map.data[coord_y][coord_x] == '1')
+				if (map.data[coords.y][coords.x] == '1')
 					asset = ASSET_TILE_WALL;
 				if (asset)
-					mlx_image_to_window(mlx, assets_get(asset), coord_x * TILE_SIZE, coord_y * TILE_SIZE);
-				coord_x++;
+					mlx_image_to_window(mlx, assets_get(asset), coords.x * TILE_SIZE, coords.y * TILE_SIZE);
+				coords.x++;
 			}
-			coord_y++;
+			coords.y++;
 		}
-		g_gamestate.player = entities_player(256.0, 256.0);
+		g_gamestate.player = entities_player((map.start.x * TILE_SIZE) + (TILE_SIZE / 2), map.start.y * TILE_SIZE);
 	}
 }
 
