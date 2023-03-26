@@ -28,7 +28,7 @@ void	animation_set(ent_id_t ent, int32_t index, int32_t frame)
 	comp_anim_t		*anim;
 	comp_sprite_t	*sprt;
 
-	if (!g_anims[index])
+	if (index < 0 || !g_anims[index])
 		return ;
 	if (!g_anims[index][frame])
 		return ;

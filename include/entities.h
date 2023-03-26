@@ -96,8 +96,10 @@ typedef struct
 void		entities_init(void);
 ent_id_t	entities_player(double x, double y);
 ent_id_t	entities_collectible(double x, double y);
+
 void		animation_set(ent_id_t ent, int32_t index, int32_t frame);
 void		state_set(ent_id_t ent, int32_t next);
+
 void		sys_controls(mlx_key_data_t keydata, void *params);
 void		sys_controls_tick(double dt);
 void		sys_movement(double dt);

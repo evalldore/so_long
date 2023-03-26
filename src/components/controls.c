@@ -14,8 +14,17 @@
 
 void	*control_new(va_list args)
 {
+	comp_ctrl_t	*ctrl;
+
 	(void)args;
-	return (malloc(sizeof(comp_ctrl_t)));
+	ctrl = malloc(sizeof(comp_ctrl_t));
+	if (!ctrl)
+		return (NULL);
+	ctrl->jump = false;
+	ctrl->left = false;
+	ctrl->right = false;
+	ctrl->shoot = false;
+	return (ctrl);
 }
 
 void	control_free(void	*ptr)
