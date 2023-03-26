@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:14:25 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/26 07:33:32 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/26 18:40:51 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ enum e_state
 
 typedef struct
 {
-	float x;
-	float y;
+	double x;
+	double y;
 }	vector_t;
 
 typedef struct
@@ -66,7 +66,7 @@ typedef struct
 
 typedef struct
 {
-	float	scale;
+	double	scale;
 }	comp_grav_t;
 
 typedef struct

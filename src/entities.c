@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 06:05:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/26 07:31:30 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/26 18:41:13 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	entities_init(void)
 
 ent_id_t	entities_player(double x, double y)
 {
-	ent_id_t	ent;
-	int32_t		collflags;
+	ent_id_t		ent;
+	uint32_t		collflags;
 	
 	collflags = (COLL_FLAG_WORLD | COLL_FLAG_PLAYER);
 	ent = ecs_create();
@@ -39,7 +39,7 @@ ent_id_t	entities_player(double x, double y)
 	ecs_comp_add(ent, COMP_VEL, 2, 0.0, 0.0);
 	ecs_comp_add(ent, COMP_GRAV, 1, 1.0);
 	ecs_comp_add(ent, COMP_SPRITE, 4, ASSET_SAM_IDLE_R, -20.0, -40.0);
-	ecs_comp_add(ent, COMP_COLLISION, 5, 16, 16, -8, -16, collflags);
+	ecs_comp_add(ent, COMP_COLLISION, 5, 16, 16, -8.0, -16.0, collflags);
 	ecs_comp_add(ent, COMP_ANIM, 1, ANIM_IDLE_R);
 	ecs_comp_add(ent, COMP_STATE, 1, STATE_IDLE);
 	ecs_comp_add(ent, COMP_DIRECTION, 1, true);
