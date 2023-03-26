@@ -38,6 +38,23 @@ static bool	check_line(t_linecheck *check, char	*line)
 	return (true);
 }
 
+static bool	map_init(map_t *map_data, t_list *list)
+{
+	size_t	index;
+
+	index = 0;
+	map_data->dim_x = ft_strlen(list->content);
+	map_data->dim_y = ft_lstsize(list);
+	map_data->data = malloc(sizeof(char *) * ft_lstsize(list));
+	while (list)
+	{
+		map_data->data[index++] = list->content;
+		list = list->next;
+	}
+	ft_printf("dim x: %d\ndim y: %d\n", map_data->dim_x, map_data->dim_y);
+	return (true);
+}
+
 bool	map_load(map_t *map_data, const char	*path)
 {
 	static t_linecheck	check;
@@ -47,7 +64,6 @@ bool	map_load(map_t *map_data, const char	*path)
 	t_list				*new;
 
 	fd = open(path, O_RDONLY);
-	(void)map_data;
 	list = NULL;
 	if (fd < 0)
 		return (NULL);
@@ -65,11 +81,12 @@ bool	map_load(map_t *map_data, const char	*path)
 				continue ;
 			}
 		}
+		free(line);
 		ft_lstclear(&list, &free);
 		break;
 	}
 	close(fd);
 	if (list)
-		ft_printf("woah\n");
+		return (map_init(map_data, list));
 	return (false);
 }

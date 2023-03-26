@@ -27,6 +27,9 @@
 typedef struct
 {
 	uint32_t	num_coll;
+	char		**data;
+	uint32_t	dim_x;
+	uint32_t	dim_y;
 }	map_t;
 
 typedef struct 

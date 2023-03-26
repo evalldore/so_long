@@ -18,10 +18,12 @@ static gamestate_t	g_gamestate;
 
 void	sl_init(mlx_t *mlx)
 {
-	assets_init(mlx);
-	entities_init();
-	map_load(NULL, "maps/test.ber");
-	g_gamestate.player = entities_player(256.0, 256.0);
+	if (map_load(&g_gamestate.map, "maps/test.ber"))
+	{
+		assets_init(mlx);
+		entities_init();
+		g_gamestate.player = entities_player(256.0, 256.0);
+	}
 }
 
 void	sl_keys(mlx_key_data_t keydata, void *param)
