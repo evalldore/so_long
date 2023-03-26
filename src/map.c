@@ -45,12 +45,13 @@ static bool	map_init(map_t *map_data, t_list *list)
 	index = 0;
 	map_data->dim_x = ft_strlen(list->content);
 	map_data->dim_y = ft_lstsize(list);
-	map_data->data = malloc(sizeof(char *) * ft_lstsize(list));
+	map_data->data = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
 	while (list)
 	{
 		map_data->data[index++] = list->content;
 		list = list->next;
 	}
+	map_data->data[index] = NULL;
 	ft_printf("dim x: %d\ndim y: %d\n", map_data->dim_x, map_data->dim_y);
 	return (true);
 }

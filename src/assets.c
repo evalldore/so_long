@@ -32,6 +32,8 @@ mlx_image_t	*assets_get(int32_t	asset)
 
 void	assets_init(mlx_t *mlx)
 {
+	assets_load(mlx, ASSET_TILE_EMPTY, "assets/tile_empty.png");
+	assets_load(mlx, ASSET_TILE_WALL, "assets/tile_wall.png");
 	assets_load(mlx, ASSET_SAM_IDLE_R, "assets/idle_r.png");
 	assets_load(mlx, ASSET_SAM_WALK_R_1, "assets/walk_r_1.png");
 	assets_load(mlx, ASSET_SAM_WALK_R_2, "assets/walk_r_2.png");

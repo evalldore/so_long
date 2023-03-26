@@ -18,10 +18,31 @@ static gamestate_t	g_gamestate;
 
 void	sl_init(mlx_t *mlx)
 {
+	uint32_t	coord_x;
+	uint32_t	coord_y;
+	int32_t		asset;
+
 	if (map_load(&g_gamestate.map, "maps/test.ber"))
 	{
+		coord_y = 0;
 		assets_init(mlx);
 		entities_init();
+		while (g_gamestate.map.data[coord_y])
+		{
+			coord_x = 0;
+			while (g_gamestate.map.data[coord_y][coord_x] && g_gamestate.map.data[coord_y][coord_x] != '\n')
+			{
+				asset = 0;
+				if (g_gamestate.map.data[coord_y][coord_x] == '0')
+					asset = ASSET_TILE_EMPTY;
+				if (g_gamestate.map.data[coord_y][coord_x] == '1')
+					asset = ASSET_TILE_WALL;
+				if (asset)
+					mlx_image_to_window(mlx, assets_get(asset), coord_x * TILE_SIZE, coord_y * TILE_SIZE);
+				coord_x++;
+			}
+			coord_y++;
+		}
 		g_gamestate.player = entities_player(256.0, 256.0);
 	}
 }
