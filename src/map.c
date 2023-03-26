@@ -12,78 +12,64 @@
 
 #include "so_long.h"
 
-static bool	check_content(t_mapcheck *mapcheck, char *content, size_t *len)
+static bool	check_line(t_linecheck *check, char	*line)
 {
-	*len = 0;
-	while (content[*len] && content[*len] != '\n')
+	check->len = 0;
+	while(line[check->len] && line[check->len] != '\n')
 	{
-		if (content[*len] == 'P')
+		if (line[check->len] == 'P')
 		{
-			if (!mapcheck->has_start)
-				mapcheck->has_start = true;
+			if (!check->has_start)
+				check->has_start = true;
 			else
 				return (false);
 		}
-		if (content[*len] == 'E' && !mapcheck->has_exit)
+		if (line[check->len] == 'E')
 		{
-			if (!mapcheck->has_exit)
-				mapcheck->has_exit = true;
+			if (!check->has_exit)
+				check->has_exit = true;
 			else
 				return (false);
 		}
-		if (content[*len] == 'C')
-			mapcheck->collectibles++;
-		*len += 1;
-	}
-	return (false);
-}
-
-static bool	init_map(map_t *map_data, t_list *list)
-{
-	t_mapcheck		mapcheck;
-	t_list			*temp;
-	char			*content;
-	size_t			len;
-	(void)map_data;
-	while (list)
-	{
-		temp = list;
-		content = list->content;
-		check_content(&mapcheck, content, &len);
-		if (mapcheck.x == 0)
-			mapcheck.x = len;
-		// if (mapcheck.x != len)
-		// 	ft_lstclear(&list, &free);
-		// else
-			list = list->next;
-		ft_lstdelone(temp, &free);
-		mapcheck.y++;
+		if (line[check->len] == 'C')
+			check->collectibles++;
+		check->len++;
 	}
 	return (true);
 }
 
 bool	map_load(map_t *map_data, const char	*path)
 {
-	int		fd;
-	t_list	*list;
-	t_list	*new;
-	char	*line;
+	static t_linecheck	check;
+	int					fd;
+	char				*line;
+	t_list				*list;
+	t_list				*new;
 
 	fd = open(path, O_RDONLY);
 	(void)map_data;
+	list = NULL;
 	if (fd < 0)
 		return (NULL);
-	list = NULL;
 	while (1)
 	{
 		line = ft_get_next_line(fd);
 		if (!line)
 			break ;
-		new = ft_lstnew(line);
-		if (!new)
-			break ;
-		ft_lstadd_back(&list, new);
+		if (check_line(&check, line))
+		{
+			new = ft_lstnew(line);
+			if (new)
+			{
+				ft_lstadd_back(&list, new);
+				continue ;
+			}
+		}
+		ft_lstclear(&list, &free);
+		break;
 	}
 	close(fd);
-	return (init_map(map_data, list));
+	if (list)
+		ft_printf("woah\n");
+	return (false);
 }

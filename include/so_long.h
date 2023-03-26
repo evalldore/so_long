@@ -40,6 +40,14 @@ typedef struct
 	bool		has_exit;
 	bool		has_start;
 	uint32_t	collectibles;
+	size_t		len;
+}	t_linecheck;
+
+typedef struct
+{
+	bool		has_exit;
+	bool		has_start;
+	uint32_t	collectibles;
 	uint32_t	x;
 	uint32_t	y;
 }	t_mapcheck;
