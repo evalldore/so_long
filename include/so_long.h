@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/26 06:42:55 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 01:49:14 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,10 @@
 # include <stddef.h>
 # include <ecs.h>
 # include <math.h>
+# include "vector.h"
 # define WIDTH 512
 # define HEIGHT 512
 # define TILE_SIZE 32
-
-typedef struct s_coord
-{
-	uint32_t	x;
-	uint32_t	y;
-}	t_coord;
 
 typedef struct s_map
 {
@@ -37,8 +32,8 @@ typedef struct s_map
 	char		**data;
 	uint32_t	dim_x;
 	uint32_t	dim_y;
-	t_coord		start;
-	t_coord		end;
+	t_uvector	start;
+	t_uvector	end;
 }	t_map;
 
 typedef struct s_gamestate
@@ -54,14 +49,14 @@ typedef struct s_linecheck
 	size_t		len;
 }	t_mapcheck;
 
-t_coord	pos_to_coords(double x, double y);
-t_list  *parse_file(char *path);
-bool	map_load(char *path);
-t_map	map_get();
-void	sl_init(mlx_t *mlx, char *path);
-void	sl_keys(mlx_key_data_t keydata, void *params);
-void	sl_tick(void *params);
-void	sl_draw(mlx_image_t *buffer, void *param);
-void	sl_exit(void);
+t_uvector	pos_to_coords(double x, double y);
+t_list		*parse_file(char *path);
+bool		map_load(char *path);
+t_map		map_get();
+void		sl_init(mlx_t *mlx, char *path);
+void		sl_keys(mlx_key_data_t keydata, void *params);
+void		sl_tick(void *params);
+void		sl_draw(mlx_image_t *buffer, void *param);
+void		sl_exit(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:14:25 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/26 18:40:51 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 01:59:24 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdint.h>
 # include <MLX42/MLX42.h>
 # include "ecs.h"
+# include "vector.h"
 
 enum	e_collflags
 {
@@ -48,20 +49,14 @@ enum e_state
 
 typedef struct
 {
-	double x;
-	double y;
-}	vector_t;
-
-typedef struct
-{
-	vector_t	curr;
-	vector_t	last;
+	t_dvector	curr;
+	t_dvector	last;
 }	comp_pos_t;
 
 typedef struct
 {
-	vector_t	curr;
-	vector_t	last;
+	t_dvector	curr;
+	t_dvector	last;
 }	comp_vel_t;
 
 typedef struct
@@ -73,7 +68,7 @@ typedef struct
 {
 	int32_t		asset;
 	int32_t		last_asset;
-	vector_t	offset;
+	t_dvector	offset;
 	int32_t		*insts;
 }	comp_sprite_t;
 
@@ -87,9 +82,8 @@ typedef struct
 
 typedef struct
 {
-	vector_t		offset;
-	unsigned int	width;
-	unsigned int	height;
+	t_dvector		offset;
+	t_uvector		size;
 	uint32_t		flags;
 }	comp_coll_t;
 
@@ -128,6 +122,7 @@ void		sys_sprites(mlx_t *mlx);
 void		sys_animation(double dt);
 void		sys_state(void);
 void		sys_collision(double dt);
+void		sys_gravity(double dt);
 
 void		comp_ctrl_reg(void);
 void		comp_pos_reg(void);

@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/26 06:47:38 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 01:53:49 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static gamestate_t	g_gamestate;
 
 void	sl_init(mlx_t *mlx, char *path)
 {
-	t_coord		coords;
-	int32_t		asset;
-	t_map		map;
+	t_uvector		coords;
+	int32_t			asset;
+	t_map			map;
 
 	if (map_load(path))
 	{
@@ -61,6 +61,7 @@ void	sl_tick(void *param)
 
 	mlx = param;
 	sys_controls_tick(mlx->delta_time);
+	sys_gravity(mlx->delta_time);
 	sys_collision(mlx->delta_time);
 	sys_movement(mlx->delta_time);
 	sys_state();
