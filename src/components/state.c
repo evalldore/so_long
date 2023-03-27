@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 01:21:37 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 03:21:15 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:19:52 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*state_new(va_list args)
 {
-	comp_state_t	*state;
+	t_c_state	*state;
 
-	state = malloc(sizeof(comp_state_t));
+	state = malloc(sizeof(t_c_state));
 	if (!state)
 		return (NULL);
 	state->curr = va_arg(args, int32_t);

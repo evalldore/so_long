@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 02:30:19 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 03:33:49 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:21:13 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 void	sys_sprites(mlx_t *mlx)
 {
-	comp_pos_t		*pos;
-	comp_sprite_t	*sprite;
-	ent_id_t		ent;
+	t_c_pos		*pos;
+	t_c_sprt	*sprite;
+	uint32_t		ent;
 	mlx_image_t		*img;
 	int32_t			inst;
 

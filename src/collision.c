@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 03:30:48 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:25:22 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,36 @@
 #include "entities.h"
 #include <stdlib.h>
 
-bool	is_colliding(t_dvector pos, t_uvector size, t_dvector tpos, t_uvector tsize)
+static bool check_tile(t_uvec coords, t_dvec pos, t_uvec size)
 {
-	if (tpos.x <= (pos.x + size.x) && (tpos.x + tsize.x) >= pos.x)
-	{
-		if (tpos.y <= (pos.y + size.y) && (tpos.y + tsize.y) >= pos.y)
-			return (true);
-	}
-	return (false);
-}
-
-static bool check_tile(t_uvector coords, t_dvector pos, t_uvector size)
-{
-	t_uvector	tilesize;
-	t_dvector	tilepos;
+	t_uvec	tilesize;
+	t_dvec	tilepos;
 
 	tilepos.x = (double)(coords.x * TILE_SIZE);
 	tilepos.y = (double)(coords.y * TILE_SIZE);
-	tilesize.x = (double)TILE_SIZE;
-	tilesize.y = (double)TILE_SIZE;
-	return (is_colliding(pos, size, tilepos, tilesize));
+	tilesize.x = TILE_SIZE;
+	tilesize.y = TILE_SIZE;
+	return (box_check(pos, size, tilepos, tilesize));
 }
 
-static bool	check_world(double dt, comp_pos_t *pos, comp_vel_t *vel, comp_coll_t *coll)
+static bool	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *coll)
 {
 	t_map		map;
-	t_dvector	coll_pos;
-	t_uvector	coords[2];
-	t_dvector	step;
-	t_uvector	check;
+	t_dvec	coll_pos;
+	t_uvec	coords[2];
+	t_dvec	step;
+	t_uvec	check;
 
 	map = map_get();
 	coll_pos.x = pos->curr.x + coll->offset.x;
 	coll_pos.y = pos->curr.y + coll->offset.y;
 	step.x = vel->curr.x * dt;
 	step.y = vel->curr.y * dt;
+
 	coords[0] = pos_to_coords(coll_pos.x + fmin(step.x, 0.0), coll_pos.y + fmin(step.y, 0.0));
 	coords[1] = pos_to_coords(coll_pos.x + coll->size.x + fabs(step.x), coll_pos.y + coll->size.y + fabs(step.y));
 	check.x = coords[0].x;
+	check.y = coords[0].y;
 	while (check.x <= coords[1].x)
 	{
 		check.y = coords[0].y;
@@ -68,10 +60,10 @@ static bool	check_world(double dt, comp_pos_t *pos, comp_vel_t *vel, comp_coll_t
 
 void	sys_collision(double dt)
 {
-	ent_id_t		ent;
-	comp_pos_t		*pos;
-	comp_vel_t		*vel;
-	comp_coll_t		*coll;
+	uint32_t		ent;
+	t_c_pos		*pos;
+	t_c_vel		*vel;
+	t_c_coll		*coll;
 
 	ent = 0;
 	while (ent < ecs_num())

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 14:28:58 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/27 02:37:53 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:18:46 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 void	*collision_new(va_list args)
 {
-	comp_coll_t	*coll;
+	t_c_coll	*coll;
 
-	coll = malloc(sizeof(comp_coll_t));
+	coll = malloc(sizeof(t_c_coll));
 	if (!coll)
 		return (NULL);
 	coll->size.x = va_arg(args, uint32_t);

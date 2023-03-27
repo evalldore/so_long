@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:16:41 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 15:49:47 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:15:14 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*position_new(va_list args)
 {
-	comp_pos_t	*pos;
+	t_c_pos	*pos;
 
-	pos = malloc(sizeof(comp_pos_t));
+	pos = malloc(sizeof(t_c_pos));
 	if (!pos)
 		return (NULL);
 	pos->curr.x = va_arg(args, double);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:53:17 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 03:18:01 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:18:10 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 void	*sprite_new(va_list args)
 {
-	comp_sprite_t	*sprite;
+	t_c_sprt	*sprite;
 	int32_t			inst;
 
-	sprite = malloc(sizeof(comp_sprite_t));
+	sprite = malloc(sizeof(t_c_sprt));
 	if (!sprite)
 		return (NULL);
 	inst = 0;
@@ -34,7 +34,7 @@ void	*sprite_new(va_list args)
 
 void	sprite_free(void	*ptr)
 {
-	comp_sprite_t	*sprite;
+	t_c_sprt	*sprite;
 
 	sprite = ptr;
 	free(sprite->insts);

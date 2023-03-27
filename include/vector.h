@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 01:14:42 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 01:41:48 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:21:42 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@ typedef struct s_ivector
 {
 	int32_t	x;
 	int32_t y;
-}	t_ivector;
+}	t_ivec;
 
 typedef struct s_uvector
 {
 	uint32_t	x;
 	uint32_t	y;
-}	t_uvector;
+}	t_uvec;
 
 typedef struct s_dvector
 {
 	double	x;
 	double	y;
-}	t_dvector;
+}	t_dvec;
 
 typedef struct s_fvector
 {
 	float	x;
 	float	y;
-}	t_fvector;
+}	t_fvec;
 
 #endif

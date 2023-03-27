@@ -6,17 +6,17 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 01:30:22 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 19:58:50 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:21:13 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assets.h"
 #include "entities.h"
 
-static void	dir_anim(ent_id_t ent, int32_t l_index, int32_t r_index)
+static void	dir_anim(uint32_t ent, int32_t l_index, int32_t r_index)
 {
-	comp_anim_t		*anim;
-	comp_dir_t		*dir;
+	t_c_anim		*anim;
+	t_c_dir		*dir;
 
 	anim = ecs_comp_get(ent, COMP_ANIM);
 	dir = ecs_comp_get(ent, COMP_DIRECTION);
@@ -28,9 +28,9 @@ static void	dir_anim(ent_id_t ent, int32_t l_index, int32_t r_index)
 		animation_set(ent, l_index, 0);
 }
 
-void	state_set(ent_id_t ent, int32_t next)
+void	state_set(uint32_t ent, int32_t next)
 {
-	comp_state_t	*state;
+	t_c_state	*state;
 
 	state = ecs_comp_get(ent, COMP_STATE);
 	if (state && (state->curr != next))
@@ -46,9 +46,9 @@ void	state_set(ent_id_t ent, int32_t next)
 
 void	sys_state(void)
 {
-	ent_id_t		ent;
-	comp_state_t	*state;
-	comp_vel_t		*vel;
+	uint32_t		ent;
+	t_c_state	*state;
+	t_c_vel		*vel;
 
 	ent = 0;
 	while (ent < ecs_num())

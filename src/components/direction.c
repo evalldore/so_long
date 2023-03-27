@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 17:10:30 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/24 18:06:32 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:19:34 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*direction_new(va_list args)
 {
-	comp_dir_t	*dir;
+	t_c_dir	*dir;
 
-	dir = malloc(sizeof(comp_dir_t));
+	dir = malloc(sizeof(t_c_dir));
 	if (!dir)
 		return (NULL);
 	dir->curr = va_arg(args, int);

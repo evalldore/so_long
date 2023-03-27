@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 03:41:25 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:14:00 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static gamestate_t	g_gamestate;
 
 void	sl_init(mlx_t *mlx, char *path)
 {
-	t_uvector		coords;
+	t_uvec		coords;
 	int32_t			asset;
 	t_map			map;
 

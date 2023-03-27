@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 01:49:14 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:27:03 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <ecs.h>
 # include <math.h>
 # include "vector.h"
+# include "entities.h"
 # define WIDTH 512
 # define HEIGHT 512
 # define TILE_SIZE 32
@@ -32,13 +33,13 @@ typedef struct s_map
 	char		**data;
 	uint32_t	dim_x;
 	uint32_t	dim_y;
-	t_uvector	start;
-	t_uvector	end;
+	t_uvec	start;
+	t_uvec	end;
 }	t_map;
 
 typedef struct s_gamestate
 {
-	ent_id_t	player;
+	uint32_t	player;
 }	gamestate_t;
 
 typedef struct s_linecheck
@@ -49,7 +50,24 @@ typedef struct s_linecheck
 	size_t		len;
 }	t_mapcheck;
 
-t_uvector	pos_to_coords(double x, double y);
+typedef struct s_collparams
+{
+	t_dvec	pos;
+	t_uvec	size;
+	t_dvec	vel;
+	t_dvec	tpos;
+	t_uvec	t_size;
+}	t_collparams;
+
+typedef struct s_collinfos
+{
+	bool	found;
+	
+}	t_collinfos;
+
+bool		box_check(t_dvec pos, t_uvec size, t_dvec tpos, t_uvec tsize);
+t_uvec		pos_to_coords(double x, double y);
+void		ent_coords(t_uvec *coords[2], t_c_pos pos, t_c_coll *coll, t_c_vel *vel);
 t_list		*parse_file(char *path);
 bool		map_load(char *path);
 t_map		map_get();

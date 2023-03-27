@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ecs.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 03:33:14 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 01:24:52 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:21:18 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdlib.h>
 # include <stdarg.h>
 
-typedef unsigned int ent_id_t;
 typedef void *(*constructor_t)(va_list);
 typedef void (*destructor_t)(void	*);
 
@@ -28,12 +27,12 @@ typedef struct
 	void			*ptrs[MAX_ENTS];
 }	component_t;
 
-ent_id_t	ecs_create(void);
-ent_id_t	ecs_num(void);
-void		*ecs_comp_add(ent_id_t ent_id, int comp, int argc, ...);
-void		ecs_comp_remove(ent_id_t ent_id, int comp);
+uint32_t	ecs_create(void);
+uint32_t	ecs_num(void);
+void		*ecs_comp_add(uint32_t ent_id, int comp, int argc, ...);
+void		ecs_comp_remove(uint32_t ent_id, int comp);
 void		ecs_comp_register(int comp, constructor_t c, destructor_t d);
-void		*ecs_comp_get(ent_id_t ent_id, int comp);
-void		ecs_iterate(void (*f)(ent_id_t));
+void		*ecs_comp_get(uint32_t ent_id, int comp);
+void		ecs_iterate(void (*f)(uint32_t));
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:16:41 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 15:50:28 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:17:25 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*velocity_new(va_list args)
 {
-	comp_vel_t	*vel;
+	t_c_vel	*vel;
 
-	vel = malloc(sizeof(comp_vel_t));
+	vel = malloc(sizeof(t_c_vel));
 	if (!vel)
 		return (NULL);
 	vel->curr.x = va_arg(args, double);

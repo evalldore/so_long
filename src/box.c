@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gravity.c                                          :+:      :+:    :+:   */
+/*   box.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/26 19:11:13 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 17:21:13 by evallee-         ###   ########.fr       */
+/*   Created: 2023/03/27 16:52:10 by evallee-          #+#    #+#             */
+/*   Updated: 2023/03/27 17:14:06 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "entities.h"
+#include <stdbool.h>
+#include "vector.h"
 
-static float	g_grav = 480;
-
-void	sys_gravity(double dt)
+bool	box_check(t_dvec pos, t_uvec size, t_dvec tpos, t_uvec tsize)
 {
-	t_c_grav	*grav;
-	t_c_vel	*vel;
-	uint32_t	ent;
-
-	ent = 0;
-	while (ent < ecs_num())
+	if (tpos.x <= (pos.x + size.x) && (tpos.x + tsize.x) >= pos.x)
 	{
-		grav = ecs_comp_get(ent, COMP_GRAV);
-		vel = ecs_comp_get(ent, COMP_VEL);
-		if (grav && vel)
-		{
-			grav->scale += dt * 3;
-			if (grav->scale > 1)
-				grav->scale = 1;
-			vel->curr.y += (g_grav * dt) * grav->scale;
-		}
-		ent++;
+		if (tpos.y <= (pos.y + size.y) && (tpos.y + tsize.y) >= pos.y)
+			return (true);
 	}
+	return (false);
 }

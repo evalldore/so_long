@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   components.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 00:14:52 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 01:26:12 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:21:13 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static component_t	G_COMPONENTS[MAX_COMP];
 
-void	*ecs_comp_add(ent_id_t ent_id, int comp, int argc, ...)
+void	*ecs_comp_add(uint32_t ent_id, int comp, int argc, ...)
 {
 	void	*ptr;
 	va_list	args;
@@ -28,7 +28,7 @@ void	*ecs_comp_add(ent_id_t ent_id, int comp, int argc, ...)
 	return (ptr);
 }
 
-void	ecs_comp_remove(ent_id_t ent_id, int comp)
+void	ecs_comp_remove(uint32_t ent_id, int comp)
 {
 	if (ent_id > ecs_num() || ent_id >= MAX_ENTS || comp >= MAX_COMP)
 		return ;
@@ -36,7 +36,7 @@ void	ecs_comp_remove(ent_id_t ent_id, int comp)
 	G_COMPONENTS[comp].ptrs[ent_id] = NULL;
 }
 
-void	*ecs_comp_get(ent_id_t ent_id, int comp)
+void	*ecs_comp_get(uint32_t ent_id, int comp)
 {
 	if (ent_id > ecs_num() || ent_id >= MAX_ENTS || comp >= MAX_COMP)
 		return (NULL);

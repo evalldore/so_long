@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:51:53 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/23 15:40:21 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:17:48 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*gravity_new(va_list args)
 {
-	comp_grav_t	*grav;
+	t_c_grav	*grav;
 
-	grav = malloc(sizeof(comp_grav_t));
+	grav = malloc(sizeof(t_c_grav));
 	if (!grav)
 		return (NULL);
 	grav->scale = va_arg(args, double);

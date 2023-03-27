@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 06:05:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 03:31:24 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:21:13 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	entities_init(void)
 	comp_dir_reg();
 }
 
-ent_id_t	entities_player(double x, double y)
+uint32_t	entities_player(double x, double y)
 {
-	ent_id_t		ent;
+	uint32_t		ent;
 	uint32_t		collflags;
 	
 	collflags = (COLL_FLAG_WORLD | COLL_FLAG_PLAYER);
@@ -46,9 +46,9 @@ ent_id_t	entities_player(double x, double y)
 	return (ent);
 }
 
-ent_id_t	entities_collectible(double x, double y)
+uint32_t	entities_collectible(double x, double y)
 {
-	ent_id_t	ent;
+	uint32_t	ent;
 
 	ent = ecs_create();
 	ecs_comp_add(ent, COMP_POS, 2, x, y);

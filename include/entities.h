@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:14:25 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 01:59:24 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:25:41 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ enum	e_collflags
 	COLL_FLAG_COLLECTIBLE = 1 << 3
 };
 
-typedef enum comp_e
+enum e_comp
 {
 	COMP_NONE,
 	COMP_POS,
@@ -38,7 +38,7 @@ typedef enum comp_e
 	COMP_ANIM,
 	COMP_STATE,
 	COMP_DIRECTION
-}	compnum_t;
+};
 
 enum e_state
 {
@@ -47,73 +47,73 @@ enum e_state
 	STATE_JUMP
 };
 
-typedef struct
+typedef struct s_comp_position
 {
-	t_dvector	curr;
-	t_dvector	last;
-}	comp_pos_t;
+	t_dvec	curr;
+	t_dvec	last;
+}	t_c_pos;
 
-typedef struct
+typedef struct s_com_velocity
 {
-	t_dvector	curr;
-	t_dvector	last;
-}	comp_vel_t;
+	t_dvec	curr;
+	t_dvec	last;
+}	t_c_vel;
 
-typedef struct
+typedef struct s_comp_gravity
 {
 	double	scale;
-}	comp_grav_t;
+}	t_c_grav;
 
-typedef struct
+typedef struct s_comp_sprite
 {
 	int32_t		asset;
 	int32_t		last_asset;
-	t_dvector	offset;
+	t_dvec	offset;
 	int32_t		*insts;
-}	comp_sprite_t;
+}	t_c_sprt;
 
-typedef struct
+typedef struct s_comp_control
 {
 	bool	left;
 	bool	right;
 	bool	jump;
 	bool	shoot;
-}	comp_ctrl_t;
+}	t_c_ctrl;
 
-typedef struct
+typedef struct s_comp_collision
 {
-	t_dvector		offset;
-	t_uvector		size;
+	t_dvec		offset;
+	t_uvec		size;
 	uint32_t		flags;
-}	comp_coll_t;
+}	t_c_coll;
 
-typedef struct
+typedef struct s_comp_animation
 {
 	int32_t		index;
 	int32_t		frame;
 	double		time;
 
-}	comp_anim_t;
+}	t_c_anim;
 
-typedef struct
+typedef struct s_comp_direction
 {
 	bool	last;
 	bool	curr;
 
-}	comp_dir_t;
+}	t_c_dir;
 
-typedef struct
+typedef struct s_comp_state
 {
 	int32_t	curr;
 	int32_t last;
-}	comp_state_t;
+}	t_c_state;
 
 void		entities_init(void);
-ent_id_t	entities_player(double x, double y);
-ent_id_t	entities_collectible(double x, double y);
+uint32_t	entities_player(double x, double y);
+uint32_t	entities_collectible(double x, double y);
 
-void		animation_set(ent_id_t ent, int32_t index, int32_t frame);
-void		state_set(ent_id_t ent, int32_t next);
+void		animation_set(uint32_t ent, int32_t index, int32_t frame);
+void		state_set(uint32_t ent, int32_t next);
 
 void		sys_controls(mlx_key_data_t keydata, void *params);
 void		sys_controls_tick(double dt);

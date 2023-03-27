@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:55:37 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/26 19:14:17 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:21:13 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	sys_movement(double dt)
 {
-	comp_pos_t	*pos;
-	comp_vel_t	*vel;
-	ent_id_t	ent;
+	t_c_pos	*pos;
+	t_c_vel	*vel;
+	uint32_t	ent;
 
 	ent = 0;
 	while (ent < ecs_num())
@@ -27,13 +27,6 @@ void	sys_movement(double dt)
 		{
 			pos->curr.x += vel->curr.x * dt;
 			pos->curr.y += vel->curr.y * dt;
-			if (pos->curr.y < 0)
-				pos->curr.y = 0;
-			if (pos->curr.y > 512)
-			{
-				pos->curr.y = 512;
-				vel->curr.y = 0;
-			}
 		}
 		ent++;
 	}

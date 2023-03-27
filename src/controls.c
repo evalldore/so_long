@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:33:12 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 03:35:54 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:21:13 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 #include "entities.h"
 
-static void	set(ent_id_t ent, keys_t key, bool toggle)
+static void	set(uint32_t ent, keys_t key, bool toggle)
 {
-	comp_ctrl_t		*ctrl;
+	t_c_ctrl		*ctrl;
 	
 	ctrl = ecs_comp_get(ent, COMP_CTRL);
 	if (key == MLX_KEY_A)
@@ -30,7 +30,7 @@ static void	set(ent_id_t ent, keys_t key, bool toggle)
 
 void	sys_controls(mlx_key_data_t keydata, void *params)
 {
-	ent_id_t		ent;
+	uint32_t		ent;
 
 	ent = 0;
 	(void)params;
@@ -47,11 +47,11 @@ void	sys_controls(mlx_key_data_t keydata, void *params)
 	}
 }
 
-static void	jump(ent_id_t	ent)
+static void	jump(uint32_t	ent)
 {
-	comp_state_t	*state;
-	comp_vel_t		*vel;
-	comp_grav_t		*grav;
+	t_c_state	*state;
+	t_c_vel		*vel;
+	t_c_grav		*grav;
 
 	state = ecs_comp_get(ent, COMP_STATE);
 	vel = ecs_comp_get(ent, COMP_VEL);
@@ -64,10 +64,10 @@ static void	jump(ent_id_t	ent)
 	grav->scale = 0.0f;
 }
 
-static void	move(ent_id_t ent, float speed)
+static void	move(uint32_t ent, float speed)
 {
-	comp_dir_t	*dir;
-	comp_vel_t	*vel;
+	t_c_dir	*dir;
+	t_c_vel	*vel;
 
 	dir = ecs_comp_get(ent, COMP_DIRECTION);
 	vel = ecs_comp_get(ent, COMP_VEL);
@@ -82,8 +82,8 @@ static void	move(ent_id_t ent, float speed)
 
 void	sys_controls_tick(double dt)
 {
-	ent_id_t	ent;
-	comp_ctrl_t	*ctrl;
+	uint32_t	ent;
+	t_c_ctrl	*ctrl;
 
 	ent = 0;
 	(void)dt;

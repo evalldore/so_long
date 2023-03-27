@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:47:27 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/24 00:06:18 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:19:20 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*animation_new(va_list args)
 {
-	comp_anim_t	*anim;
+	t_c_anim	*anim;
 
-	anim = malloc(sizeof(comp_anim_t));
+	anim = malloc(sizeof(t_c_anim));
 	if (!anim)
 		return (NULL);
 	anim->index = va_arg(args, int32_t);

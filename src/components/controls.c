@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:16:41 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 18:03:28 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:18:31 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	*control_new(va_list args)
 {
-	comp_ctrl_t	*ctrl;
+	t_c_ctrl	*ctrl;
 
 	(void)args;
-	ctrl = malloc(sizeof(comp_ctrl_t));
+	ctrl = malloc(sizeof(t_c_ctrl));
 	if (!ctrl)
 		return (NULL);
 	ctrl->jump = false;
