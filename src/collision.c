@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 02:31:52 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 02:37:15 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	sys_collision(double dt)
 			continue ;
 		if ((coll->flags & COLL_FLAG_WORLD) && check_world(dt, pos, vel, coll))
 		{
-			vel->curr.y = 0.0;
+			if (vel->curr.y < 0.0)
+				vel->curr.y = 0.0;
 		}
 		ent++;
 	}
