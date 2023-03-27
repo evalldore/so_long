@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:33:12 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/24 18:20:01 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 03:35:54 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	set(ent_id_t ent, keys_t key, bool toggle)
 		ctrl->left = toggle;
 	if (key == MLX_KEY_D)
 		ctrl->right = toggle;
-	if (key == MLX_KEY_W)
-		ctrl->jump = toggle;
 	if (key == MLX_KEY_SPACE)
+		ctrl->jump = toggle;
+	if (key == MLX_KEY_ENTER)
 		ctrl->shoot = toggle;
 }
 

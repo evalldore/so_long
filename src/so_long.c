@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 01:53:49 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/27 03:41:25 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ void	sl_init(mlx_t *mlx, char *path)
 			while (map.data[coords.y][coords.x] && map.data[coords.y][coords.x] != '\n')
 			{
 				asset = 0;
-				if (map.data[coords.y][coords.x] == '0' || map.data[coords.y][coords.x] == 'C')
-					asset = ASSET_TILE_EMPTY;
 				if (map.data[coords.y][coords.x] == '1')
 					asset = ASSET_TILE_WALL;
+				else
+					asset = ASSET_TILE_EMPTY;
 				if (asset)
 					mlx_image_to_window(mlx, assets_get(asset), coords.x * TILE_SIZE, coords.y * TILE_SIZE);
 				coords.x++;
 			}
 			coords.y++;
 		}
-		g_gamestate.player = entities_player((map.start.x * TILE_SIZE) + (TILE_SIZE / 2), map.start.y * TILE_SIZE);
+		g_gamestate.player = entities_player((map.start.x * TILE_SIZE) + (TILE_SIZE / 2), (map.start.y + 1) * TILE_SIZE);
 	}
 }
 
