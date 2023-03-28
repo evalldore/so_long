@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 01:30:22 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 17:21:13 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 20:58:38 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	dir_anim(uint32_t ent, int32_t l_index, int32_t r_index)
 {
-	t_c_anim		*anim;
+	t_c_anim	*anim;
 	t_c_dir		*dir;
 
 	anim = ecs_comp_get(ent, COMP_ANIM);
@@ -46,7 +46,7 @@ void	state_set(uint32_t ent, int32_t next)
 
 void	sys_state(void)
 {
-	uint32_t		ent;
+	uint32_t	ent;
 	t_c_state	*state;
 	t_c_vel		*vel;
 

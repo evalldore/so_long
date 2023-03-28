@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 17:25:22 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 20:54:01 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static bool check_tile(t_uvec coords, t_dvec pos, t_uvec size)
 
 static bool	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *coll)
 {
-	t_map		map;
+	t_map	map;
 	t_dvec	coll_pos;
 	t_uvec	coords[2];
 	t_dvec	step;
@@ -39,11 +39,9 @@ static bool	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *coll)
 	coll_pos.y = pos->curr.y + coll->offset.y;
 	step.x = vel->curr.x * dt;
 	step.y = vel->curr.y * dt;
-
 	coords[0] = pos_to_coords(coll_pos.x + fmin(step.x, 0.0), coll_pos.y + fmin(step.y, 0.0));
 	coords[1] = pos_to_coords(coll_pos.x + coll->size.x + fabs(step.x), coll_pos.y + coll->size.y + fabs(step.y));
-	check.x = coords[0].x;
-	check.y = coords[0].y;
+	check = coords[0];
 	while (check.x <= coords[1].x)
 	{
 		check.y = coords[0].y;
@@ -60,10 +58,10 @@ static bool	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *coll)
 
 void	sys_collision(double dt)
 {
-	uint32_t		ent;
+	uint32_t	ent;
 	t_c_pos		*pos;
 	t_c_vel		*vel;
-	t_c_coll		*coll;
+	t_c_coll	*coll;
 
 	ent = 0;
 	while (ent < ecs_num())

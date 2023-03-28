@@ -1,41 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.h                                           :+:      :+:    :+:   */
+/*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 01:14:42 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 20:00:47 by evallee-         ###   ########.fr       */
+/*   Created: 2023/03/27 19:13:07 by evallee-          #+#    #+#             */
+/*   Updated: 2023/03/27 20:57:48 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	VECTOR_H
-# define VECTOR_H
-# include <stdint.h>
+#include "vector.h"
 
-typedef struct s_ivector
+void	vec_add(void *dest, void *src1, void *src2)
 {
-	int32_t	x;
-	int32_t y;
-}	t_ivec;
+	((t_ivec *)dest)->x = ((t_ivec *)src1)->x + ((t_ivec *)src2)->x;
+}
 
-typedef struct s_uvector
+void	vec_sub(void *dest, void *src1, void *src2)
 {
-	uint32_t	x;
-	uint32_t	y;
-}	t_uvec;
-
-typedef struct s_dvector
-{
-	double	x;
-	double	y;
-}	t_dvec;
-
-typedef struct s_fvector
-{
-	float	x;
-	float	y;
-}	t_fvec;
-
-#endif
+	((t_ivec *)dest)->x = ((t_ivec *)src1)->x - ((t_ivec *)src2)->x;
+}

@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:33:12 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 17:21:13 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 20:57:10 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void	set(uint32_t ent, keys_t key, bool toggle)
 {
 	t_c_ctrl		*ctrl;
-	
+
 	ctrl = ecs_comp_get(ent, COMP_CTRL);
 	if (key == MLX_KEY_A)
 		ctrl->left = toggle;
@@ -51,7 +51,7 @@ static void	jump(uint32_t	ent)
 {
 	t_c_state	*state;
 	t_c_vel		*vel;
-	t_c_grav		*grav;
+	t_c_grav	*grav;
 
 	state = ecs_comp_get(ent, COMP_STATE);
 	vel = ecs_comp_get(ent, COMP_VEL);

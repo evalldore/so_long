@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 02:30:19 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 17:21:13 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 21:09:12 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,33 @@
 #include "assets.h"
 #include "entities.h"
 
+static void	last_frame(t_c_sprt	*sprite)
+{
+	mlx_image_t		*img;
+
+	if (sprite->last_asset != sprite->asset)
+	{
+		img = assets_get(sprite->last_asset);
+		if (sprite->insts[sprite->last_asset] >= 0)
+			img->instances[sprite->insts[sprite->last_asset]].enabled = false;
+	}
+}
+
+static int32_t checkk_instance(mlx_t *mlx, int32_t inst, double x, double y)
+{
+	if (inst < 0)
+	{
+		inst = mlx_image_to_window(mlx, img, pos->curr.x + sprite->offset.x, pos->curr.y + sprite->offset.y);
+		sprite->insts[sprite->asset] = inst;
+		continue ;
+	}
+	return inst;
+}
+
 void	sys_sprites(mlx_t *mlx)
 {
-	t_c_pos		*pos;
-	t_c_sprt	*sprite;
+	t_c_pos			*pos;
+	t_c_sprt		*sprite;
 	uint32_t		ent;
 	mlx_image_t		*img;
 	int32_t			inst;
@@ -29,12 +52,7 @@ void	sys_sprites(mlx_t *mlx)
 		sprite = ecs_comp_get(ent, COMP_SPRITE);
 		if (pos && sprite)
 		{
-			if (sprite->last_asset != sprite->asset)
-			{
-				img = assets_get(sprite->last_asset);
-				if (sprite->insts[sprite->last_asset] >= 0)
-					img->instances[sprite->insts[sprite->last_asset]].enabled = false;
-			}
+			last_frame(sprite);
 			img = assets_get(sprite->asset);
 			inst = sprite->insts[sprite->asset];
 			if (inst < 0)

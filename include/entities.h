@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:14:25 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 17:25:41 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 18:16:39 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_comp_sprite
 {
 	int32_t		asset;
 	int32_t		last_asset;
-	t_dvec	offset;
+	t_dvec		offset;
 	int32_t		*insts;
 }	t_c_sprt;
 
@@ -84,7 +84,7 @@ typedef struct s_comp_collision
 {
 	t_dvec		offset;
 	t_uvec		size;
-	uint32_t		flags;
+	uint32_t	flags;
 }	t_c_coll;
 
 typedef struct s_comp_animation

@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 17:27:03 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 18:18:10 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct s_collinfos
 
 bool		box_check(t_dvec pos, t_uvec size, t_dvec tpos, t_uvec tsize);
 t_uvec		pos_to_coords(double x, double y);
-void		ent_coords(t_uvec *coords[2], t_c_pos pos, t_c_coll *coll, t_c_vel *vel);
 t_list		*parse_file(char *path);
 bool		map_load(char *path);
 t_map		map_get();

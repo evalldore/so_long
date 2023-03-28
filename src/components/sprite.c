@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:53:17 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 17:18:10 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 20:57:34 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	*sprite_new(va_list args)
 {
 	t_c_sprt	*sprite;
-	int32_t			inst;
+	int32_t		inst;
 
 	sprite = malloc(sizeof(t_c_sprt));
 	if (!sprite)
