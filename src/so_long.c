@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 02:25:48 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 04:11:52 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	sl_init(mlx_t *mlx, char *path)
 			coords.y++;
 		}
 		g_gamestate.player = entities_player((map.start.x * TILE_SIZE) + (TILE_SIZE / 2), (map.start.y + 1) * TILE_SIZE);
-		//entities_collectible(10.0, 10.0);
+		entities_collectible(10.0, 10.0);
 	}
 }
 

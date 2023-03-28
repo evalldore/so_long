@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 01:14:42 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 20:00:47 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/28 03:58:05 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 typedef struct s_ivector
 {
-	int32_t	x;
-	int32_t y;
+	int32_t		x;
+	int32_t		y;
 }	t_ivec;
 
 typedef struct s_uvector
@@ -37,5 +37,8 @@ typedef struct s_fvector
 	float	x;
 	float	y;
 }	t_fvec;
+
+void	vec_add(void *dest, void *src1, void *src2);
+void	vec_sub(void *dest, void *src1, void *src2);
 
 #endif
