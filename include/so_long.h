@@ -75,5 +75,5 @@ void		sl_keys(mlx_key_data_t keydata, void *params);
 void		sl_tick(void *params);
 void		sl_draw(mlx_image_t *buffer, void *param);
 void		sl_exit(void);
-
+ 
 #endif

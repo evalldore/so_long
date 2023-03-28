@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 02:30:19 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 21:09:12 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 21:11:28 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,6 @@ static void	last_frame(t_c_sprt	*sprite)
 		if (sprite->insts[sprite->last_asset] >= 0)
 			img->instances[sprite->insts[sprite->last_asset]].enabled = false;
 	}
-}
-
-static int32_t checkk_instance(mlx_t *mlx, int32_t inst, double x, double y)
-{
-	if (inst < 0)
-	{
-		inst = mlx_image_to_window(mlx, img, pos->curr.x + sprite->offset.x, pos->curr.y + sprite->offset.y);
-		sprite->insts[sprite->asset] = inst;
-		continue ;
-	}
-	return inst;
 }
 
 void	sys_sprites(mlx_t *mlx)
