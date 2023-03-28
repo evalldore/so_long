@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:33:12 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 20:57:10 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/28 02:20:32 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,22 +80,16 @@ static void	move(uint32_t ent, float speed)
 	vel->curr.x = speed;
 }
 
-void	sys_controls_tick(double dt)
+void	sys_controls_tick(uint32_t ent, va_list args)
 {
-	uint32_t	ent;
 	t_c_ctrl	*ctrl;
 
-	ent = 0;
-	(void)dt;
-	while (ent < ecs_num())
+	(void)args;
+	ctrl = ecs_comp_get(ent, COMP_CTRL);
+	if (ctrl)
 	{
-		ctrl = ecs_comp_get(ent, COMP_CTRL);
-		if (ctrl)
-		{
-			move(ent, (-120 * ctrl->left) + (120 * ctrl->right));
-			if (ctrl->jump)
-				jump(ent);
-		}
-		ent++;
+		move(ent, (-120 * ctrl->left) + (120 * ctrl->right));
+		if (ctrl->jump)
+			jump(ent);
 	}
 }

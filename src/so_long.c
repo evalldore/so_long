@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 17:14:00 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/28 02:25:48 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	sl_init(mlx_t *mlx, char *path)
 			coords.y++;
 		}
 		g_gamestate.player = entities_player((map.start.x * TILE_SIZE) + (TILE_SIZE / 2), (map.start.y + 1) * TILE_SIZE);
+		//entities_collectible(10.0, 10.0);
 	}
 }
 
@@ -60,13 +61,13 @@ void	sl_tick(void *param)
 	mlx_t	*mlx;
 
 	mlx = param;
-	sys_controls_tick(mlx->delta_time);
-	sys_gravity(mlx->delta_time);
-	sys_collision(mlx->delta_time);
-	sys_movement(mlx->delta_time);
-	sys_state();
-	sys_animation(mlx->delta_time);
-	sys_sprites(mlx);
+	ecs_iterate(&sys_controls_tick, mlx->delta_time);
+	ecs_iterate(&sys_gravity, mlx->delta_time);
+	ecs_iterate(&sys_collision, mlx->delta_time);
+	ecs_iterate(&sys_movement, mlx->delta_time);
+	ecs_iterate(&sys_state);
+	ecs_iterate(&sys_animation, mlx->delta_time);
+	ecs_iterate(&sys_sprites, mlx);
 }
 
 void	sl_draw(mlx_image_t *buffer, void *param)

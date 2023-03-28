@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 01:30:22 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 20:58:38 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/28 02:30:09 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,16 @@ void	state_set(uint32_t ent, int32_t next)
 	}
 }
 
-void	sys_state(void)
+void	sys_state(uint32_t ent, va_list args)
 {
-	uint32_t	ent;
 	t_c_state	*state;
 	t_c_vel		*vel;
 
-	ent = 0;
-	while (ent < ecs_num())
+	(void)args;
+	state = ecs_comp_get(ent, COMP_STATE);
+	vel = ecs_comp_get(ent, COMP_VEL);
+	if (state && vel)
 	{
-		state = ecs_comp_get(ent, COMP_STATE);
-		vel = ecs_comp_get(ent, COMP_VEL);
-		if (!state || !vel)
-			continue ;
 		if (vel->curr.y != 0.0)
 		{
 			dir_anim(ent, ANIM_JUMP_L, ANIM_JUMP_R);
@@ -66,6 +63,5 @@ void	sys_state(void)
 			state_set(ent, STATE_WALK);
 		else
 			state_set(ent, STATE_IDLE);
-		ent++;
 	}
 }

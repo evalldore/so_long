@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:14:25 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 18:16:39 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/28 02:34:02 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ enum	e_collflags
 	COLL_FLAG_WORLD = 1 << 0,
 	COLL_FLAG_PLAYER = 1 << 1,
 	COLL_FLAG_ENEMIES = 1 << 2,
-	COLL_FLAG_COLLECTIBLE = 1 << 3
+	COLL_FLAG_COLLECTIBLE = 1 << 3,
+	COLL_FLAG_PROJECTILE = 1 << 4
 };
 
 enum e_comp
@@ -116,13 +117,13 @@ void		animation_set(uint32_t ent, int32_t index, int32_t frame);
 void		state_set(uint32_t ent, int32_t next);
 
 void		sys_controls(mlx_key_data_t keydata, void *params);
-void		sys_controls_tick(double dt);
-void		sys_movement(double dt);
-void		sys_sprites(mlx_t *mlx);
-void		sys_animation(double dt);
-void		sys_state(void);
-void		sys_collision(double dt);
-void		sys_gravity(double dt);
+void		sys_controls_tick(uint32_t ent, va_list args);
+void		sys_movement(uint32_t ent, va_list args);
+void		sys_sprites(uint32_t ent, va_list args);
+void		sys_animation(uint32_t ent, va_list args);
+void		sys_state(uint32_t ent, va_list args);
+void		sys_collision(uint32_t ent, va_list args);
+void		sys_gravity(uint32_t ent, va_list args);
 
 void		comp_ctrl_reg(void);
 void		comp_pos_reg(void);

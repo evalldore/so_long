@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 00:31:54 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 02:26:33 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,22 +85,20 @@ static bool check_ents(uint32_t	ent, t_c_pos *pos, t_c_coll *coll)
 	return (false);
 }
 
-void	sys_collision(double dt)
+void	sys_collision(uint32_t ent, va_list args)
 {
-	uint32_t	ent;
 	t_c_pos		*pos;
 	t_c_vel		*vel;
 	t_c_coll	*coll;
+	double		dt;
 
-	ent = 0;
-	while (ent < ecs_num())
+	dt = va_arg(args, double);
+	pos = ecs_comp_get(ent, COMP_POS);
+	vel = ecs_comp_get(ent, COMP_VEL);
+	coll = ecs_comp_get(ent, COMP_COLLISION);
+	if (pos && coll)
 	{
-		pos = ecs_comp_get(ent, COMP_POS);
-		vel = ecs_comp_get(ent, COMP_VEL);
-		coll = ecs_comp_get(ent, COMP_COLLISION);
-		if (!pos || !vel || !coll)
-			continue ;
-		if ((coll->flags & COLL_FLAG_WORLD) && check_world(dt, pos, vel, coll))
+		if (vel && (coll->flags & COLL_FLAG_WORLD) && check_world(dt, pos, vel, coll))
 		{
 			if (vel->curr.y > 0.0)
 				vel->curr.y = 0.0;
@@ -109,6 +107,5 @@ void	sys_collision(double dt)
 		{
 			ft_printf("collision with other ent");
 		}
-		ent++;
 	}
 }
