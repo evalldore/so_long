@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ecs.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 03:33:14 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 17:21:18 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/27 22:56:34 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define MAX_COMP 32
 # include <stdlib.h>
 # include <stdarg.h>
+# include <stdint.h>
 
 typedef void *(*constructor_t)(va_list);
 typedef void (*destructor_t)(void	*);
