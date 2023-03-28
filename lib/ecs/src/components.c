@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   components.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 00:14:52 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 17:21:13 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/28 02:43:38 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ecs.h"
 
-static component_t	G_COMPONENTS[MAX_COMP];
+static t_component	G_COMPONENTS[MAX_COMP];
 
 void	*ecs_comp_add(uint32_t ent_id, int comp, int argc, ...)
 {
@@ -43,7 +43,7 @@ void	*ecs_comp_get(uint32_t ent_id, int comp)
 	return (G_COMPONENTS[comp].ptrs[ent_id]);
 }
 
-void	ecs_comp_register(int comp, constructor_t c, destructor_t d)
+void	ecs_comp_register(int comp, t_constructor c, t_destructor d)
 {
 	if (comp >= MAX_COMP || !c || ! d)
 		return ;
