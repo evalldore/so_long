@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:54:01 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/28 02:53:27 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 17:58:24 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int32_t g_anims[MAX_ANIM][4] = {
 
 void	animation_set(uint32_t ent, int32_t index, int32_t frame)
 {
-	t_c_anim		*anim;
+	t_c_anim	*anim;
 	t_c_sprt	*sprt;
 
 	if (index < 0 || index >= MAX_ANIM)

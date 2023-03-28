@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 04:56:16 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/26 05:24:01 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 18:00:44 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-t_list  *parse_file(char	*path)
+t_list	*parse_file(char	*path)
 {
 	int			fd;
 	t_list		*list;
@@ -36,7 +36,7 @@ t_list  *parse_file(char	*path)
 		}
 		free(line);
 		ft_lstclear(&list, &free);
-		break;
+		break ;
 	}
 	close(fd);
 	return (list);

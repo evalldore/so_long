@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/27 01:51:00 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 17:59:54 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_map	g_map;
 static bool	check_line(t_mapcheck *check, char	*line)
 {
 	check->len = 0;
-	while(line[check->len] && line[check->len] != '\n')
+	while (line[check->len] && line[check->len] != '\n')
 	{
 		if (line[check->len] == 'P')
 		{
@@ -69,7 +69,7 @@ static bool	map_init(t_list *list)
 	return (true);
 }
 
-t_map	map_get()
+t_map	map_get(void)
 {
 	return (g_map);
 }
@@ -92,7 +92,7 @@ bool	map_load(char *path)
 			continue ;
 		}
 		ft_lstclear(&list, &free);
-		break;
+		break ;
 	}
 	if (list)
 		return (map_init(list));

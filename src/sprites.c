@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 02:30:19 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 04:07:01 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 18:38:45 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int32_t	check_instance(mlx_t *mlx, mlx_image_t *img, t_c_sprt *sprite)
 	int32_t			inst;
 
 	inst = sprite->insts[sprite->asset];
-	ft_printf("check %p/%p\n", img, mlx);
 	if (inst >= 0)
 		return (inst);
 	inst = mlx_image_to_window(mlx, img, 0, 0);

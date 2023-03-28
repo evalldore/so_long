@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:47:33 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 02:45:08 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 18:39:43 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,33 @@
 
 static uint32_t	g_entities;
 
-uint32_t	ecs_num()
+uint32_t	ecs_num(void)
 {
 	return (g_entities);
 }
 
-uint32_t	ecs_create()
+uint32_t	ecs_create(void)
 {
 	if (g_entities >= MAX_ENTS)
 		return (-1);
 	return (g_entities++);
 }
 
-void	ecs_iterate(void (*f)(uint32_t, va_list), ...)
+void	ecs_iterate(t_system f, ...)
 {
 	uint32_t	ent_id;
-	va_list		args;
+	va_list		o_args;
+	va_list		e_args;
 
 	if (!f)
 		return ;
 	ent_id = 0;
-	va_start(args, f);
-	while(ent_id < g_entities)
-		f(ent_id++, args);
-	va_end(args);
+	va_start(o_args, f);
+	while (ent_id < g_entities)
+	{
+		va_copy(e_args, o_args);
+		f(ent_id++, e_args);
+	}
+	va_end(o_args);
+	va_end(e_args);
 }

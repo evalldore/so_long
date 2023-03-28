@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/26 05:47:29 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 17:59:30 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	loop(void *param)
 int32_t	main(int argc, char	**argv)
 {
 	mlx_t	*mlx;
+
 	if (argc < 2)
 		ft_error();
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
