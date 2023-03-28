@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 03:33:14 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 02:42:36 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 02:46:13 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef void *(*t_constructor)(va_list);
 typedef void (*t_destructor)(void	*);
 typedef void (*t_system)(uint32_t, va_list);
 
-typedef struct
+typedef struct s_component
 {
 	t_constructor	new;
 	t_destructor	dest;
