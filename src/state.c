@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 01:30:22 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 02:30:09 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 02:55:44 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,15 @@ void	sys_state(uint32_t ent, va_list args)
 	(void)args;
 	state = ecs_comp_get(ent, COMP_STATE);
 	vel = ecs_comp_get(ent, COMP_VEL);
-	if (state && vel)
+	if (!state || !vel)
+		return ;
+	if (vel->curr.y != 0.0)
 	{
-		if (vel->curr.y != 0.0)
-		{
-			dir_anim(ent, ANIM_JUMP_L, ANIM_JUMP_R);
-			state_set(ent, STATE_JUMP);
-		}
-		else if (vel->curr.x != 0.0)
-			state_set(ent, STATE_WALK);
-		else
-			state_set(ent, STATE_IDLE);
+		dir_anim(ent, ANIM_JUMP_L, ANIM_JUMP_R);
+		state_set(ent, STATE_JUMP);
 	}
+	else if (vel->curr.x != 0.0)
+		state_set(ent, STATE_WALK);
+	else
+		state_set(ent, STATE_IDLE);
 }

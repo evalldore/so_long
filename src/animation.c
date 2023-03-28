@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:54:01 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/28 02:31:42 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 02:53:27 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,15 @@ void	sys_animation(uint32_t ent, va_list args)
 	dt = va_arg(args, double);
 	anim = ecs_comp_get(ent, COMP_ANIM);
 	sprt = ecs_comp_get(ent, COMP_SPRITE);
-	if (anim && sprt)
+	if (!anim || !sprt)
+		return ;
+	anim->time += dt;
+	if (anim->time < 0.1)
+		return ;
+	if (g_anims[anim->index][anim->frame + 1])
 	{
-		anim->time += dt;
-		if (anim->time > 0.1)
-		{
-			if (g_anims[anim->index][anim->frame + 1])
-			{
-				animation_set(ent, anim->index, anim->frame + 1);
-				return ;
-			}
-			animation_set(ent, anim->index, 0);
-		}
+		animation_set(ent, anim->index, anim->frame + 1);
+		return ;
 	}
+	animation_set(ent, anim->index, 0);
 }

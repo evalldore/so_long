@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 02:26:33 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 02:54:06 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,13 @@ void	sys_collision(uint32_t ent, va_list args)
 	pos = ecs_comp_get(ent, COMP_POS);
 	vel = ecs_comp_get(ent, COMP_VEL);
 	coll = ecs_comp_get(ent, COMP_COLLISION);
-	if (pos && coll)
+	if (!pos || !coll)
+		return ;
+	if (vel && (coll->flags & COLL_FLAG_WORLD) && check_world(dt, pos, vel, coll))
 	{
-		if (vel && (coll->flags & COLL_FLAG_WORLD) && check_world(dt, pos, vel, coll))
-		{
-			if (vel->curr.y > 0.0)
-				vel->curr.y = 0.0;
-		}
-		if (check_ents(ent, pos, coll))
-		{
-			ft_printf("collision with other ent");
-		}
+		if (vel->curr.y > 0.0)
+			vel->curr.y = 0.0;
 	}
+	if (check_ents(ent, pos, coll))
+		ft_printf("collision with other ent");
 }
