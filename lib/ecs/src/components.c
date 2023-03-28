@@ -6,13 +6,13 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 00:14:52 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 02:43:38 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/28 02:44:49 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ecs.h"
 
-static t_component	G_COMPONENTS[MAX_COMP];
+static t_component	g_components[MAX_COMP];
 
 void	*ecs_comp_add(uint32_t ent_id, int comp, int argc, ...)
 {
@@ -22,9 +22,9 @@ void	*ecs_comp_add(uint32_t ent_id, int comp, int argc, ...)
 	if (ent_id > ecs_num() || ent_id >= MAX_ENTS || comp >= MAX_COMP)
 		return (NULL);
 	va_start(args, argc);
-	ptr = G_COMPONENTS[comp].new(args);
+	ptr = g_components[comp].new(args);
 	va_end(args);
-	G_COMPONENTS[comp].ptrs[ent_id] = ptr;
+	g_components[comp].ptrs[ent_id] = ptr;
 	return (ptr);
 }
 
@@ -32,21 +32,21 @@ void	ecs_comp_remove(uint32_t ent_id, int comp)
 {
 	if (ent_id > ecs_num() || ent_id >= MAX_ENTS || comp >= MAX_COMP)
 		return ;
-	G_COMPONENTS[comp].dest(G_COMPONENTS[comp].ptrs[ent_id]);
-	G_COMPONENTS[comp].ptrs[ent_id] = NULL;
+	g_components[comp].dest(g_components[comp].ptrs[ent_id]);
+	g_components[comp].ptrs[ent_id] = NULL;
 }
 
 void	*ecs_comp_get(uint32_t ent_id, int comp)
 {
 	if (ent_id > ecs_num() || ent_id >= MAX_ENTS || comp >= MAX_COMP)
 		return (NULL);
-	return (G_COMPONENTS[comp].ptrs[ent_id]);
+	return (g_components[comp].ptrs[ent_id]);
 }
 
 void	ecs_comp_register(int comp, t_constructor c, t_destructor d)
 {
 	if (comp >= MAX_COMP || !c || ! d)
 		return ;
-	G_COMPONENTS[comp].new = c;
-	G_COMPONENTS[comp].dest = d;
+	g_components[comp].new = c;
+	g_components[comp].dest = d;
 }
