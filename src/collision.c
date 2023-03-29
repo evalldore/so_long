@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 18:08:38 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/28 21:27:03 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,31 @@ static bool	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *coll)
 	}
 	return (false);
 }
+
+/*static bool	check_world(double dt, t_c_pos *p, t_c_vel *vel, t_c_coll *c)
+{
+	t_dvec	cp;
+	t_uvec	coords[4];
+	t_dvec	s;
+	t_uvec	check[2];
+
+	s.x = vel->curr.x * dt;
+	s.y = vel->curr.y * dt;
+	cp.x = p->curr.x + c->offset.x;
+	cp.y = p->curr.y + c->offset.y;
+	coords[0] = pos_to_coords(cp.x, cp.y);
+	coords[1] = pos_to_coords(cp.x + c->size.x, cp.y + c->size.y);
+	coords[2] = pos_to_coords(cp.x + s.x, cp.y + s.y);
+	coords[3] = pos_to_coords(cp.x + c->size.x + s.x, cp.y + c->size.y + s.y);
+	check[0] = coords[0];
+	check[1] = coords[1];
+	while (check[0].x != check[1].x)
+	{
+		if (check[0].x < check[1].x)
+			check[0].x++;
+	}
+	return (false);
+}*/
 
 static bool	check_ents(uint32_t	ent, t_c_pos *pos, t_c_coll *coll)
 {

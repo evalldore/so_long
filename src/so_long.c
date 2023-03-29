@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 18:28:04 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/28 21:37:11 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	sl_init(mlx_t *mlx, char *path)
 					asset = ASSET_TILE_WALL;
 				else
 					asset = ASSET_TILE_EMPTY;
+				if (map.data[coords.y][coords.x] == 'C')
+					entities_collectible(coords.x * TILE_SIZE, coords.y * TILE_SIZE);
 				if (asset)
 					mlx_image_to_window(mlx, assets_get(asset), coords.x * TILE_SIZE, coords.y * TILE_SIZE);
 				coords.x++;
@@ -45,7 +47,6 @@ void	sl_init(mlx_t *mlx, char *path)
 			coords.y++;
 		}
 		g_gamestate.player = entities_player((map.start.x * TILE_SIZE) + (TILE_SIZE / 2), (map.start.y + 1) * TILE_SIZE);
-		entities_collectible(10.0, 10.0);
 	}
 }
 
