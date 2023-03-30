@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/29 22:25:36 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:34:12 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,33 @@ static t_gamestate	g_gamestate;
 
 void	sl_init(mlx_t *mlx, char *path)
 {
-	t_uvec		coords;
-	int32_t		asset;
-	t_map		map;
+	t_uvec			co;
+	int32_t			asset;
+	t_map			map;
 
 	if (map_load(path))
 	{
 		map = map_get();
-		coords.y = 0;
+		co.y = 0;
 		assets_init(mlx);
 		entities_init();
-		while (map.data[coords.y])
+		while (map.data[co.y])
 		{
-			coords.x = 0;
-			while (map.data[coords.y][coords.x] && map.data[coords.y][coords.x] != '\n')
+			co.x = 0;
+			while (map.data[co.y][co.x])
 			{
 				asset = 0;
-				if (map.data[coords.y][coords.x] == '1')
+				if (map.data[co.y][co.x] == '1')
 					asset = ASSET_TILE_WALL;
 				else
 					asset = ASSET_TILE_EMPTY;
-				if (map.data[coords.y][coords.x] == 'C')
-					entities_collectible(coords.x * TILE_SIZE, coords.y * TILE_SIZE);
+				if (map.data[co.y][co.x] == 'C')
+					entities_collectible(co.x * TILE_SIZE, co.y * TILE_SIZE);
 				if (asset)
-					mlx_image_to_window(mlx, assets_get(asset), coords.x * TILE_SIZE, coords.y * TILE_SIZE);
-				coords.x++;
+					mlx_image_to_window(mlx, assets_get(asset), co.x * TILE_SIZE, co.y * TILE_SIZE);
+				co.x++;
 			}
-			coords.y++;
+			co.y++;
 		}
 		g_gamestate.player = entities_player((map.start.x * TILE_SIZE) + (TILE_SIZE / 2), (map.start.y + 1) * TILE_SIZE);
 	}

@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/30 18:01:48 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:41:09 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,25 @@ static bool	check_line(t_mapcheck *check, char	*line)
 	return (true);
 }
 
+static void	set_points(size_t collumn, char *line, char c)
+{
+	char	*pos;
+
+	pos = ft_strchr(line, c);
+	if (!pos)
+		return ;
+	if (c == 'P')
+	{
+		g_map.start.x = pos - (char *)(line);
+		g_map.start.y = collumn;
+	}
+	else if (c == 'E')
+	{
+		g_map.end.x = pos - (char *)(line);
+		g_map.end.y = collumn;
+	}
+}
+
 static bool	map_init(t_list *list)
 {
 	size_t	index;
@@ -47,29 +66,23 @@ static bool	map_init(t_list *list)
 	index = 0;
 	g_map.dim_x = ft_strlen(list->content);
 	g_map.dim_y = ft_lstsize(list);
-	g_map.data = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
-	while (list)
+	if (g_map.dim_x > g_map.dim_y)
 	{
-		g_map.data[index] = list->content;
-		if (ft_strchr(list->content, 'P'))
+		g_map.data = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
+		while (list)
 		{
-			g_map.start.x = ft_strchr(list->content, 'P') - (char *)(list->content);
-			g_map.start.y = index;
+			g_map.data[index] = list->content;
+			set_points(index, (char *)(list->content), 'P');
+			set_points(index, (char *)(list->content), 'E');
+			list = list->next;
+			index++;
 		}
-		if (ft_strchr(list->content, 'E'))
-		{
-			g_map.end.x = ft_strchr(list->content, 'E') - (char *)(list->content);
-			g_map.end.y = index;
-		}
-		index++;
-		list = list->next;
+		g_map.data[index] = NULL;
+		ft_lstclear(&list, NULL);
+		return (true);
 	}
-	g_map.data[index] = NULL;
-	ft_printf("dim x: %d y: %d\n", g_map.dim_x, g_map.dim_y);
-	ft_printf("start x: %d y: %d\n", g_map.start.x, g_map.start.y);
-	ft_printf("end x: %d y: %d\n", g_map.end.x, g_map.end.x);
-	ft_printf("collectibles:%d\n", g_map.num_coll);
-	return (true);
+	ft_lstclear(&list, NULL);
+	return (false);
 }
 
 t_map	map_get(void)
