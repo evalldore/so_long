@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/29 22:23:20 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/30 02:02:46 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "entities.h"
 #include "box.h"
 
-static bool	check_tile(t_uvec coords, t_dvec pos, t_uvec size)
+/*static bool	check_tile(t_uvec coords, t_dvec pos, t_uvec size)
 {
 	t_uvec	tilesize;
 	t_dvec	tilepos;
@@ -27,13 +27,12 @@ static bool	check_tile(t_uvec coords, t_dvec pos, t_uvec size)
 	tilesize.x = TILE_SIZE;
 	tilesize.y = TILE_SIZE;
 	return (box_check(pos, size, tilepos, tilesize));
-}
+}*/
 
-static bool	resolve(t_uvec coords, t_dvec step, t_dvec pos, t_uvec size)
+static double	resolve(t_uvec coords, t_dvec step, t_dvec pos, t_uvec size)
 {
 	t_box	s;
 	t_box	t;
-	double	time;
 
 	s.x = pos.x;
 	s.y = pos.y;
@@ -43,62 +42,36 @@ static bool	resolve(t_uvec coords, t_dvec step, t_dvec pos, t_uvec size)
 	t.y = (double)(coords.y * TILE_SIZE);
 	t.w = TILE_SIZE;
 	t.h = TILE_SIZE;
-	time = box_intersect(step, s, t);
-	return (true);
+	return (box_intersect_v(step.y, s, t));
 }
 
-static bool	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *coll)
+static bool	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *cc)
 {
-	t_dvec	coll_pos;
-	t_uvec	coords[2];
+	t_dvec	cp;
+	t_uvec	co[2];
 	t_dvec	step;
 	t_uvec	check;
 
-	coll_pos.x = pos->curr.x + coll->offset.x;
-	coll_pos.y = pos->curr.y + coll->offset.y;
+	cp.x = pos->curr.x + cc->offset.x;
+	cp.y = pos->curr.y + cc->offset.y;
 	step.x = vel->curr.x * dt;
 	step.y = vel->curr.y * dt;
-	coords[0] = pos_to_coords(coll_pos.x + fmin(step.x, 0.0), coll_pos.y + fmin(step.y, 0.0));
-	coords[1] = pos_to_coords(coll_pos.x + coll->size.x + fabs(step.x), coll_pos.y + coll->size.y + fabs(step.y));
-	check = coords[0];
-	while (check.x <= coords[1].x)
+	co[0] = pos_to_coords(cp.x + fmin(step.x, 0.0), cp.y + fmin(step.y, 0.0));
+	co[1] = pos_to_coords(cp.x + cc->size.x + fabs(step.x), cp.y + cc->size.y + fabs(step.y));
+	check = co[0];
+	while (check.x <= co[1].x)
 	{
-		check.y = coords[0].y;
-		while (check.y <= coords[1].y)
+		check.y = co[0].y;
+		while (check.y <= co[1].y)
 		{
-			if (check_tile(check, coll_pos, coll->size))
-				return (resolve(check, step, coll_pos, coll->size));
+			if (resolve(check, step, cp, cc->size) < 1.0)
+				return (true);
 			check.y++;
 		}
 		check.x++;
 	}
 	return (false);
 }
-
-/*static bool	check_world(double dt, t_c_pos *p, t_c_vel *vel, t_c_coll *c)
-{
-	t_dvec	s;
-	t_dvec	cp;
-	t_uvec	coords[4];
-	t_uvec	check[2];
-
-	s.x = vel->curr.x * dt;
-	s.y = vel->curr.y * dt;
-	cp.x = p->curr.x + c->offset.x;
-	cp.y = p->curr.y + c->offset.y;
-	coords[0] = pos_to_coords(cp.x, cp.y);
-	coords[1] = pos_to_coords(cp.x + c->size.x, cp.y + c->size.y);
-	coords[2] = pos_to_coords(cp.x, cp.y + s.y);
-	coords[3] = pos_to_coords(cp.x + c->size.x, cp.y + c->size.y + s.y);
-	check[0] = coords[0];
-	check[1] = coords[1];
-	while (check[0].x != check[1].x)
-	{
-		if (check[0].x < check[1].x)
-			check[0].x++;
-	}
-	return (false);
-}*/
 
 static bool	check_ents(uint32_t	ent, t_c_pos *pos, t_c_coll *coll)
 {
