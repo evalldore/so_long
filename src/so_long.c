@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 21:37:11 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/29 22:25:36 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "entities.h"
 #include "assets.h"
 
-static gamestate_t	g_gamestate;
+static t_gamestate	g_gamestate;
 
 void	sl_init(mlx_t *mlx, char *path)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 02:19:04 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/29 22:24:35 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ typedef struct s_map
 	char		**data;
 	uint32_t	dim_x;
 	uint32_t	dim_y;
-	t_uvec	start;
-	t_uvec	end;
+	t_uvec		start;
+	t_uvec		end;
 }	t_map;
 
 typedef struct s_gamestate
 {
 	uint32_t	player;
-}	gamestate_t;
+}	t_gamestate;
 
 typedef struct s_linecheck
 {
@@ -50,30 +50,14 @@ typedef struct s_linecheck
 	size_t		len;
 }	t_mapcheck;
 
-typedef struct s_collparams
-{
-	t_dvec	pos;
-	t_uvec	size;
-	t_dvec	vel;
-	t_dvec	tpos;
-	t_uvec	t_size;
-}	t_collparams;
-
-typedef struct s_collinfos
-{
-	bool	found;
-	
-}	t_collinfos;
-
-bool		box_check(t_dvec pos, t_uvec size, t_dvec tpos, t_uvec tsize);
 t_uvec		pos_to_coords(double x, double y);
 t_list		*parse_file(char *path);
 bool		map_load(char *path);
-t_map		map_get();
+t_map		map_get(void);
 void		sl_init(mlx_t *mlx, char *path);
 void		sl_keys(mlx_key_data_t keydata, void *params);
 void		sl_tick(void *params);
 void		sl_draw(mlx_image_t *buffer, void *param);
 void		sl_exit(void);
- 
+
 #endif

@@ -6,28 +6,45 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 21:27:03 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/29 22:23:20 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "so_long.h"
 #include "entities.h"
-#include <stdlib.h>
+#include "box.h"
 
 static bool	check_tile(t_uvec coords, t_dvec pos, t_uvec size)
 {
-	t_map	map;
 	t_uvec	tilesize;
 	t_dvec	tilepos;
 
-	map = map_get();
-	if (map.data[coords.y][coords.x] != '1')
+	if (map_get().data[coords.y][coords.x] != '1')
 		return (false);
 	tilepos.x = (double)(coords.x * TILE_SIZE);
 	tilepos.y = (double)(coords.y * TILE_SIZE);
 	tilesize.x = TILE_SIZE;
 	tilesize.y = TILE_SIZE;
 	return (box_check(pos, size, tilepos, tilesize));
+}
+
+static bool	resolve(t_uvec coords, t_dvec step, t_dvec pos, t_uvec size)
+{
+	t_box	s;
+	t_box	t;
+	double	time;
+
+	s.x = pos.x;
+	s.y = pos.y;
+	s.w = size.x;
+	s.h = size.y;
+	t.x = (double)(coords.x * TILE_SIZE);
+	t.y = (double)(coords.y * TILE_SIZE);
+	t.w = TILE_SIZE;
+	t.h = TILE_SIZE;
+	time = box_intersect(step, s, t);
+	return (true);
 }
 
 static bool	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *coll)
@@ -50,7 +67,7 @@ static bool	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *coll)
 		while (check.y <= coords[1].y)
 		{
 			if (check_tile(check, coll_pos, coll->size))
-				return (true);
+				return (resolve(check, step, coll_pos, coll->size));
 			check.y++;
 		}
 		check.x++;
@@ -60,9 +77,9 @@ static bool	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *coll)
 
 /*static bool	check_world(double dt, t_c_pos *p, t_c_vel *vel, t_c_coll *c)
 {
+	t_dvec	s;
 	t_dvec	cp;
 	t_uvec	coords[4];
-	t_dvec	s;
 	t_uvec	check[2];
 
 	s.x = vel->curr.x * dt;
@@ -71,8 +88,8 @@ static bool	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *coll)
 	cp.y = p->curr.y + c->offset.y;
 	coords[0] = pos_to_coords(cp.x, cp.y);
 	coords[1] = pos_to_coords(cp.x + c->size.x, cp.y + c->size.y);
-	coords[2] = pos_to_coords(cp.x + s.x, cp.y + s.y);
-	coords[3] = pos_to_coords(cp.x + c->size.x + s.x, cp.y + c->size.y + s.y);
+	coords[2] = pos_to_coords(cp.x, cp.y + s.y);
+	coords[3] = pos_to_coords(cp.x + c->size.x, cp.y + c->size.y + s.y);
 	check[0] = coords[0];
 	check[1] = coords[1];
 	while (check[0].x != check[1].x)
@@ -123,9 +140,9 @@ void	sys_collision(uint32_t ent, va_list args)
 	coll = ecs_comp_get(ent, COMP_COLLISION);
 	if (!pos || !coll)
 		return ;
-	if (vel)
+	if (vel && (coll->flags & COLL_FLAG_WORLD))
 	{
-		if ((coll->flags & COLL_FLAG_WORLD) && check_world(dt, pos, vel, coll))
+		if (check_world(dt, pos, vel, coll))
 		{
 			if (vel->curr.y > 0.0)
 				vel->curr.y = 0.0;
