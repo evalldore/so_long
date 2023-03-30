@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/29 22:24:35 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:25:41 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,18 @@ typedef struct s_linecheck
 	size_t		len;
 }	t_mapcheck;
 
+typedef struct s_sweep
+{
+	t_uvec	min;
+	t_uvec	max;
+	t_dvec	step;
+	double	time;
+	t_ivec	normal;
+}	t_sweepinfos;
+
 t_uvec		pos_to_coords(double x, double y);
 t_list		*parse_file(char *path);
+void		interact(uint32_t ent1, uint32_t ent2);
 bool		map_load(char *path);
 t_map		map_get(void);
 void		sl_init(mlx_t *mlx, char *path);

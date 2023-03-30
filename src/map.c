@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 17:59:54 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:01:48 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ static bool	map_init(t_list *list)
 		list = list->next;
 	}
 	g_map.data[index] = NULL;
-	ft_printf("dim x: %d\ndim y: %d\nstart x: %d\nstart y: %d\nend x :%d\nend y:%d\n", g_map.dim_x, g_map.dim_y, g_map.start.x, g_map.start.y);
+	ft_printf("dim x: %d y: %d\n", g_map.dim_x, g_map.dim_y);
+	ft_printf("start x: %d y: %d\n", g_map.start.x, g_map.start.y);
+	ft_printf("end x: %d y: %d\n", g_map.end.x, g_map.end.x);
+	ft_printf("collectibles:%d\n", g_map.num_coll);
 	return (true);
 }
 
@@ -84,11 +87,14 @@ bool	map_load(char *path)
 	if (!list)
 		return (false);
 	curr = list;
+	g_map.num_coll = 0;
 	while (curr)
 	{
+		check.collectibles = 0;
 		if (check_line(&check, curr->content))
 		{
 			curr = curr->next;
+			g_map.num_coll += check.collectibles;
 			continue ;
 		}
 		ft_lstclear(&list, &free);

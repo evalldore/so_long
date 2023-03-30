@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:14:25 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 02:34:02 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/30 12:43:01 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 # include "ecs.h"
 # include "vector.h"
 
-enum	e_collflags
+enum	e_flags
 {
-	COLL_FLAG_WORLD = 1 << 0,
-	COLL_FLAG_PLAYER = 1 << 1,
-	COLL_FLAG_ENEMIES = 1 << 2,
-	COLL_FLAG_COLLECTIBLE = 1 << 3,
-	COLL_FLAG_PROJECTILE = 1 << 4
+	FLAG_WORLD = 1 << 0,
+	FLAG_PLAYER = 1 << 1,
+	FLAG_ENEMIES = 1 << 2,
+	FLAG_COLLECTIBLE = 1 << 3,
+	FLAG_PROJECTILE = 1 << 4
 };
 
 enum e_comp
@@ -106,7 +106,7 @@ typedef struct s_comp_direction
 typedef struct s_comp_state
 {
 	int32_t	curr;
-	int32_t last;
+	int32_t	last;
 }	t_c_state;
 
 void		entities_init(void);

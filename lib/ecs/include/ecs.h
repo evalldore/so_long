@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ecs.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 03:33:14 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 03:20:26 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/30 15:56:42 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_component
 
 uint32_t	ecs_create(void);
 uint32_t	ecs_num(void);
+void		ecs_remove(uint32_t	ent_id);
 void		*ecs_comp_add(uint32_t ent_id, int comp, int argc, ...);
 void		ecs_comp_remove(uint32_t ent_id, int comp);
 void		ecs_comp_register(int comp, t_constructor c, t_destructor d);

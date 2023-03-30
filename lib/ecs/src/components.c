@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   components.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 00:14:52 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 03:20:30 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/30 15:55:45 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	*ecs_comp_add(uint32_t ent_id, int comp, int argc, ...)
 void	ecs_comp_remove(uint32_t ent_id, int comp)
 {
 	if (ent_id > ecs_num() || ent_id >= MAX_ENTS || comp >= MAX_COMP)
+		return ;
+	if (!g_components[comp].ptrs[ent_id])
 		return ;
 	g_components[comp].dest(g_components[comp].ptrs[ent_id]);
 	g_components[comp].ptrs[ent_id] = NULL;
