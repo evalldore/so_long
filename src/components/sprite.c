@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:53:17 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/30 16:06:27 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/31 05:55:10 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@ void	*sprite_new(va_list args)
 
 void	sprite_free(void	*ptr)
 {
-	t_c_sprt	*sprite;
+	t_c_sprt	*sprt;
+	mlx_image_t	*img;
 
-	sprite = ptr;
-	free(sprite->insts);
-	free(sprite);
+	sprt = ptr;
+	img = assets_get(sprt->asset);
+	img->instances[sprt->insts[sprt->asset]].enabled = false;
+	free(sprt->insts);
+	free(sprt);
 }
 
 void	comp_sprite_reg(void)

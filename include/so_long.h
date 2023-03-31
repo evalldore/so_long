@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 04:54:11 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 05:49:30 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		interact(uint32_t ent1, uint32_t ent2);
 void		shoot(uint32_t	player);
 bool		map_load(char *path);
 t_map		map_get(void);
-void		sl_init(mlx_t *mlx, char *path);
+bool		sl_init(mlx_t *mlx, char *path);
 void		sl_keys(mlx_key_data_t keydata, void *params);
 void		sl_tick(void *params);
 void		sl_draw(mlx_image_t *buffer, void *param);

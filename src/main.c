@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 17:59:30 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/31 05:50:43 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int32_t	main(int argc, char	**argv)
 		ft_error();
 	mlx_key_hook(mlx, sl_keys, NULL);
 	mlx_loop_hook(mlx, loop, mlx);
-	sl_init(mlx, argv[1]);
+	if (!sl_init(mlx, argv[1]))
+		ft_error();
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	sl_exit();

@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 05:28:44 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 05:48:57 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static t_gamestate	g_gamestate;
 
-void	sl_init(mlx_t *mlx, char *path)
+bool	sl_init(mlx_t *mlx, char *path)
 {
 	t_uvec			co;
 	int32_t			asset;
@@ -33,11 +33,9 @@ void	sl_init(mlx_t *mlx, char *path)
 			co.x = 0;
 			while (map.data[co.y][co.x])
 			{
-				asset = 0;
+				asset = ASSET_TILE_EMPTY;
 				if (map.data[co.y][co.x] == '1')
 					asset = ASSET_TILE_WALL;
-				else
-					asset = ASSET_TILE_EMPTY;
 				if (map.data[co.y][co.x] == 'C')
 					entities_enemy(co.x * TILE_SIZE, co.y * TILE_SIZE);
 				if (asset)
@@ -47,7 +45,9 @@ void	sl_init(mlx_t *mlx, char *path)
 			co.y++;
 		}
 		g_gamestate.player = entities_player((map.start.x * TILE_SIZE) + (TILE_SIZE / 2), (map.start.y + 1) * TILE_SIZE);
+		return (true);
 	}
+	return (false);
 }
 
 void	sl_keys(mlx_key_data_t keydata, void *param)
