@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 00:23:38 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 01:59:47 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,32 @@
 
 static t_map	g_map;
 
-static bool	check_line(t_mapcheck *check, char	*line)
+static bool	check_line(char	*line, char *start)
 {
-	check->len = 0;
-	while (line[check->len] && line[check->len] != '\n')
+	static uint32_t index;
+
+	while (*line && *line != '\n')
 	{
-		if (line[check->len] == 'P')
+		if (*line == 'P')
 		{
-			if (!check->has_start)
-				check->has_start = true;
-			else
+			if (g_map.start.x > 0 || g_map.start.y > 0)
 				return (false);
+			g_map.start.x = line - start;
+			g_map.start.y = index;
 		}
-		if (line[check->len] == 'E')
+		else if (*line == 'E')
 		{
-			if (!check->has_exit)
-				check->has_exit = true;
-			else
+			if (g_map.end.x > 0 || g_map.end.y > 0)
 				return (false);
+			g_map.end.x = line - start;
+			g_map.end.y = index;
 		}
-		if (line[check->len] == 'C')
-			check->collectibles++;
-		check->len++;
+		else if (*line == 'C')
+			g_map.num_coll++;
+		line++;
 	}
+	index++;
 	return (true);
-}
-
-static void	set_points(size_t collumn, char *line, char c)
-{
-	char	*pos;
-
-	pos = ft_strchr(line, c);
-	if (!pos)
-		return ;
-	if (c == 'P')
-	{
-		g_map.start.x = pos - (char *)(line);
-		g_map.start.y = collumn;
-	}
-	else if (c == 'E')
-	{
-		g_map.end.x = pos - (char *)(line);
-		g_map.end.y = collumn;
-	}
 }
 
 static bool check_borders()
@@ -84,6 +67,18 @@ static bool check_borders()
 	return (true);
 }
 
+static bool is_valid(void)
+{
+
+	if (g_map.dim_x <= g_map.dim_y)
+		return (false);
+	if (g_map.start.x < 0 || g_map.end.x < 0)
+		return (false);
+	if (g_map.num_coll == 0)
+		return (false);
+	return (true);
+}
+
 static bool	map_init(t_list *list)
 {
 	size_t	index;
@@ -91,13 +86,11 @@ static bool	map_init(t_list *list)
 	index = 0;
 	g_map.dim_x = ft_strlen(list->content) - 1;
 	g_map.dim_y = ft_lstsize(list);
-	if (g_map.dim_x > g_map.dim_y)
+	if (is_valid())
 	{
 		g_map.data = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
 		while (list)
 		{
-			set_points(index, (char *)(list->content), 'P');
-			set_points(index, (char *)(list->content), 'E');
 			g_map.data[index++] = list->content;
 			list = list->next;
 		}
@@ -105,7 +98,7 @@ static bool	map_init(t_list *list)
 		ft_lstclear(&list, NULL);
 		return (check_borders());
 	}
-	ft_lstclear(&list, NULL);
+	ft_lstclear(&list, &free);
 	return (false);
 }
 
@@ -116,7 +109,6 @@ t_map	map_get(void)
 
 bool	map_load(char *path)
 {
-	static t_mapcheck	check;
 	t_list				*list;
 	t_list				*curr;
 
@@ -124,14 +116,15 @@ bool	map_load(char *path)
 	if (!list)
 		return (false);
 	curr = list;
-	g_map.num_coll = 0;
+	g_map.start.x = -1;
+	g_map.start.y = -1;
+	g_map.end.x = -1;
+	g_map.end.y = -1;
 	while (curr)
 	{
-		check.collectibles = 0;
-		if (check_line(&check, curr->content))
+		if (check_line(curr->content, curr->content))
 		{
 			curr = curr->next;
-			g_map.num_coll += check.collectibles;
 			continue ;
 		}
 		ft_lstclear(&list, &free);

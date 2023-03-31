@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/30 23:04:40 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 01:26:47 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_map
 	char		**data;
 	uint32_t	dim_x;
 	uint32_t	dim_y;
-	t_uvec		start;
-	t_uvec		end;
+	t_ivec		start;
+	t_ivec		end;
 }	t_map;
 
 typedef struct s_gamestate
@@ -48,7 +48,7 @@ typedef struct s_linecheck
 	bool		has_exit;
 	bool		has_start;
 	uint32_t	collectibles;
-	size_t		len;
+	int32_t		len;
 }	t_mapcheck;
 
 typedef struct s_sweep
