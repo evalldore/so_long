@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/30 18:41:09 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/31 00:23:38 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,51 @@ static void	set_points(size_t collumn, char *line, char c)
 	}
 }
 
+static bool check_borders()
+{
+	t_uvec	coords;
+
+	coords.x = 0;
+	coords.y = 0;
+	while (coords.x < (g_map.dim_x))
+	{
+		if (g_map.data[0][coords.x] != '1')
+			return (false);
+		if (g_map.data[g_map.dim_y - 1][coords.x] != '1')
+			return (false);
+		coords.x++;
+	}
+	while (coords.y < g_map.dim_y)
+	{
+		if (g_map.data[coords.y][0] != '1')
+			return (false);
+		if (g_map.data[coords.y][g_map.dim_x - 1] != '1')
+			return (false);
+		coords.y++;
+	}
+	return (true);
+}
+
 static bool	map_init(t_list *list)
 {
 	size_t	index;
 
 	index = 0;
-	g_map.dim_x = ft_strlen(list->content);
+	g_map.dim_x = ft_strlen(list->content) - 1;
 	g_map.dim_y = ft_lstsize(list);
 	if (g_map.dim_x > g_map.dim_y)
 	{
 		g_map.data = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
 		while (list)
 		{
-			g_map.data[index] = list->content;
 			set_points(index, (char *)(list->content), 'P');
 			set_points(index, (char *)(list->content), 'E');
+			g_map.data[index++] = list->content;
 			list = list->next;
-			index++;
 		}
 		g_map.data[index] = NULL;
 		ft_lstclear(&list, NULL);
-		return (true);
+		return (check_borders());
 	}
 	ft_lstclear(&list, NULL);
 	return (false);

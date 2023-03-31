@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/30 17:40:44 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/30 23:09:56 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,6 @@ static bool	check_tile(t_uvec coords, t_dvec pos, t_uvec size)
 	tilesize.y = TILE_SIZE;
 	return (box_check(pos, size, tilepos, tilesize));
 }
-
-/*static bool	iterate_tiles(t_uvec	co[2], t_dvec pos, t_uvec size)
-{
-	t_uvec	check;
-
-	check = co[0];
-	while (check.x <= co[1].x)
-	{
-		check.y = co[0].y;
-		while (check.y <= co[1].y)
-		{
-			if (check_tile(check, pos, size))
-				return (true);
-			check.y++;
-		}
-		check.x++;
-	}
-	return (false);
-}*/
 
 static void	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *cc)
 {

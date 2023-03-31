@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:47:33 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/30 16:13:06 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/30 23:00:32 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ecs_remove(uint32_t ent_id)
 {
 	int32_t	comp;
 
-	if (ent_id >= g_entities || ent_id < 0)
+	if (ent_id >= g_entities)
 		return ;
 	comp = 0;
 	while (comp < MAX_COMP)
