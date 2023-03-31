@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:14:25 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/30 12:43:01 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/31 05:28:36 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <MLX42/MLX42.h>
 # include "ecs.h"
 # include "vector.h"
+# define BULLET_SPEED 480
 
 enum	e_flags
 {
@@ -38,7 +39,9 @@ enum e_comp
 	COMP_COLLISION,
 	COMP_ANIM,
 	COMP_STATE,
-	COMP_DIRECTION
+	COMP_DIRECTION,
+	COMP_PROJECTILE,
+	COMP_AI
 };
 
 enum e_state
@@ -79,6 +82,7 @@ typedef struct s_comp_control
 	bool	right;
 	bool	jump;
 	bool	shoot;
+	bool	lastshoot;
 }	t_c_ctrl;
 
 typedef struct s_comp_collision
@@ -109,9 +113,22 @@ typedef struct s_comp_state
 	int32_t	last;
 }	t_c_state;
 
+typedef struct s_comp_projectile
+{
+	double	time;
+}	t_c_project;
+
+typedef struct s_comp_ai
+{
+	bool	attacking;
+}	t_c_ai;
+
+
 void		entities_init(void);
 uint32_t	entities_player(double x, double y);
 uint32_t	entities_collectible(double x, double y);
+uint32_t	entities_projectile(double x, double y, bool isRight);
+uint32_t	entities_enemy(double x, double y);
 
 void		animation_set(uint32_t ent, int32_t index, int32_t frame);
 void		state_set(uint32_t ent, int32_t next);
@@ -124,6 +141,8 @@ void		sys_animation(uint32_t ent, va_list args);
 void		sys_state(uint32_t ent, va_list args);
 void		sys_collision(uint32_t ent, va_list args);
 void		sys_gravity(uint32_t ent, va_list args);
+void		sys_projectiles(uint32_t, va_list args);
+void		sys_ai(uint32_t, va_list args);
 
 void		comp_ctrl_reg(void);
 void		comp_pos_reg(void);
@@ -134,5 +153,7 @@ void		comp_coll_reg(void);
 void		comp_anim_reg(void);
 void		comp_state_reg(void);
 void		comp_dir_reg(void);
+void		comp_project_reg(void);
+void		comp_ai_reg(void);
 
 #endif

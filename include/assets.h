@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 05:07:51 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 01:52:29 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 05:25:53 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ enum	e_asset
 	ASSET_ENERGY_1,
 	ASSET_ENERGY_2,
 	ASSET_ENERGY_3,
+	ASSET_PROJECT_R_1,
+	ASSET_PROJECT_R_2,
+	ASSET_PROJECT_L_1,
+	ASSET_PROJECT_L_2,
+	ASSET_METROID_1,
+	ASSET_METROID_2,
+	ASSET_METROID_3,
 	MAX_ASSETS
 };
 
@@ -45,6 +52,9 @@ enum	e_anim
 	ANIM_WALK_L,
 	ANIM_JUMP_L,
 	ANIM_ENERGY,
+	ANIM_PROJECT_R,
+	ANIM_PROJECT_L,
+	ANIM_METROID,
 	MAX_ANIM
 };
 

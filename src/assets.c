@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 05:06:31 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/30 16:05:58 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/31 05:25:39 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,11 @@ void	assets_init(mlx_t *mlx)
 	assets_load(mlx, ASSET_ENERGY_1, "assets/energy_1.png");
 	assets_load(mlx, ASSET_ENERGY_2, "assets/energy_2.png");
 	assets_load(mlx, ASSET_ENERGY_3, "assets/energy_3.png");
+	assets_load(mlx, ASSET_PROJECT_R_1, "assets/projectile_r_1.png");
+	assets_load(mlx, ASSET_PROJECT_R_2, "assets/projectile_r_2.png");
+	assets_load(mlx, ASSET_PROJECT_L_1, "assets/projectile_l_1.png");
+	assets_load(mlx, ASSET_PROJECT_L_2, "assets/projectile_l_2.png");
+	assets_load(mlx, ASSET_METROID_1, "assets/metroid_1.png");
+	assets_load(mlx, ASSET_METROID_2, "assets/metroid_2.png");
+	assets_load(mlx, ASSET_METROID_3, "assets/metroid_3.png");
 }

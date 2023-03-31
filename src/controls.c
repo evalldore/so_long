@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:33:12 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 02:20:32 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 04:50:54 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,11 @@ void	sys_controls_tick(uint32_t ent, va_list args)
 		move(ent, (-120 * ctrl->left) + (120 * ctrl->right));
 		if (ctrl->jump)
 			jump(ent);
+		if (ctrl->lastshoot != ctrl->shoot)
+		{
+			ctrl->lastshoot = ctrl->shoot;
+			if (ctrl->shoot)
+				shoot(ent);
+		}
 	}
 }

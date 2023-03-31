@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/30 18:34:12 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/31 05:28:44 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	sl_init(mlx_t *mlx, char *path)
 				else
 					asset = ASSET_TILE_EMPTY;
 				if (map.data[co.y][co.x] == 'C')
-					entities_collectible(co.x * TILE_SIZE, co.y * TILE_SIZE);
+					entities_enemy(co.x * TILE_SIZE, co.y * TILE_SIZE);
 				if (asset)
 					mlx_image_to_window(mlx, assets_get(asset), co.x * TILE_SIZE, co.y * TILE_SIZE);
 				co.x++;
@@ -63,6 +63,8 @@ void	sl_tick(void *param)
 
 	mlx = param;
 	ecs_iterate(&sys_controls_tick, mlx->delta_time);
+	ecs_iterate(&sys_projectiles, mlx->delta_time);
+	ecs_iterate(&sys_ai, mlx->delta_time);
 	ecs_iterate(&sys_gravity, mlx->delta_time);
 	ecs_iterate(&sys_collision, mlx->delta_time);
 	ecs_iterate(&sys_movement, mlx->delta_time);

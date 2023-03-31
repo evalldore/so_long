@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.c                                         :+:      :+:    :+:   */
+/*   projectile.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 21:16:41 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 04:49:22 by niceguy          ###   ########.fr       */
+/*   Created: 2023/03/31 04:37:45 by niceguy           #+#    #+#             */
+/*   Updated: 2023/03/31 05:24:39 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
+#include "libft.h"
 
-void	*control_new(va_list args)
+void	*projectile_new(va_list args)
 {
-	t_c_ctrl	*ctrl;
+	t_c_project	*project;
 
 	(void)args;
-	ctrl = malloc(sizeof(t_c_ctrl));
-	if (!ctrl)
+	project = malloc(sizeof(t_c_project));
+	if (!project)
 		return (NULL);
-	ctrl->jump = false;
-	ctrl->left = false;
-	ctrl->right = false;
-	ctrl->shoot = false;
-	ctrl->lastshoot = false;
-	return (ctrl);
+	project->time = 0.0;
+	return (project);
 }
 
-void	control_free(void	*ptr)
+void	projectile_free(void	*ptr)
 {
 	free(ptr);
 }
 
-void	comp_ctrl_reg(void)
+void	comp_project_reg(void)
 {
-	ecs_comp_register(COMP_CTRL, &control_new, &control_free);
+	ecs_comp_register(COMP_PROJECTILE, &projectile_new, &projectile_free);
 }

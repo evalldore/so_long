@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.c                                         :+:      :+:    :+:   */
+/*   ai.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 21:16:41 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 04:49:22 by niceguy          ###   ########.fr       */
+/*   Created: 2023/03/31 05:17:57 by niceguy           #+#    #+#             */
+/*   Updated: 2023/03/31 05:20:38 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-void	*control_new(va_list args)
+void	*ai_new(va_list args)
 {
-	t_c_ctrl	*ctrl;
+	t_c_ai	*ai;
 
 	(void)args;
-	ctrl = malloc(sizeof(t_c_ctrl));
-	if (!ctrl)
+	ai = malloc(sizeof(t_c_ai));
+	if (!ai)
 		return (NULL);
-	ctrl->jump = false;
-	ctrl->left = false;
-	ctrl->right = false;
-	ctrl->shoot = false;
-	ctrl->lastshoot = false;
-	return (ctrl);
+	ai->attacking = false;
+	return (ai);
 }
 
-void	control_free(void	*ptr)
+void	ai_free(void	*ptr)
 {
 	free(ptr);
 }
 
-void	comp_ctrl_reg(void)
+void	comp_ai_reg()
 {
-	ecs_comp_register(COMP_CTRL, &control_new, &control_free);
+	ecs_comp_register(COMP_AI, &ai_new, &ai_free);
 }

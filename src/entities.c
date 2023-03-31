@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 06:05:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/30 17:42:23 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/31 05:31:07 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	entities_init(void)
 	comp_anim_reg();
 	comp_state_reg();
 	comp_dir_reg();
+	comp_project_reg();
+	comp_ai_reg();
 }
 
 uint32_t	entities_player(double x, double y)
@@ -58,5 +60,50 @@ uint32_t	entities_collectible(double x, double y)
 	ecs_comp_add(ent, COMP_SPRITE, 3, ASSET_ENERGY_1, -4.0, -4.0);
 	ecs_comp_add(ent, COMP_ANIM, 1, ANIM_ENERGY);
 	ecs_comp_add(ent, COMP_COLLISION, 5, 8, 8, -4.0, -4.0, collflags);
+	return (ent);
+}
+
+uint32_t	entities_projectile(double x, double y, bool isRight)
+{
+	uint32_t		ent;
+	uint32_t		collflags;
+	double			vel;
+	int32_t			asset;
+	int32_t			anim;
+
+	vel = -BULLET_SPEED;
+	asset = ASSET_PROJECT_L_1;
+	anim = ANIM_PROJECT_L;
+	if (isRight)
+	{
+		vel = BULLET_SPEED;
+		asset = ASSET_PROJECT_R_1;
+		anim = ANIM_PROJECT_R;
+	}
+	collflags = (FLAG_PROJECTILE);
+	ent = ecs_create();
+	ecs_comp_add(ent, COMP_POS, 2, x, y);
+	ecs_comp_add(ent, COMP_VEL, 2, vel, 0.0);
+	ecs_comp_add(ent, COMP_SPRITE, 3, asset, -4.0, -4.0);
+	ecs_comp_add(ent, COMP_ANIM, 1, anim);
+	ecs_comp_add(ent, COMP_COLLISION, 5, 8, 8, -4.0, -4.0, collflags);
+	ecs_comp_add(ent, COMP_DIRECTION, 1, isRight);
+	ecs_comp_add(ent, COMP_PROJECTILE, 0);
+	return (ent);
+}
+
+uint32_t	entities_enemy(double x, double y)
+{
+	uint32_t		ent;
+	uint32_t		collflags;
+
+	collflags = (FLAG_ENEMIES);
+	ent = ecs_create();
+	ecs_comp_add(ent, COMP_POS, 2, x, y);
+	ecs_comp_add(ent, COMP_VEL, 2, 0.0, 0.0);
+	ecs_comp_add(ent, COMP_SPRITE, 3, ASSET_METROID_1, -4.0, -4.0);
+	ecs_comp_add(ent, COMP_ANIM, 1, ANIM_METROID);
+	ecs_comp_add(ent, COMP_COLLISION, 5, 8, 8, -4.0, -4.0, collflags);
+	ecs_comp_add(ent, COMP_AI, 0);
 	return (ent);
 }

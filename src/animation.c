@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:54:01 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/28 17:58:24 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/03/31 05:26:11 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static int32_t g_anims[MAX_ANIM][4] = {
 	{ASSET_SAM_IDLE_L, ASSET_NONE, ASSET_NONE, ASSET_NONE},
 	{ASSET_SAM_WALK_L_1, ASSET_SAM_WALK_L_2, ASSET_SAM_WALK_L_3, ASSET_NONE},
 	{ASSET_SAM_WALK_L_3, ASSET_NONE, ASSET_NONE, ASSET_NONE},
-	{ASSET_ENERGY_1, ASSET_ENERGY_3, ASSET_ENERGY_2, ASSET_NONE}
+	{ASSET_ENERGY_1, ASSET_ENERGY_3, ASSET_ENERGY_2, ASSET_NONE},
+	{ASSET_PROJECT_R_1, ASSET_PROJECT_R_2, ASSET_NONE, ASSET_NONE},
+	{ASSET_PROJECT_L_1, ASSET_PROJECT_L_2, ASSET_NONE, ASSET_NONE},
+	{ASSET_METROID_1, ASSET_METROID_2, ASSET_METROID_3, ASSET_NONE}
 };
 
 void	animation_set(uint32_t ent, int32_t index, int32_t frame)
