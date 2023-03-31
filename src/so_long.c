@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 05:48:57 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 18:44:11 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ bool	sl_init(mlx_t *mlx, char *path)
 	if (map_load(path))
 	{
 		map = map_get();
-		co.y = 0;
 		assets_init(mlx);
 		entities_init();
+		co.y = 0;
 		while (map.data[co.y])
 		{
 			co.x = 0;
@@ -64,6 +64,7 @@ void	sl_tick(void *param)
 	mlx = param;
 	ecs_iterate(&sys_controls_tick, mlx->delta_time);
 	ecs_iterate(&sys_projectiles, mlx->delta_time);
+	ecs_iterate(&sys_collectible, mlx->delta_time, g_gamestate.player);
 	ecs_iterate(&sys_ai, mlx->delta_time);
 	ecs_iterate(&sys_gravity, mlx->delta_time);
 	ecs_iterate(&sys_collision, mlx->delta_time);

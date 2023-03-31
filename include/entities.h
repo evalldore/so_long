@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:14:25 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 05:28:36 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 18:36:39 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,14 @@ enum e_comp
 	COMP_STATE,
 	COMP_DIRECTION,
 	COMP_PROJECTILE,
-	COMP_AI
+	COMP_AI,
+	COMP_COLLECTIBLE
+};
+
+enum e_collect
+{
+	COLLECT_HP,
+	COLLECT_MISSILE
 };
 
 enum e_state
@@ -123,6 +130,10 @@ typedef struct s_comp_ai
 	bool	attacking;
 }	t_c_ai;
 
+typedef struct s_comp_collect
+{
+	int32_t	type;
+}	t_c_collect;
 
 void		entities_init(void);
 uint32_t	entities_player(double x, double y);
@@ -143,6 +154,7 @@ void		sys_collision(uint32_t ent, va_list args);
 void		sys_gravity(uint32_t ent, va_list args);
 void		sys_projectiles(uint32_t, va_list args);
 void		sys_ai(uint32_t, va_list args);
+void		sys_collectible(uint32_t, va_list args);
 
 void		comp_ctrl_reg(void);
 void		comp_pos_reg(void);
@@ -155,5 +167,6 @@ void		comp_state_reg(void);
 void		comp_dir_reg(void);
 void		comp_project_reg(void);
 void		comp_ai_reg(void);
+void		comp_collect_reg(void);
 
 #endif
