@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 19:52:32 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 23:15:01 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,36 @@
 
 static t_gamestate	g_gamestate;
 
-bool	sl_init(mlx_t *mlx, char *path)
+bool	sl_init(mlx_t *mlx)
 {
 	t_uvec			co;
 	int32_t			asset;
 	t_map			map;
 
-	if (map_load(path))
+	map = map_get();
+	assets_init(mlx);
+	entities_init();
+	co.y = 0;
+	while (map.data[co.y])
 	{
-		map = map_get();
-		assets_init(mlx);
-		entities_init();
-		co.y = 0;
-		while (map.data[co.y])
+		co.x = 0;
+		while (map.data[co.y][co.x])
 		{
-			co.x = 0;
-			while (map.data[co.y][co.x])
-			{
-				asset = ASSET_TILE_EMPTY;
-				if (map.data[co.y][co.x] == '1')
-					asset = ASSET_TILE_WALL;
-				if (map.data[co.y][co.x] == 'C')
-					entities_enemy(co.x * TILE_SIZE, co.y * TILE_SIZE);
-				if (asset)
-					mlx_image_to_window(mlx, assets_get(asset), co.x * TILE_SIZE, co.y * TILE_SIZE);
-				co.x++;
-			}
-			co.y++;
+			if (map.data[co.y][co.x] == '\n')
+				break;
+			asset = ASSET_TILE_EMPTY;
+			if (map.data[co.y][co.x] == '1')
+				asset = ASSET_TILE_WALL;
+			if (map.data[co.y][co.x] == 'C')
+				entities_enemy(co.x * TILE_SIZE, co.y * TILE_SIZE);
+			if (asset)
+				mlx_image_to_window(mlx, assets_get(asset), co.x * TILE_SIZE, co.y * TILE_SIZE);
+			co.x++;
 		}
-		g_gamestate.player = entities_player((map.start.x * TILE_SIZE) + (TILE_SIZE / 2), (map.start.y + 1) * TILE_SIZE);
-		return (true);
+		co.y++;
 	}
-	return (false);
+	g_gamestate.player = entities_player((map.start.x * TILE_SIZE) + (TILE_SIZE / 2), (map.start.y + 1) * TILE_SIZE);
+	return (true);
 }
 
 void	sl_keys(mlx_key_data_t keydata, void *param)
@@ -72,13 +70,6 @@ void	sl_tick(void *param)
 	ecs_iterate(&sys_state);
 	ecs_iterate(&sys_animation, mlx->delta_time);
 	ecs_iterate(&sys_sprites, mlx);
-}
-
-void	sl_draw(mlx_image_t *buffer, void *param)
-{
-	(void)buffer;
-	(void)param;
-	//ft_memset(buffer->pixels, 0, buffer->width * buffer->height * sizeof(int32_t));
 }
 
 void	sl_exit(void)

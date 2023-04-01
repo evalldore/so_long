@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 20:10:39 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 22:18:30 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static t_map	g_map;
 
 static bool	check_line(uint32_t index, char	*line, char *start)
 {
-	//if ((ft_strlen(line) - 1) != g_map.dim_x)
-		//return (false);
+	if (row_len(line) != g_map.dim_x)
+		return (false);
 	while (*line && *line != '\n')
 	{
 		if (*line == 'P')
@@ -77,7 +77,7 @@ bool	map_load(char *path)
 	if (!list)
 		return (false);
 	curr = list;
-	g_map.dim_x = ft_strlen(list->content) - 1;
+	g_map.dim_x = row_len(list->content);
 	g_map.dim_y = ft_lstsize(list);
 	while (curr)
 	{

@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 20:06:48 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 23:15:12 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
 # include <math.h>
 # include "vector.h"
 # include "entities.h"
+# include "coordinates.h"
 # include "map.h"
+
 # define WIDTH 512
 # define HEIGHT 512
-# define TILE_SIZE 32
 
 typedef struct s_gamestate
 {
@@ -43,13 +44,11 @@ typedef struct s_sweep
 	t_ivec	normal;
 }	t_sweepinfos;
 
-t_uvec		pos_to_coords(double x, double y);
 void		interact(uint32_t ent1, uint32_t ent2);
 void		shoot(uint32_t	player);
-bool		sl_init(mlx_t *mlx, char *path);
+bool		sl_init(mlx_t *mlx);
 void		sl_keys(mlx_key_data_t keydata, void *params);
 void		sl_tick(void *params);
-void		sl_draw(mlx_image_t *buffer, void *param);
 void		sl_exit(void);
 
 #endif

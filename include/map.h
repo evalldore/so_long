@@ -1,11 +1,11 @@
 #ifndef	MAP_H
 # define MAP_H
-
 # include<stdint.h>
 # include<stdbool.h>
 # include"vector.h"
 # include"libft.h"
 # include"parsing.h"
+# define TILE_SIZE 32
 
 typedef struct s_map
 {
@@ -21,5 +21,7 @@ bool		map_load(char *path);
 t_map		map_get(void);
 bool		map_is_valid(t_map map);
 bool		map_check_borders(t_map map);
+void		map_iter_tiles(t_map map, void (*f)(char));
+size_t		row_len(char	*line);
 
 #endif
