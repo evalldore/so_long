@@ -6,12 +6,14 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:33:12 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 04:50:54 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/01 05:18:05 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 #include "entities.h"
+#include "map.h"
+#include "coordinates.h"
 
 static void	set(uint32_t ent, keys_t key, bool toggle)
 {
@@ -60,7 +62,7 @@ static void	jump(uint32_t	ent)
 		return ;
 	if (state && state->curr == STATE_JUMP)
 		return ;
-	vel->curr.y = -180;
+	vel->curr.y = -188;
 	grav->scale = 0.0f;
 }
 
@@ -83,19 +85,27 @@ static void	move(uint32_t ent, float speed)
 void	sys_controls_tick(uint32_t ent, va_list args)
 {
 	t_c_ctrl	*ctrl;
+	t_c_pos		*pos;
+	t_c_state	*state;
+	t_uvec		coords;
 
 	(void)args;
 	ctrl = ecs_comp_get(ent, COMP_CTRL);
-	if (ctrl)
+	state = ecs_comp_get(ent, COMP_STATE);
+	pos = ecs_comp_get(ent, COMP_POS);
+	if (!ctrl)
+		return ;
+	move(ent, (-120 * ctrl->left) + (120 * ctrl->right));
+	if (ctrl->jump && state->curr != STATE_JUMP)
 	{
-		move(ent, (-120 * ctrl->left) + (120 * ctrl->right));
-		if (ctrl->jump)
+		coords = pos_to_coords(pos->curr.x, pos->curr.y);
+		if (map_get().data[coords.y][coords.x] == '1')
 			jump(ent);
-		if (ctrl->lastshoot != ctrl->shoot)
-		{
-			ctrl->lastshoot = ctrl->shoot;
-			if (ctrl->shoot)
-				shoot(ent);
-		}
+	}
+	if (ctrl->lastshoot != ctrl->shoot)
+	{
+		ctrl->lastshoot = ctrl->shoot;
+		if (ctrl->shoot)
+			shoot(ent);
 	}
 }

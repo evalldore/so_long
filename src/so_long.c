@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 23:15:01 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/01 04:06:01 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	sl_init(mlx_t *mlx)
 			if (map.data[co.y][co.x] == '1')
 				asset = ASSET_TILE_WALL;
 			if (map.data[co.y][co.x] == 'C')
-				entities_enemy(co.x * TILE_SIZE, co.y * TILE_SIZE);
+				entities_enemy((co.x * TILE_SIZE) + (TILE_SIZE / 2), (co.y * TILE_SIZE) + (TILE_SIZE / 2));
 			if (asset)
 				mlx_image_to_window(mlx, assets_get(asset), co.x * TILE_SIZE, co.y * TILE_SIZE);
 			co.x++;

@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 02:10:25 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/01 05:19:27 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,30 @@ static bool	check_tile(t_uvec coords, t_dvec pos, t_uvec size)
 static void	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *cc)
 {
 	t_dvec			cp;
-	t_dvec			step;
 	t_uvec			test;
+	t_dvec			tp;
 
-	step.x = vel->curr.x * dt;
-	step.y = vel->curr.y * dt;
 	cp.x = pos->curr.x + cc->offset.x;
 	cp.y = pos->curr.y + cc->offset.y;
-	test = pos_to_coords(pos->curr.x, step.y + pos->curr.y);
+	tp.x = cp.x;
+	tp.y = pos->curr.y;
+	if (vel->curr.y < 0.0)
+		tp.y = cp.y;
+	if (vel->curr.x > 0.0)
+		tp.x = cp.x + cc->size.x;
+	test = pos_to_coords(pos->curr.x, tp.y + vel->curr.y * dt);
 	if (check_tile(test, cp, cc->size))
 	{
-		if (vel->curr.y < 0.0)
-			pos->curr.y = (test.y * TILE_SIZE) + TILE_SIZE;
 		if (vel->curr.y > 0.0)
 			pos->curr.y = (test.y * TILE_SIZE);
 		vel->curr.y = 0.0;
 	}
-	test = pos_to_coords(pos->curr.x + step.x, pos->curr.y - 1);
+	test = pos_to_coords(tp.x + vel->curr.x * dt, pos->curr.y - 1);
 	if (check_tile(test, cp, cc->size))
 		vel->curr.x = 0.0;
 }
 
-static bool	check_ents(uint32_t	ent, t_c_pos *pos, t_c_coll *coll)
+static void	check_ents(uint32_t	ent, t_c_pos *pos, t_c_coll *coll)
 {
 	uint32_t	check_ent;
 	t_dvec		coll_pos;
@@ -77,7 +79,6 @@ static bool	check_ents(uint32_t	ent, t_c_pos *pos, t_c_coll *coll)
 		}
 		check_ent++;
 	}
-	return (false);
 }
 
 void	sys_collision(uint32_t ent, va_list args)

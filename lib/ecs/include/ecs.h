@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ecs.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 03:33:14 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/30 15:56:42 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/04/01 02:54:22 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ECS_H
 # define ECS_H
-# define MAX_ENTS 256
+# define MAX_ENTS 1024
 # define MAX_COMP 32
 # include <stdlib.h>
 # include <stdarg.h>

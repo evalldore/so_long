@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 12:37:07 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/31 19:08:03 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/01 03:58:21 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	collect(uint32_t ent)
 	ecs_remove(ent);
 }
 
-void	kill(uint32_t ent, uint32_t attacker)
+void	kill(uint32_t ent)
 {
 	t_c_pos		*pos;
 
 	pos = ecs_comp_get(ent, COMP_POS);
 	entities_collectible(pos->curr.x, pos->curr.y);
 	ecs_remove(ent);
-	ecs_remove(attacker);
+	//ecs_remove(attacker);
 }
 
 void	interact(uint32_t ent1, uint32_t ent2)
@@ -43,5 +43,5 @@ void	interact(uint32_t ent1, uint32_t ent2)
 	if ((entcomp1->flags & FLAG_PLAYER) && (entcomp2->flags & FLAG_COLLECTIBLE))
 		collect(ent2);
 	if ((entcomp1->flags & FLAG_PROJECTILE) && (entcomp2->flags & FLAG_ENEMIES))
-		kill(ent2, ent1);
+		kill(ent2);
 }

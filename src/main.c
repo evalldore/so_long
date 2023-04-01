@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 23:20:51 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 23:43:55 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int32_t	main(int argc, char	**argv)
 	mlx = mlx_init(map.dim_x * TILE_SIZE, map.dim_y * TILE_SIZE, "So Long", true);
 	if (!mlx)
 		ft_error();
-	mlx_set_window_size(mlx, mlx->width * 4, mlx->height * 4);
+	mlx_set_window_size(mlx, mlx->width * 2, mlx->height * 2);
 	mlx_key_hook(mlx, sl_keys, NULL);
 	mlx_loop_hook(mlx, &sl_tick, mlx);
 	sl_init(mlx);

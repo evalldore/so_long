@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 23:15:12 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/01 03:57:42 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_gamestate
 {
 	uint32_t	player;
 	uint32_t	collected;
+	uint32_t	moves;
 }	t_gamestate;
 
 typedef struct s_sweep
