@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 02:30:19 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 18:38:45 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:42:00 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@
 static void	last_frame(t_c_sprt	*sprite)
 {
 	mlx_image_t		*img;
+	int32_t			inst;
 
 	if (sprite->last_asset == sprite->asset)
 		return ;
 	img = assets_get(sprite->last_asset);
-	if (sprite->insts[sprite->last_asset] >= 0)
-		img->instances[sprite->insts[sprite->last_asset]].enabled = false;
+	inst = sprite->insts[sprite->last_asset];
+	if (inst >= 0)
+		img->instances[inst].enabled = false;
 }
 
 static int32_t	check_instance(mlx_t *mlx, mlx_image_t *img, t_c_sprt *sprite)
@@ -48,7 +50,7 @@ void	sys_sprites(uint32_t ent, va_list args)
 	mlx = va_arg(args, void *);
 	pos = ecs_comp_get(ent, COMP_POS);
 	sprite = ecs_comp_get(ent, COMP_SPRITE);
-	if (!pos || !sprite)
+	if (!pos || !sprite || sprite->asset == ASSET_NONE)
 		return ;
 	last_frame(sprite);
 	img = assets_get(sprite->asset);

@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:32:47 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 22:55:59 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/01 17:19:38 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,34 @@ t_uvec	pos_to_coords(double x, double y)
 	return (coord);
 }
 
-static void set_line_vars(t_uvec start, t_uvec end, t_ivec *d, t_ivec *s)
+static int32_t set_line_vars(t_uvec start, t_uvec end, t_ivec *d, t_ivec *s)
 {
 	d->x = abs((int32_t)(end.x - start.x));
 	d->y = abs((int32_t)(end.y - start.y));
-	s->x = 1;
-	s->y = 1;
-	if (start.x > end.x)
-		s->x = -1;
-	if (start.y > end.y)
-		s->y = -1;
+	s->x = -1;
+	s->y = -1;
+	if (start.x < end.x)
+		s->x = 1;
+	if (start.y < end.y)
+		s->y = 1;
+	return (d->x - d->y);
 }
 
-void line_coords(t_uvec start, t_uvec end, void (*f)(uint32_t, uint32_t)) 
+bool line_coords(t_uvec start, t_uvec end, bool (*f)(uint32_t, uint32_t)) 
 {
 	t_ivec		d;
 	t_ivec		s;
 	int32_t		err;
 
 	if (!f)
-		return ;
-	set_line_vars(start, end, &d, &s);
-	err = d.x - d.y;
-	while (start.x != end.x || start.y != end.y)
+		return (false);
+	err = set_line_vars(start, end, &d, &s);
+	while (1)
 	{
-		f(start.x, start.y);
+		if (!f(start.x, start.y))
+			return (false);
+		if (start.x == end.x && start.y == end.y)
+			break ;
 		if ((2 * err) > -d.y) 
 		{
 			err -= d.y; 
@@ -57,4 +60,5 @@ void line_coords(t_uvec start, t_uvec end, void (*f)(uint32_t, uint32_t))
 			start.y += s.y;
 		}
 	}
+	return (true);
 }

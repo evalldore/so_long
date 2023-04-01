@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:54:01 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/31 05:26:11 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/01 17:47:51 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 #include "assets.h"
 
 static int32_t g_anims[MAX_ANIM][4] = {
-	{ASSET_NONE, ASSET_NONE, ASSET_NONE, ASSET_NONE},
-	{ASSET_SAM_IDLE_R, ASSET_NONE, ASSET_NONE, ASSET_NONE},
-	{ASSET_SAM_WALK_R_1, ASSET_SAM_WALK_R_2, ASSET_SAM_WALK_R_3, ASSET_NONE},
-	{ASSET_SAM_WALK_R_3, ASSET_NONE, ASSET_NONE, ASSET_NONE},
-	{ASSET_SAM_IDLE_L, ASSET_NONE, ASSET_NONE, ASSET_NONE},
-	{ASSET_SAM_WALK_L_1, ASSET_SAM_WALK_L_2, ASSET_SAM_WALK_L_3, ASSET_NONE},
-	{ASSET_SAM_WALK_L_3, ASSET_NONE, ASSET_NONE, ASSET_NONE},
-	{ASSET_ENERGY_1, ASSET_ENERGY_3, ASSET_ENERGY_2, ASSET_NONE},
-	{ASSET_PROJECT_R_1, ASSET_PROJECT_R_2, ASSET_NONE, ASSET_NONE},
-	{ASSET_PROJECT_L_1, ASSET_PROJECT_L_2, ASSET_NONE, ASSET_NONE},
-	{ASSET_METROID_1, ASSET_METROID_2, ASSET_METROID_3, ASSET_NONE}
+{ASSET_NONE, ASSET_NONE, ASSET_NONE, ASSET_NONE},
+{ASSET_SAM_IDLE_R, ASSET_NONE, ASSET_NONE, ASSET_NONE},
+{ASSET_SAM_WALK_R_1, ASSET_SAM_WALK_R_2, ASSET_SAM_WALK_R_3, ASSET_NONE},
+{ASSET_SAM_WALK_R_3, ASSET_NONE, ASSET_NONE, ASSET_NONE},
+{ASSET_SAM_IDLE_L, ASSET_NONE, ASSET_NONE, ASSET_NONE},
+{ASSET_SAM_WALK_L_1, ASSET_SAM_WALK_L_2, ASSET_SAM_WALK_L_3, ASSET_NONE},
+{ASSET_SAM_WALK_L_3, ASSET_NONE, ASSET_NONE, ASSET_NONE},
+{ASSET_ENERGY_1, ASSET_ENERGY_3, ASSET_ENERGY_2, ASSET_NONE},
+{ASSET_PROJECT_R_1, ASSET_PROJECT_R_2, ASSET_NONE, ASSET_NONE},
+{ASSET_PROJECT_L_1, ASSET_PROJECT_L_2, ASSET_NONE, ASSET_NONE},
+{ASSET_METROID_1, ASSET_METROID_2, ASSET_METROID_3, ASSET_NONE}
 };
 
 void	animation_set(uint32_t ent, int32_t index, int32_t frame)
@@ -33,19 +33,16 @@ void	animation_set(uint32_t ent, int32_t index, int32_t frame)
 	t_c_anim	*anim;
 	t_c_sprt	*sprt;
 
-	if (index < 0 || index >= MAX_ANIM)
-		return ;
-	if (frame >= MAX_FRAMES)
+	if (index <= 0 || index >= MAX_ANIM || frame >= MAX_FRAMES)
 		return ;
 	anim = ecs_comp_get(ent, COMP_ANIM);
 	sprt = ecs_comp_get(ent, COMP_SPRITE);
-	if (sprt && anim)
-	{
-		anim->index = index;
-		anim->frame = frame;
-		sprt->asset = g_anims[index][frame];
-		anim->time = 0.0f;
-	}
+	if (!sprt || !anim)
+		return ;
+	anim->index = index;
+	anim->frame = frame;
+	sprt->asset = g_anims[index][frame];
+	anim->time = 0.0f;
 }
 
 void	sys_animation(uint32_t ent, va_list args)
@@ -57,7 +54,7 @@ void	sys_animation(uint32_t ent, va_list args)
 	dt = va_arg(args, double);
 	anim = ecs_comp_get(ent, COMP_ANIM);
 	sprt = ecs_comp_get(ent, COMP_SPRITE);
-	if (!anim || !sprt)
+	if (!sprt || !anim || anim->index == ANIM_NONE)
 		return ;
 	anim->time += dt;
 	if (anim->time < 0.1)

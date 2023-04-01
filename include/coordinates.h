@@ -5,6 +5,6 @@
 # include "map.h"
 
 t_uvec		pos_to_coords(double x, double y);
-void		line_coords(t_uvec start, t_uvec end, void (*f)(uint32_t, uint32_t));
+bool		line_coords(t_uvec start, t_uvec end, bool (*f)(uint32_t, uint32_t));
 
 #endif
