@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 12:37:07 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/31 19:03:51 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 19:08:03 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 void	collect(uint32_t ent)
 {
+	t_c_collect	*collect;
+
+	collect = ecs_comp_get(ent, COMP_COLLECTIBLE);
+	if (!collect)
+		return ;
 	ecs_remove(ent);
 }
 

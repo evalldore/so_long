@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 05:49:30 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 20:06:48 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,16 @@
 # include <math.h>
 # include "vector.h"
 # include "entities.h"
+# include "map.h"
 # define WIDTH 512
 # define HEIGHT 512
 # define TILE_SIZE 32
-
-typedef struct s_map
-{
-	uint32_t	num_coll;
-	char		**data;
-	uint32_t	dim_x;
-	uint32_t	dim_y;
-	t_ivec		start;
-	t_ivec		end;
-}	t_map;
 
 typedef struct s_gamestate
 {
 	uint32_t	player;
 	uint32_t	collected;
 }	t_gamestate;
-
-typedef struct s_linecheck
-{
-	bool		has_exit;
-	bool		has_start;
-	uint32_t	collectibles;
-	int32_t		len;
-}	t_mapcheck;
 
 typedef struct s_sweep
 {
@@ -61,11 +44,8 @@ typedef struct s_sweep
 }	t_sweepinfos;
 
 t_uvec		pos_to_coords(double x, double y);
-t_list		*parse_file(char *path);
 void		interact(uint32_t ent1, uint32_t ent2);
 void		shoot(uint32_t	player);
-bool		map_load(char *path);
-t_map		map_get(void);
 bool		sl_init(mlx_t *mlx, char *path);
 void		sl_keys(mlx_key_data_t keydata, void *params);
 void		sl_tick(void *params);

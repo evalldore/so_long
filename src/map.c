@@ -6,18 +6,18 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 01:59:47 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/03/31 20:10:39 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "map.h"
 
 static t_map	g_map;
 
-static bool	check_line(char	*line, char *start)
+static bool	check_line(uint32_t index, char	*line, char *start)
 {
-	static uint32_t index;
-
+	//if ((ft_strlen(line) - 1) != g_map.dim_x)
+		//return (false);
 	while (*line && *line != '\n')
 	{
 		if (*line == 'P')
@@ -38,44 +38,6 @@ static bool	check_line(char	*line, char *start)
 			g_map.num_coll++;
 		line++;
 	}
-	index++;
-	return (true);
-}
-
-static bool check_borders()
-{
-	t_uvec	coords;
-
-	coords.x = 0;
-	coords.y = 0;
-	while (coords.x < (g_map.dim_x))
-	{
-		if (g_map.data[0][coords.x] != '1')
-			return (false);
-		if (g_map.data[g_map.dim_y - 1][coords.x] != '1')
-			return (false);
-		coords.x++;
-	}
-	while (coords.y < g_map.dim_y)
-	{
-		if (g_map.data[coords.y][0] != '1')
-			return (false);
-		if (g_map.data[coords.y][g_map.dim_x - 1] != '1')
-			return (false);
-		coords.y++;
-	}
-	return (true);
-}
-
-static bool is_valid(void)
-{
-
-	if (g_map.dim_x <= g_map.dim_y)
-		return (false);
-	if (g_map.start.x < 0 || g_map.end.x < 0)
-		return (false);
-	if (g_map.num_coll == 0)
-		return (false);
 	return (true);
 }
 
@@ -84,9 +46,7 @@ static bool	map_init(t_list *list)
 	size_t	index;
 
 	index = 0;
-	g_map.dim_x = ft_strlen(list->content) - 1;
-	g_map.dim_y = ft_lstsize(list);
-	if (is_valid())
+	if (map_is_valid(g_map))
 	{
 		g_map.data = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
 		while (list)
@@ -96,7 +56,7 @@ static bool	map_init(t_list *list)
 		}
 		g_map.data[index] = NULL;
 		ft_lstclear(&list, NULL);
-		return (check_borders());
+		return (map_check_borders(g_map));
 	}
 	ft_lstclear(&list, &free);
 	return (false);
@@ -109,6 +69,7 @@ t_map	map_get(void)
 
 bool	map_load(char *path)
 {
+	static uint32_t 	index;
 	t_list				*list;
 	t_list				*curr;
 
@@ -116,13 +77,11 @@ bool	map_load(char *path)
 	if (!list)
 		return (false);
 	curr = list;
-	g_map.start.x = -1;
-	g_map.start.y = -1;
-	g_map.end.x = -1;
-	g_map.end.y = -1;
+	g_map.dim_x = ft_strlen(list->content) - 1;
+	g_map.dim_y = ft_lstsize(list);
 	while (curr)
 	{
-		if (check_line(curr->content, curr->content))
+		if (check_line(index++, curr->content, curr->content))
 		{
 			curr = curr->next;
 			continue ;
