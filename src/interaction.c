@@ -6,12 +6,11 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 12:37:07 by evallee-          #+#    #+#             */
-/*   Updated: 2023/04/01 03:58:21 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/01 23:19:27 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "entities.h"
-#include "assets.h"
+#include "interact.h"
 
 void	collect(uint32_t ent)
 {

@@ -6,14 +6,15 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/01 05:19:27 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/01 23:21:30 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "so_long.h"
 #include "entities.h"
 #include "box.h"
+#include "map.h"
+#include "interact.h"
+#include "coordinates.h"
 
 static bool	check_tile(t_uvec coords, t_dvec pos, t_uvec size)
 {

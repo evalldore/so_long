@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/01 18:05:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/01 18:32:12 by niceguy          ###   ########.fr       */
+/*   Created: 2023/04/01 22:46:37 by niceguy           #+#    #+#             */
+/*   Updated: 2023/04/01 23:26:06 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#ifndef GAME_H
+# define GAME_H
+# include <stdint.h>
 
-double	clamp(double value, double min, double max)
+typedef struct s_gamestate
 {
-	return (fmax(min, fmin(max, value)));
-}
+	uint32_t	player;
+	uint32_t	collected;
+	uint32_t	moves;
+}	t_gamestate;
 
-t_dvec	normalize(double x, double y)
-{
-	double	l;
-	t_dvec	norm;
+t_gamestate		game_get(void);
+void			game_add_collectible();
+void			game_set_player(uint32_t ent);
 
-	norm.x = 0.0;
-	norm.y = 0.0;
-	l = sqrt((x * x) + (y * y));	
-	if (l != 0.0) 
-	{
-		norm.x = x / l;
-		norm.y = y / l;
-	} 
-	return (norm);
-}
+#endif

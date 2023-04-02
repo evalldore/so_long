@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   interact.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/01 18:05:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/01 18:32:12 by niceguy          ###   ########.fr       */
+/*   Created: 2023/04/01 23:15:00 by niceguy           #+#    #+#             */
+/*   Updated: 2023/04/01 23:17:30 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#ifndef INTERACT_H
+# define INTERACT_H
+# include <stdint.h>
+# include "entities.h"
+# include "assets.h"
 
-double	clamp(double value, double min, double max)
-{
-	return (fmax(min, fmin(max, value)));
-}
+void		interact(uint32_t ent1, uint32_t ent2);
+void		shoot(uint32_t	player);
 
-t_dvec	normalize(double x, double y)
-{
-	double	l;
-	t_dvec	norm;
-
-	norm.x = 0.0;
-	norm.y = 0.0;
-	l = sqrt((x * x) + (y * y));	
-	if (l != 0.0) 
-	{
-		norm.x = x / l;
-		norm.y = y / l;
-	} 
-	return (norm);
-}
+#endif

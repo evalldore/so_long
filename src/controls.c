@@ -6,14 +6,14 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 02:33:12 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/01 05:18:05 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/01 23:32:52 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <so_long.h>
 #include "entities.h"
 #include "map.h"
 #include "coordinates.h"
+#include "interact.h"
 
 static void	set(uint32_t ent, keys_t key, bool toggle)
 {
