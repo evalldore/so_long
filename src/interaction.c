@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 12:37:07 by evallee-          #+#    #+#             */
-/*   Updated: 2023/04/01 23:19:27 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/02 00:00:34 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	collect(uint32_t ent)
 	if (!collect)
 		return ;
 	ecs_remove(ent);
+	game_add_collectible();
 }
 
 void	kill(uint32_t ent)

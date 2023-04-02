@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/01 23:32:09 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/02 00:31:12 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	sl_init(mlx_t *mlx)
 		}
 		co.y++;
 	}
-	game_set_player(entities_player((map.start.x * TILE_SIZE) + (TILE_SIZE / 2), (map.start.y + 1) * TILE_SIZE));
+	game_add_player(map.start);
 	return (true);
 }
 

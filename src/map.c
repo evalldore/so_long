@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 22:18:30 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/02 01:13:27 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ bool	map_load(char *path)
 	t_list				*list;
 	t_list				*curr;
 
+	if (!ft_strnstr(path, ".ber", ft_strlen(path)))
+		return (false);
 	list = parse_file(path);
 	if (!list)
 		return (false);

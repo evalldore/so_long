@@ -6,11 +6,12 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 22:46:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/01 23:25:16 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/02 00:37:41 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
+
 
 static t_gamestate	g_gamestate;
 
@@ -19,12 +20,20 @@ t_gamestate	game_get(void)
 	return (g_gamestate);
 }
 
-void	game_set_player(uint32_t ent)
+void	game_add_player(t_uvec start)
 {
-	g_gamestate.player = ent;
+	t_dvec	pos;
+
+	pos.x = (start.x * TILE_SIZE) + (TILE_SIZE / 2);
+	pos.y = (start.y + 1) * TILE_SIZE;
+	g_gamestate.player = entities_player(pos.x, pos.y);
 }
 
 void	game_add_collectible()
 {
+	t_map	map;
+
+	map = map_get();
 	g_gamestate.collected++;
+	ft_printf("%d/%d\n", g_gamestate.collected, map.num_coll);
 }
