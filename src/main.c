@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/02 06:27:36 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 10:06:44 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int32_t	main(int argc, char	**argv)
 	mlx_loop_hook(mlx, &sl_tick, mlx);
 	sl_init(mlx);
 	mlx_loop(mlx);
-	mlx_terminate(mlx);
 	sl_exit();
+	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }

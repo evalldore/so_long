@@ -15,7 +15,7 @@ OBJS	:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
 all: libmlx libft ecs $(NAME)
 
 leaks:
-	valgrind --leak-check=full ./$(NAME) maps/test.ber
+	valgrind --leak-check=full ./$(NAME) maps/test1.ber
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
