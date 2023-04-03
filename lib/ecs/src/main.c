@@ -6,12 +6,11 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:47:33 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/30 23:00:32 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/02 01:57:32 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ecs.h"
-#include <stdio.h>
 
 static uint32_t	g_entities;
 
@@ -36,6 +35,15 @@ void	ecs_remove(uint32_t ent_id)
 	comp = 0;
 	while (comp < MAX_COMP)
 		ecs_comp_remove(ent_id, comp++);
+}
+
+void	ecs_clear(void)
+{
+	uint32_t	ent_id;
+
+	ent_id = 0;
+	while (ent_id < g_entities)
+		ecs_remove(ent_id++);
 }
 
 void	ecs_iterate(t_system f, ...)

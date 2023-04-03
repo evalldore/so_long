@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/02 01:13:27 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/02 06:59:49 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,20 @@ static bool	map_init(t_list *list)
 t_map	map_get(void)
 {
 	return (g_map);
+}
+
+void	map_clear(void)
+{
+	uint32_t	row;
+
+	row = 0;
+	while (g_map.data[row])
+	{
+		free(g_map.data[row++]);
+		g_map.data[row] = NULL;
+	}
+	free(g_map.data);
+	g_map.data = NULL;
 }
 
 bool	map_load(char *path)

@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/02 00:31:12 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/02 06:47:50 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ void	sl_tick(void *param)
 
 void	sl_exit(void)
 {
-	
+	ecs_clear();
+	map_clear();
 }

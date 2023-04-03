@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:14:25 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 18:36:39 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 00:31:16 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <MLX42/MLX42.h>
 # include "ecs.h"
 # include "vector.h"
+# include "assets.h"
 # define BULLET_SPEED 480
 
 enum	e_flags
@@ -80,7 +81,7 @@ typedef struct s_comp_sprite
 	int32_t		asset;
 	int32_t		last_asset;
 	t_dvec		offset;
-	int32_t		*insts;
+	int32_t		insts[MAX_ASSETS];
 }	t_c_sprt;
 
 typedef struct s_comp_control

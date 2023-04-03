@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 02:30:19 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/01 17:42:00 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/02 21:24:29 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ void	sys_sprites(uint32_t ent, va_list args)
 	mlx = va_arg(args, void *);
 	pos = ecs_comp_get(ent, COMP_POS);
 	sprite = ecs_comp_get(ent, COMP_SPRITE);
-	if (!pos || !sprite || sprite->asset == ASSET_NONE)
+	if (!pos || !sprite)
+		return ;
+	if (sprite->asset <= ASSET_NONE || sprite->asset >= MAX_ASSETS)
 		return ;
 	last_frame(sprite);
 	img = assets_get(sprite->asset);

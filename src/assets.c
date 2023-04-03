@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 05:06:31 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 05:25:39 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/02 21:06:05 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	assets_load(mlx_t *mlx, int32_t asset, const char *path)
 
 mlx_image_t	*assets_get(int32_t	asset)
 {
-	if (asset >= MAX_ASSETS)
+	if (asset <= ASSET_NONE || asset >= MAX_ASSETS)
 		return (NULL);
 	return (g_assets.images[asset]);
 }

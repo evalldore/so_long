@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 03:33:14 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/01 02:54:22 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/02 01:31:37 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_component
 uint32_t	ecs_create(void);
 uint32_t	ecs_num(void);
 void		ecs_remove(uint32_t	ent_id);
+void		ecs_clear(void);
 void		*ecs_comp_add(uint32_t ent_id, int comp, int argc, ...);
 void		ecs_comp_remove(uint32_t ent_id, int comp);
 void		ecs_comp_register(int comp, t_constructor c, t_destructor d);
