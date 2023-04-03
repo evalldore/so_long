@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 15:13:31 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/04/03 19:18:53 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,12 @@
 
 bool	sl_init(mlx_t *mlx)
 {
-	t_uvec			co;
-	int32_t			asset;
 	t_map			map;
 
 	map = map_get();
 	assets_init(mlx);
 	entities_init();
-	co.y = 0;
-	while (map.data[co.y])
-	{
-		co.x = 0;
-		while (map.data[co.y][co.x])
-		{
-			asset = ASSET_TILE_EMPTY;
-			if (map.data[co.y][co.x] == '\n')
-				break ;
-			if (map.data[co.y][co.x] == '1')
-				asset = ASSET_TILE_WALL;
-			if (map.data[co.y][co.x] == 'C')
-				entities_enemy((co.x * TILE_SIZE) + (TILE_SIZE / 2), (co.y * TILE_SIZE) + (TILE_SIZE / 2));
-			if (asset)
-				mlx_image_to_window(mlx, assets_get(asset), co.x * TILE_SIZE, co.y * TILE_SIZE);
-			co.x++;
-		}
-		co.y++;
-	}
+	map_iter_tiles(map, &game_set_tile, mlx);
 	game_add_player(map.start);
 	return (true);
 }
@@ -72,6 +52,7 @@ void	sl_tick(void *param)
 	ecs_iterate(&sys_state);
 	ecs_iterate(&sys_animation, dt);
 	ecs_iterate(&sys_sprites, mlx);
+	game_tick();
 }
 
 void	sl_exit(void)

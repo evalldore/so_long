@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:53:17 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/02 21:48:45 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:30:24 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	sprite_free(void	*ptr)
 	{
 		img = assets_get(sprt->asset);
 		inst = sprt->insts[sprt->asset];
-		ft_printf("sprite asset: %d sprite inst: %d\n", sprt->asset, inst);
 		if (inst > -1)
 			img->instances[inst].enabled = false;
 	}
