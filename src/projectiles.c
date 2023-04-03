@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projectiles.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 04:43:38 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 05:55:33 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:19:24 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	shoot(uint32_t	player)
 	t_c_dir		*dir;
 
 	pos = ecs_comp_get(player, COMP_POS);
-	dir	= ecs_comp_get(player, COMP_DIRECTION);
+	dir = ecs_comp_get(player, COMP_DIRECTION);
 	if (!pos || !dir)
 		return ;
 	entities_projectile(pos->curr.x, pos->curr.y - 24.0, dir->curr);

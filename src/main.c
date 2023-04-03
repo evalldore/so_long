@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 10:06:44 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 17:55:50 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int32_t	main(int argc, char	**argv)
 {
 	mlx_t	*mlx;
 	t_map	map;
+	t_uvec	dim;
 
 	if (argc < 2)
 		ft_error();
@@ -30,7 +31,9 @@ int32_t	main(int argc, char	**argv)
 	if (!map_load(argv[1]))
 		ft_error();
 	map = map_get();
-	mlx = mlx_init(map.dim_x * TILE_SIZE, map.dim_y * TILE_SIZE, "So Long", true);
+	dim.x = map.dim_x * TILE_SIZE;
+	dim.y = map.dim_y * TILE_SIZE;
+	mlx = mlx_init(dim.x, dim.y, "So Long", true);
 	if (!mlx)
 		ft_error();
 	mlx_set_window_size(mlx, mlx->width * 2, mlx->height * 2);

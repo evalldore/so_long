@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interaction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 12:37:07 by evallee-          #+#    #+#             */
-/*   Updated: 2023/04/02 00:00:34 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 15:08:43 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	kill(uint32_t ent)
 	pos = ecs_comp_get(ent, COMP_POS);
 	entities_collectible(pos->curr.x, pos->curr.y);
 	ecs_remove(ent);
-	//ecs_remove(attacker);
 }
 
 void	interact(uint32_t ent1, uint32_t ent2)

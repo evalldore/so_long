@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/02 06:47:50 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 15:13:31 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	sl_init(mlx_t *mlx)
 		{
 			asset = ASSET_TILE_EMPTY;
 			if (map.data[co.y][co.x] == '\n')
-				break;
+				break ;
 			if (map.data[co.y][co.x] == '1')
 				asset = ASSET_TILE_WALL;
 			if (map.data[co.y][co.x] == 'C')

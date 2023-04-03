@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ai.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 05:20:46 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/02 00:52:03 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:18:05 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	check_tile(uint32_t x, uint32_t y)
 	return (map_get().data[y][x] != '1');
 }
 
-static bool find_player(uint32_t ent, uint32_t player)
+static bool	find_player(uint32_t ent, uint32_t player)
 {
 	t_c_pos	*entpos;
 	t_c_pos	*playerpos;

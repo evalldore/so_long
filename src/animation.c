@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:54:01 by evallee-          #+#    #+#             */
-/*   Updated: 2023/04/01 17:47:51 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:18:27 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "entities.h"
 #include "assets.h"
 
-static int32_t g_anims[MAX_ANIM][4] = {
+static int32_t	g_anims[MAX_ANIM][4] = {
 {ASSET_NONE, ASSET_NONE, ASSET_NONE, ASSET_NONE},
 {ASSET_SAM_IDLE_R, ASSET_NONE, ASSET_NONE, ASSET_NONE},
 {ASSET_SAM_WALK_R_1, ASSET_SAM_WALK_R_2, ASSET_SAM_WALK_R_3, ASSET_NONE},

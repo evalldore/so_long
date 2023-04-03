@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 01:14:42 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/28 03:58:05 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:23:44 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	VECTOR_H
+#ifndef VECTOR_H
 # define VECTOR_H
 # include <stdint.h>
 

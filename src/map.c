@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/02 06:59:49 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:04:00 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ static bool	map_init(t_list *list)
 		}
 		g_map.data[index] = NULL;
 		ft_lstclear(&list, NULL);
-		return (map_check_borders(g_map));
+		if (map_check_borders(g_map))
+			return (true);
+		map_clear();
 	}
 	ft_lstclear(&list, &free);
 	return (false);
@@ -74,8 +76,9 @@ void	map_clear(void)
 	row = 0;
 	while (g_map.data[row])
 	{
-		free(g_map.data[row++]);
+		free(g_map.data[row]);
 		g_map.data[row] = NULL;
+		row++;
 	}
 	free(g_map.data);
 	g_map.data = NULL;
@@ -83,7 +86,7 @@ void	map_clear(void)
 
 bool	map_load(char *path)
 {
-	static uint32_t 	index;
+	static uint32_t		index;
 	t_list				*list;
 	t_list				*curr;
 

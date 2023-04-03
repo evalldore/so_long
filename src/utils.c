@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 18:05:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/01 18:32:12 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:19:54 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ t_dvec	normalize(double x, double y)
 
 	norm.x = 0.0;
 	norm.y = 0.0;
-	l = sqrt((x * x) + (y * y));	
-	if (l != 0.0) 
+	l = sqrt((x * x) + (y * y));
+	if (l != 0.0)
 	{
 		norm.x = x / l;
 		norm.y = y / l;
-	} 
+	}
 	return (norm);
 }

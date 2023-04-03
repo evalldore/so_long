@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   coordinates.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:32:47 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/01 17:19:38 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 15:07:46 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_uvec	pos_to_coords(double x, double y)
 	return (coord);
 }
 
-static int32_t set_line_vars(t_uvec start, t_uvec end, t_ivec *d, t_ivec *s)
+static int32_t	set_line_vars(t_uvec start, t_uvec end, t_ivec *d, t_ivec *s)
 {
 	d->x = abs((int32_t)(end.x - start.x));
 	d->y = abs((int32_t)(end.y - start.y));
@@ -34,7 +34,7 @@ static int32_t set_line_vars(t_uvec start, t_uvec end, t_ivec *d, t_ivec *s)
 	return (d->x - d->y);
 }
 
-bool line_coords(t_uvec start, t_uvec end, bool (*f)(uint32_t, uint32_t)) 
+bool	line_coords(t_uvec start, t_uvec end, bool (*f)(uint32_t, uint32_t))
 {
 	t_ivec		d;
 	t_ivec		s;
@@ -49,12 +49,12 @@ bool line_coords(t_uvec start, t_uvec end, bool (*f)(uint32_t, uint32_t))
 			return (false);
 		if (start.x == end.x && start.y == end.y)
 			break ;
-		if ((2 * err) > -d.y) 
+		if ((2 * err) > -d.y)
 		{
-			err -= d.y; 
-			start.x += s.x; 
+			err -= d.y;
+			start.x += s.x;
 		}
-		if ((2 * err) < d.x) 
+		if ((2 * err) < d.x)
 		{
 			err += d.x;
 			start.y += s.y;

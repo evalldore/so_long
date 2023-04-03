@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 19:59:36 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 22:17:29 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:18:59 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ bool	map_is_valid(t_map map)
 	return (true);
 }
 
-size_t row_len(char	*line)
+size_t	row_len(char	*line)
 {
 	size_t	len;
 
 	len = 0;
-	while(line[len] && line[len] != '\n')
+	while (line[len] && line[len] != '\n')
 		len++;
 	return (len);
 }
 
-bool map_check_borders(t_map map)
+bool	map_check_borders(t_map map)
 {
 	t_uvec	coords;
 
@@ -58,7 +58,7 @@ bool map_check_borders(t_map map)
 	return (true);
 }
 
-void map_iter_tiles(t_map map, void (*f)(char))
+void	map_iter_tiles(t_map map, void (*f)(char))
 {
 	t_uvec	co;
 

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 22:46:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/02 00:37:41 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:18:47 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
-
 
 static t_gamestate	g_gamestate;
 
@@ -29,7 +28,7 @@ void	game_add_player(t_uvec start)
 	g_gamestate.player = entities_player(pos.x, pos.y);
 }
 
-void	game_add_collectible()
+void	game_add_collectible(void)
 {
 	t_map	map;
 
