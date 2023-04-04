@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/01 23:21:30 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/04 04:04:07 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *cc)
 		vel->curr.x = 0.0;
 }
 
-static void	check_ents(uint32_t	ent, t_c_pos *pos, t_c_coll *coll)
+static void	check_ents(void * params, uint32_t ent, t_c_pos *pos, t_c_coll *coll)
 {
 	uint32_t	check_ent;
 	t_dvec		coll_pos;
@@ -76,7 +76,7 @@ static void	check_ents(uint32_t	ent, t_c_pos *pos, t_c_coll *coll)
 			c_coll_pos.x = c_pos->curr.x + c_coll->offset.x;
 			c_coll_pos.y = c_pos->curr.y + c_coll->offset.y;
 			if (box_check(coll_pos, coll->size, c_coll_pos, c_coll->size))
-				interact(ent, check_ent);
+				interact(params, ent, check_ent);
 		}
 		check_ent++;
 	}
@@ -97,5 +97,5 @@ void	sys_collision(uint32_t ent, va_list args)
 		return ;
 	if (vel && (coll->flags & FLAG_WORLD))
 		check_world(dt, pos, vel, coll);
-	check_ents(ent, pos, coll);
+	check_ents(va_arg(args, void *), ent, pos, coll);
 }

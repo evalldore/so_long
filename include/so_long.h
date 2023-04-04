@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 02:38:46 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/04 03:55:30 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include "map.h"
 # include "game.h"
 
-bool		sl_init(mlx_t *mlx);
+bool		sl_init(void *params);
 void		sl_keys(mlx_key_data_t keydata, void *params);
 void		sl_tick(void *params);
-void		sl_exit(void);
+void		sl_exit(void *params);
 
 #endif

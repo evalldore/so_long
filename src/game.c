@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 22:46:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 22:28:09 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/04 04:01:11 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,7 @@ void	game_add_player(t_uvec start)
 
 void	game_add_collectible(void)
 {
-	t_map	map;
-
-	map = map_get();
 	g_gamestate.collected++;
-	ft_printf("%d/%d\n", g_gamestate.collected, map.num_coll);
 }
 
 void	game_set_tile(uint32_t x, uint32_t y, char c, va_list args)
@@ -59,7 +55,7 @@ void	game_set_tile(uint32_t x, uint32_t y, char c, va_list args)
 	}
 }
 
-void	game_tick(void)
+void	game_tick(void	*params)
 {
 	t_map	map;
 	t_c_pos	*pos;
@@ -73,9 +69,5 @@ void	game_tick(void)
 	if (g_gamestate.collected != map.num_coll)
 		return ;
 	if (coords.x == map.end.x && coords.y == map.end.y)
-	{
-		ecs_clear();
-		map_clear();
-		exit(EXIT_SUCCESS);
-	}
+		sl_exit(params);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 17:55:50 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/04/04 03:55:00 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int32_t	main(int argc, char	**argv)
 	mlx_loop_hook(mlx, &sl_tick, mlx);
 	sl_init(mlx);
 	mlx_loop(mlx);
-	sl_exit();
-	mlx_terminate(mlx);
+	sl_exit(mlx);
 	return (EXIT_SUCCESS);
 }
