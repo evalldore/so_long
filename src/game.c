@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 22:46:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 19:16:19 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/04/03 22:28:09 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	game_tick(void)
 	pos = ecs_comp_get(g_gamestate.player, COMP_POS);
 	if (!pos)
 		return ;
-	coords = pos_to_coords(pos->curr.x, pos->curr.y);
+	coords = pos_to_coords(pos->curr.x, pos->curr.y + 8);
 	if (g_gamestate.collected != map.num_coll)
 		return ;
 	if (coords.x == map.end.x && coords.y == map.end.y)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 18:04:00 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/04/03 22:14:20 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,17 @@ static bool	check_line(uint32_t index, char	*line, char *start)
 static bool	map_init(t_list *list)
 {
 	size_t	index;
+	t_list	*temp;
 
 	index = 0;
 	if (map_is_valid(g_map))
 	{
 		g_map.data = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
-		while (list)
+		temp = list;
+		while (temp)
 		{
-			g_map.data[index++] = list->content;
-			list = list->next;
+			g_map.data[index++] = temp->content;
+			temp = temp->next;
 		}
 		g_map.data[index] = NULL;
 		ft_lstclear(&list, NULL);
