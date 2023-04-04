@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 12:37:07 by evallee-          #+#    #+#             */
-/*   Updated: 2023/04/04 04:02:13 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/04 04:16:41 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,5 @@ void	interact(void *params, uint32_t ent1, uint32_t ent2)
 	if ((entcomp1->flags & FLAG_PROJECTILE) && (entcomp2->flags & FLAG_ENEMIES))
 		kill_enemy(ent2);
 	if ((entcomp1->flags & FLAG_ENEMIES) && (entcomp2->flags & FLAG_PLAYER))
-	{
-		sl_exit(params);
-	}
+		mlx_close_window(params);
 }

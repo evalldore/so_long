@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 22:46:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 04:01:11 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/04 04:18:07 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ void	game_tick(void	*params)
 	if (g_gamestate.collected != map.num_coll)
 		return ;
 	if (coords.x == map.end.x && coords.y == map.end.y)
-		sl_exit(params);
+		mlx_close_window(params);
 }

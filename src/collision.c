@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 04:04:07 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/04 04:17:43 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	check_world(double dt, t_c_pos *pos, t_c_vel *vel, t_c_coll *cc)
 		vel->curr.x = 0.0;
 }
 
-static void	check_ents(void * params, uint32_t ent, t_c_pos *pos, t_c_coll *coll)
+static void	check_ents(void *params, uint32_t ent, t_c_pos *pos, t_c_coll *coll)
 {
 	uint32_t	check_ent;
 	t_dvec		coll_pos;

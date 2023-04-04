@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 04:08:28 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/04 04:29:56 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	sl_init(void *params)
 void	sl_keys(mlx_key_data_t keydata, void *param)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		sl_exit(param);
+		mlx_close_window(param);
 	sys_controls(keydata, param);
 }
 
@@ -57,10 +57,8 @@ void	sl_tick(void *param)
 	game_tick(param);
 }
 
-void	sl_exit(void *params)
+void	sl_exit()
 {
 	ecs_clear();
 	map_clear();
-	mlx_terminate(params);
-	exit(EXIT_SUCCESS);
 }
