@@ -3,22 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 19:59:36 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 19:20:50 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/04/04 03:46:35 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-bool	map_is_valid(t_map map)
+static bool	map_check_borders(t_map map, t_list *list)
+{
+	t_uvec	coords;
+	char	*content;
+
+	coords.x = 0;
+	coords.y = 0;
+	while(list)
+	{
+		content = list->content;
+		coords.x = 0;
+		while (coords.x < map.dim_x && content[coords.x])
+		{
+			if (content[coords.x] != '1')
+			{
+				if (coords.y == 0 || coords.y == (map.dim_y - 1))
+					return (false);
+				else if (coords.x == 0 || coords.x == (map.dim_x - 1))
+					return (false);
+			}
+			coords.x++;
+		}
+		list = list->next;
+		coords.y++;
+	}
+	return (true);
+}
+
+bool	map_is_valid(t_map map, t_list *list)
 {
 	if (map.dim_x <= map.dim_y)
 		return (false);
 	if (map.start.x == 0 || map.end.x == 0)
 		return (false);
 	if (map.num_coll == 0)
+		return (false);
+	if (!map_check_borders(map, list))
 		return (false);
 	return (true);
 }
@@ -31,31 +61,6 @@ size_t	row_len(char	*line)
 	while (line[len] && line[len] != '\n')
 		len++;
 	return (len);
-}
-
-bool	map_check_borders(t_map map)
-{
-	t_uvec	coords;
-
-	coords.x = 0;
-	coords.y = 0;
-	while (coords.x < (map.dim_x))
-	{
-		if (map.data[0][coords.x] != '1')
-			return (false);
-		if (map.data[map.dim_y - 1][coords.x] != '1')
-			return (false);
-		coords.x++;
-	}
-	while (coords.y < map.dim_y)
-	{
-		if (map.data[coords.y][0] != '1')
-			return (false);
-		if (map.data[coords.y][map.dim_x - 1] != '1')
-			return (false);
-		coords.y++;
-	}
-	return (true);
 }
 
 void	map_iter_tiles(t_map map, t_tileiterator it, ...)

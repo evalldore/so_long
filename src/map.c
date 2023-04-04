@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 22:14:20 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/04 02:54:18 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static bool	map_init(t_list *list)
 	t_list	*temp;
 
 	index = 0;
-	if (map_is_valid(g_map))
+	if (map_is_valid(g_map, list))
 	{
 		g_map.data = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
 		temp = list;
@@ -58,9 +58,7 @@ static bool	map_init(t_list *list)
 		}
 		g_map.data[index] = NULL;
 		ft_lstclear(&list, NULL);
-		if (map_check_borders(g_map))
-			return (true);
-		map_clear();
+		return (true);
 	}
 	ft_lstclear(&list, &free);
 	return (false);
