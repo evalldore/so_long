@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:54:01 by evallee-          #+#    #+#             */
-/*   Updated: 2023/04/03 18:18:27 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/04/04 04:39:58 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ void	sys_animation(uint32_t ent, va_list args)
 {
 	t_c_anim		*anim;
 	t_c_sprt		*sprt;
-	double			dt;
+	mlx_t			*mlx;
 
-	dt = va_arg(args, double);
+	mlx = va_arg(args, void *);
 	anim = ecs_comp_get(ent, COMP_ANIM);
 	sprt = ecs_comp_get(ent, COMP_SPRITE);
 	if (!sprt || !anim || anim->index == ANIM_NONE)
 		return ;
-	anim->time += dt;
+	anim->time += mlx->delta_time;
 	if (anim->time < 0.1)
 		return ;
 	if (g_anims[anim->index][anim->frame + 1])

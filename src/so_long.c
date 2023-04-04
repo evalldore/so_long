@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 04:29:56 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/04 04:51:12 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,21 @@ void	sl_keys(mlx_key_data_t keydata, void *param)
 void	sl_tick(void *param)
 {
 	mlx_t		*mlx;
-	double		dt;
-	t_gamestate	game;
 
-	game = game_get();
 	mlx = param;
-	dt = mlx->delta_time;
-	if (dt > 0.03)
-		dt = 0.016;
-	ecs_iterate(&sys_controls_tick, dt);
-	ecs_iterate(&sys_projectiles, dt);
-	ecs_iterate(&sys_collectible, dt, game.player);
-	ecs_iterate(&sys_ai, dt, game.player);
-	ecs_iterate(&sys_gravity, dt);
-	ecs_iterate(&sys_collision, dt, param);
-	ecs_iterate(&sys_movement, dt);
-	ecs_iterate(&sys_state);
-	ecs_iterate(&sys_animation, dt);
+	if (mlx->delta_time > 0.03)
+		mlx->delta_time = 0.016;
+	ecs_iterate(&sys_controls_tick, mlx);
+	ecs_iterate(&sys_projectiles, mlx);
+	ecs_iterate(&sys_collectible, mlx);
+	ecs_iterate(&sys_ai, mlx);
+	ecs_iterate(&sys_gravity, mlx);
+	ecs_iterate(&sys_collision, mlx);
+	ecs_iterate(&sys_movement, mlx);
+	ecs_iterate(&sys_state, mlx);
+	ecs_iterate(&sys_animation, mlx);
 	ecs_iterate(&sys_sprites, mlx);
-	game_tick(param);
+	game_tick(mlx);
 }
 
 void	sl_exit()

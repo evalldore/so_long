@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:21:39 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 04:17:43 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/04 04:38:15 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,15 @@ void	sys_collision(uint32_t ent, va_list args)
 	t_c_pos		*pos;
 	t_c_vel		*vel;
 	t_c_coll	*coll;
-	double		dt;
+	mlx_t		*mlx;
 
-	dt = va_arg(args, double);
+	mlx = va_arg(args, void *);
 	pos = ecs_comp_get(ent, COMP_POS);
 	vel = ecs_comp_get(ent, COMP_VEL);
 	coll = ecs_comp_get(ent, COMP_COLLISION);
 	if (!pos || !coll)
 		return ;
 	if (vel && (coll->flags & FLAG_WORLD))
-		check_world(dt, pos, vel, coll);
-	check_ents(va_arg(args, void *), ent, pos, coll);
+		check_world(mlx->delta_time, pos, vel, coll);
+	check_ents(mlx, ent, pos, coll);
 }
