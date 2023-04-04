@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ecs.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 03:33:14 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 19:08:07 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/04/03 23:07:46 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void		*ecs_comp_add(uint32_t ent_id, int comp, int argc, ...);
 void		ecs_comp_remove(uint32_t ent_id, int comp);
 void		ecs_comp_register(int comp, t_constructor c, t_destructor d);
 void		*ecs_comp_get(uint32_t ent_id, int comp);
-void		ecs_iterate(void (*f)(uint32_t, va_list), ...);
+void		ecs_iterate(t_system system, ...);
 
 #endif

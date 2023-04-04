@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:47:33 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/02 01:57:32 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/03 23:07:59 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,20 @@ void	ecs_clear(void)
 		ecs_remove(ent_id++);
 }
 
-void	ecs_iterate(t_system f, ...)
+void	ecs_iterate(t_system system, ...)
 {
 	uint32_t	ent_id;
 	va_list		o_args;
 	va_list		e_args;
 
-	if (!f)
+	if (!system)
 		return ;
 	ent_id = 0;
-	va_start(o_args, f);
+	va_start(o_args, system);
 	while (ent_id < g_entities)
 	{
 		va_copy(e_args, o_args);
-		f(ent_id++, e_args);
+		system(ent_id++, e_args);
 	}
 	va_end(o_args);
 	va_end(e_args);
