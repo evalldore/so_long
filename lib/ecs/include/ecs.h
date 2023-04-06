@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ecs.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 03:33:14 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 23:07:46 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/06 08:35:39 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <stdarg.h>
 # include <stdint.h>
 
-typedef void *(*t_constructor)(va_list);
-typedef void (*t_destructor)(void	*);
-typedef void (*t_system)(uint32_t, va_list);
+typedef void	*(*t_constructor)(va_list);
+typedef void	(*t_destructor)(void	*);
+typedef void	(*t_system)(uint32_t, va_list);
 
 typedef struct s_component
 {

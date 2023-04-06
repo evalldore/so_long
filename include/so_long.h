@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/06 06:07:17 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/04/06 08:41:55 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "map.h"
 # include "game.h"
 # include "moves.h"
-
 
 bool		sl_init(void *params);
 void		sl_keys(mlx_key_data_t keydata, void *params);
