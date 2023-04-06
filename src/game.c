@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 22:46:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/06 08:05:17 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/04/06 08:31:21 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	game_tick(void	*params)
 	pos = ecs_comp_get(g_gamestate.player, COMP_POS);
 	if (!pos)
 		return ;
-	coords = pos_to_coords(pos->curr.x, pos->curr.y + 8);
+	coords = pos_to_coords(pos->curr.x, pos->curr.y - 1);
 	if (g_gamestate.collected != map.num_coll)
 		return ;
 	if (coords.x == map.end.x && coords.y == map.end.y)
