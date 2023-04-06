@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ai.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 05:20:46 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 04:44:40 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/05 17:05:27 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	move_to_player(uint32_t ent)
 void	sys_ai(uint32_t ent, va_list args)
 {
 	t_c_ai		*ai;
-
 
 	(void)args;
 	ai = ecs_comp_get(ent, COMP_AI);

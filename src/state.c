@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 01:30:22 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 04:39:16 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/05 14:19:55 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@ void	sys_state(uint32_t ent, va_list args)
 {
 	t_c_state	*state;
 	t_c_vel		*vel;
+	t_c_ctrl	*ctrl;
 
 	(void)args;
 	state = ecs_comp_get(ent, COMP_STATE);
 	vel = ecs_comp_get(ent, COMP_VEL);
+	ctrl = ecs_comp_get(ent, COMP_CTRL);
 	if (!state || !vel)
 		return ;
-	if (vel->curr.y != 0.0)
+	if (vel->curr.y != 0.0 || ctrl->jump)
 	{
 		dir_anim(ent, ANIM_JUMP_L, ANIM_JUMP_R);
 		state_set(ent, STATE_JUMP);

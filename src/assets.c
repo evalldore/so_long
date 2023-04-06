@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 05:06:31 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/02 21:06:05 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/06 07:58:13 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void	assets_init(mlx_t *mlx)
 	assets_load(mlx, ASSET_METROID_1, "assets/metroid_1.png");
 	assets_load(mlx, ASSET_METROID_2, "assets/metroid_2.png");
 	assets_load(mlx, ASSET_METROID_3, "assets/metroid_3.png");
+	assets_load(mlx, ASSET_EXIT, "assets/exit.png");
 }

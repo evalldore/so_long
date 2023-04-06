@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   interaction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 12:37:07 by evallee-          #+#    #+#             */
-/*   Updated: 2023/04/04 04:16:41 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/06 08:06:45 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interact.h"
 
-static void	collect(uint32_t ent)
+static void	collect(void *params, uint32_t ent)
 {
 	t_c_collect	*collect;
 
@@ -20,7 +20,7 @@ static void	collect(uint32_t ent)
 	if (!collect)
 		return ;
 	ecs_remove(ent);
-	game_add_collectible();
+	game_add_collectible(params);
 }
 
 static void	kill_enemy(uint32_t ent)
@@ -40,7 +40,7 @@ void	interact(void *params, uint32_t ent1, uint32_t ent2)
 	entcomp1 = ecs_comp_get(ent1, COMP_COLLISION);
 	entcomp2 = ecs_comp_get(ent2, COMP_COLLISION);
 	if ((entcomp1->flags & FLAG_PLAYER) && (entcomp2->flags & FLAG_COLLECTIBLE))
-		collect(ent2);
+		collect(params, ent2);
 	if ((entcomp1->flags & FLAG_PROJECTILE) && (entcomp2->flags & FLAG_ENEMIES))
 		kill_enemy(ent2);
 	if ((entcomp1->flags & FLAG_ENEMIES) && (entcomp2->flags & FLAG_PLAYER))

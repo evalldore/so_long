@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 19:59:36 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 03:46:35 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/06 01:29:54 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static bool	map_check_borders(t_map map, t_list *list)
 
 	coords.x = 0;
 	coords.y = 0;
-	while(list)
+	while (list)
 	{
 		content = list->content;
 		coords.x = 0;

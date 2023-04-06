@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 05:07:51 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 18:21:21 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/04/06 07:57:59 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ enum	e_asset
 	ASSET_METROID_1,
 	ASSET_METROID_2,
 	ASSET_METROID_3,
+	ASSET_EXIT,
 	MAX_ASSETS
 };
 

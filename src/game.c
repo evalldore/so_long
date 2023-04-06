@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 22:46:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 04:40:53 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/06 08:05:17 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,20 @@ void	game_add_player(t_uvec start)
 	g_gamestate.player = entities_player(pos.x, pos.y);
 }
 
-void	game_add_collectible(void)
+void	game_add_collectible(void *params)
 {
+	t_map			map;
+	mlx_image_t		*img;
+	t_ivec			pos;
+
+	map = map_get();
 	g_gamestate.collected++;
+	if (map.num_coll != g_gamestate.collected)
+		return ;
+	img = assets_get(ASSET_EXIT);
+	pos.x = map.end.x * TILE_SIZE;
+	pos.y = map.end.y * TILE_SIZE;
+	mlx_image_to_window(params, img, pos.x, pos.y);
 }
 
 void	game_set_tile(uint32_t x, uint32_t y, char c, va_list args)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 02:54:18 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/06 01:29:40 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static bool	map_init(t_list *list)
 		}
 		g_map.data[index] = NULL;
 		ft_lstclear(&list, NULL);
+		if (!flood_check(g_map))
+			return (false);
 		return (true);
 	}
 	ft_lstclear(&list, &free);

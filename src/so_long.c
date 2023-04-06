@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 04:51:12 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/06 06:08:53 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ bool	sl_init(void *params)
 	entities_init();
 	map_iter_tiles(map, &game_set_tile, mlx);
 	game_add_player(map.start);
+	moves_init(params);
 	return (true);
 }
 
@@ -51,9 +52,10 @@ void	sl_tick(void *param)
 	ecs_iterate(&sys_animation, mlx);
 	ecs_iterate(&sys_sprites, mlx);
 	game_tick(mlx);
+	moves_update(param);
 }
 
-void	sl_exit()
+void	sl_exit(void)
 {
 	ecs_clear();
 	map_clear();

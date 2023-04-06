@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 22:46:37 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 04:01:25 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/04/06 07:59:17 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_gamestate
 }	t_gamestate;
 
 t_gamestate		game_get(void);
-void			game_add_collectible(void);
+void			game_add_collectible(void *params);
 void			game_add_player(t_uvec start);
 void			game_tick(void	*params);
 void			game_set_tile(uint32_t x, uint32_t y, char c, va_list args);
