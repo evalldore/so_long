@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:53:17 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 18:30:24 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/24 00:31:38 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,19 @@
 #include "entities.h"
 #include <libft.h>
 
-void	*sprite_new(va_list args)
+void	sprite_new(void *ptr, va_list args)
 {
 	t_c_sprt	*sprite;
 	int32_t		inst;
 
-	sprite = malloc(sizeof(t_c_sprt));
-	if (!sprite)
-		return (NULL);
 	inst = 0;
+	sprite = ptr;
 	sprite->asset = va_arg(args, int32_t);
 	sprite->last_asset = sprite->asset;
 	sprite->offset.x = va_arg(args, double);
 	sprite->offset.y = va_arg(args, double);
 	while (inst < MAX_ASSETS)
 		sprite->insts[inst++] = -1;
-	return (sprite);
 }
 
 void	sprite_free(void	*ptr)
@@ -46,10 +43,12 @@ void	sprite_free(void	*ptr)
 		if (inst > -1)
 			img->instances[inst].enabled = false;
 	}
-	free(sprt);
 }
 
 void	comp_sprite_reg(void)
 {
-	ecs_comp_register(COMP_SPRITE, &sprite_new, &sprite_free);
+	size_t	size;
+
+	size = sizeof(t_c_sprt);
+	ecs_comp_register(COMP_SPRITE, size, &sprite_new, sprite_free);
 }

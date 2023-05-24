@@ -3,37 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:16:41 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 04:49:22 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/05/24 00:31:14 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-void	*control_new(va_list args)
+void	control_new(void *ptr, va_list args)
 {
 	t_c_ctrl	*ctrl;
 
 	(void)args;
-	ctrl = malloc(sizeof(t_c_ctrl));
-	if (!ctrl)
-		return (NULL);
+	ctrl = ptr;
 	ctrl->jump = false;
 	ctrl->left = false;
 	ctrl->right = false;
 	ctrl->shoot = false;
 	ctrl->lastshoot = false;
-	return (ctrl);
-}
-
-void	control_free(void	*ptr)
-{
-	free(ptr);
 }
 
 void	comp_ctrl_reg(void)
 {
-	ecs_comp_register(COMP_CTRL, &control_new, &control_free);
+	size_t	size;
+
+	size = sizeof(t_c_ctrl);
+	ecs_comp_register(COMP_CTRL, size, &control_new, NULL);
 }

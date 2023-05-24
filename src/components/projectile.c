@@ -3,34 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   projectile.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 04:37:45 by niceguy           #+#    #+#             */
-/*   Updated: 2023/03/31 05:24:39 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/05/24 00:31:32 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 #include "libft.h"
 
-void	*projectile_new(va_list args)
+void	projectile_new(void *ptr, va_list args)
 {
 	t_c_project	*project;
 
 	(void)args;
-	project = malloc(sizeof(t_c_project));
-	if (!project)
-		return (NULL);
+	project = ptr;
 	project->time = 0.0;
-	return (project);
-}
-
-void	projectile_free(void	*ptr)
-{
-	free(ptr);
 }
 
 void	comp_project_reg(void)
 {
-	ecs_comp_register(COMP_PROJECTILE, &projectile_new, &projectile_free);
+	size_t	size;
+
+	size = sizeof(t_c_project);
+	ecs_comp_register(COMP_PROJECTILE, size, &projectile_new, NULL);
 }
