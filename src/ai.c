@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 05:20:46 by niceguy           #+#    #+#             */
-/*   Updated: 2023/05/24 00:28:04 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:29:34 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,19 @@ static void	move_to_player(uint32_t ent)
 void	sys_ai(uint32_t ent, va_list args)
 {
 	t_c_ai		*ai;
+	t_c_anim	*anim;
 
 	(void)args;
 	ai = ecs_comp_get(ent, COMP_AI);
+	anim = ecs_comp_get(ent, COMP_ANIM);
 	if (!ai)
 		return ;
 	if (!ai->attacking)
 		ai->attacking = find_player(ent);
 	else
+	{
+		if (anim)
+			anim->scale = 1.0f;
 		move_to_player(ent);
+	}
 }

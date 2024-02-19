@@ -1,5 +1,5 @@
 NAME	:= so_long
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wextra -Wall -Werror -Ofast
 SRCDDIR	:= ./src/
 BINDIR	:= ./bin/
 LIBMLX	:= ./lib/MLX42
@@ -30,7 +30,7 @@ $(BINDIR)%.o: $(SRCDDIR)%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(BINDIR) $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 $(BINDIR) :
 	mkdir $(BINDIR)

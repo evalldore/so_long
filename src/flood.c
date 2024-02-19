@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:24:52 by evallee-          #+#    #+#             */
-/*   Updated: 2023/04/06 06:48:44 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:16:21 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,13 @@ static void	flood(t_floodfill *fill, t_uvec coords, char tiles[2], char **copy)
 		return ;
 	copy[coords.y][coords.x] = tiles[1];
 	set_fill(fill, coords);
-	check.x = coords.x + 1;
-	check.y = coords.y;
+	check = (t_uvec){coords.x + 1, coords.y};
 	flood(fill, check, tiles, copy);
-	check.x = coords.x - 1;
-	check.y = coords.y;
+	check = (t_uvec){coords.x - 1, coords.y};
 	flood(fill, check, tiles, copy);
-	check.x = coords.x;
-	check.y = coords.y + 1;
+	check = (t_uvec){coords.x, coords.y + 1};
 	flood(fill, check, tiles, copy);
-	check.x = coords.x;
-	check.y = coords.y - 1;
+	check = (t_uvec){coords.x, coords.y - 1};
 	flood(fill, check, tiles, copy);
 }
 

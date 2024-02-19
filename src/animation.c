@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:54:01 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/23 23:13:52 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:32:07 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	sys_animation(uint32_t ent, va_list args)
 	sprt = ecs_comp_get(ent, COMP_SPRITE);
 	if (!sprt || !anim || anim->index == ANIM_NONE)
 		return ;
-	anim->time += mlx->delta_time;
+	anim->time += mlx->delta_time * anim->scale;
 	if (anim->time < 0.1)
 		return ;
 	if (g_anims[anim->index][anim->frame + 1])

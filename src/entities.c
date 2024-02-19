@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 06:05:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/03 15:08:18 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:23:17 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ uint32_t	entities_player(double x, double y)
 	ecs_comp_add(ent, COMP_GRAV, 1, 1.0);
 	ecs_comp_add(ent, COMP_SPRITE, 3, ASSET_SAM_IDLE_R, -20.0, -40.0);
 	ecs_comp_add(ent, COMP_COLLISION, 5, 16, 32, -8.0, -32.0, collflags);
-	ecs_comp_add(ent, COMP_ANIM, 1, ANIM_IDLE_R);
+	ecs_comp_add(ent, COMP_ANIM, 1, ANIM_IDLE_R, 1.0);
 	ecs_comp_add(ent, COMP_STATE, 1, STATE_IDLE);
 	ecs_comp_add(ent, COMP_DIRECTION, 1, true);
 	return (ent);
@@ -59,7 +59,7 @@ uint32_t	entities_collectible(double x, double y)
 	ecs_comp_add(ent, COMP_POS, 2, x, y);
 	ecs_comp_add(ent, COMP_VEL, 2, 0.0, 0.0);
 	ecs_comp_add(ent, COMP_SPRITE, 3, ASSET_ENERGY_1, -4.0, -4.0);
-	ecs_comp_add(ent, COMP_ANIM, 1, ANIM_ENERGY);
+	ecs_comp_add(ent, COMP_ANIM, 1, ANIM_ENERGY, 1.0);
 	ecs_comp_add(ent, COMP_COLLECTIBLE, 1, COLLECT_HP);
 	ecs_comp_add(ent, COMP_COLLISION, 5, 8, 8, -4.0, -4.0, collflags);
 	return (ent);
@@ -87,7 +87,7 @@ uint32_t	entities_projectile(double x, double y, bool isRight)
 	ecs_comp_add(ent, COMP_POS, 2, x, y);
 	ecs_comp_add(ent, COMP_VEL, 2, vel, 0.0);
 	ecs_comp_add(ent, COMP_SPRITE, 3, asset, -6.0, -2.0);
-	ecs_comp_add(ent, COMP_ANIM, 1, anim);
+	ecs_comp_add(ent, COMP_ANIM, 1, anim, 1.0);
 	ecs_comp_add(ent, COMP_COLLISION, 5, 12, 4, -6.0, -2.0, collflags);
 	ecs_comp_add(ent, COMP_DIRECTION, 1, isRight);
 	ecs_comp_add(ent, COMP_PROJECTILE, 0);
@@ -104,7 +104,7 @@ uint32_t	entities_enemy(double x, double y)
 	ecs_comp_add(ent, COMP_POS, 2, x, y);
 	ecs_comp_add(ent, COMP_VEL, 2, 0.0, 0.0);
 	ecs_comp_add(ent, COMP_SPRITE, 3, ASSET_METROID_1, -8.0, -8.0);
-	ecs_comp_add(ent, COMP_ANIM, 1, ANIM_METROID);
+	ecs_comp_add(ent, COMP_ANIM, 1, ANIM_METROID, 0.5);
 	ecs_comp_add(ent, COMP_COLLISION, 5, 16, 16, -8.0, -8.0, collflags);
 	ecs_comp_add(ent, COMP_AI, 0);
 	return (ent);

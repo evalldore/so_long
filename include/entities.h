@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 06:14:25 by niceguy           #+#    #+#             */
-/*   Updated: 2023/05/24 00:17:50 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:18:56 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct s_comp_animation
 	int32_t		index;
 	int32_t		frame;
 	double		time;
-
+	double		scale;
 }	t_c_anim;
 
 typedef struct s_comp_direction
