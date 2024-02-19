@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 06:05:09 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/19 14:23:17 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:33:53 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ uint32_t	entities_projectile(double x, double y, bool isRight)
 	ecs_comp_add(ent, COMP_POS, 2, x, y);
 	ecs_comp_add(ent, COMP_VEL, 2, vel, 0.0);
 	ecs_comp_add(ent, COMP_SPRITE, 3, asset, -6.0, -2.0);
-	ecs_comp_add(ent, COMP_ANIM, 1, anim, 1.0);
+	ecs_comp_add(ent, COMP_ANIM, 1, anim, 2.0);
 	ecs_comp_add(ent, COMP_COLLISION, 5, 12, 4, -6.0, -2.0, collflags);
 	ecs_comp_add(ent, COMP_DIRECTION, 1, isRight);
 	ecs_comp_add(ent, COMP_PROJECTILE, 0);

@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:24:52 by evallee-          #+#    #+#             */
-/*   Updated: 2024/02/19 14:16:21 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:32:14 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,26 @@ static void	set_fill(t_floodfill *fill, t_uvec check)
 		fill->found_coll++;
 }
 
-static void	flood(t_floodfill *fill, t_uvec coords, char tiles[2], char **copy)
+static void	flood(t_floodfill *fill, t_uvec coords, char **copy)
 {
 	t_uvec	check;
 	t_map	map;
 
 	map = map_get();
-	if (coords.x < 0 || coords.x >= map.dim_x)
+	if (coords.x >= map.dim_x || coords.y >= map.dim_y)
 		return ;
-	if (coords.y < 0 || coords.y >= map.dim_y)
+	if (copy[coords.y][coords.x] != '0')
 		return ;
-	if (copy[coords.y][coords.x] != tiles[0])
-		return ;
-	copy[coords.y][coords.x] = tiles[1];
+	copy[coords.y][coords.x] = '1';
 	set_fill(fill, coords);
 	check = (t_uvec){coords.x + 1, coords.y};
-	flood(fill, check, tiles, copy);
+	flood(fill, check, copy);
 	check = (t_uvec){coords.x - 1, coords.y};
-	flood(fill, check, tiles, copy);
+	flood(fill, check, copy);
 	check = (t_uvec){coords.x, coords.y + 1};
-	flood(fill, check, tiles, copy);
+	flood(fill, check, copy);
 	check = (t_uvec){coords.x, coords.y - 1};
-	flood(fill, check, tiles, copy);
+	flood(fill, check, copy);
 }
 
 void	free_copy(char	**copy)
@@ -89,15 +87,12 @@ void	free_copy(char	**copy)
 bool	flood_check(t_map map)
 {
 	t_floodfill		fill;
-	char			tiles[2];
 	char			**copy;
 
-	tiles[0] = '0';
-	tiles[1] = '1';
 	fill.found_exit = false;
 	fill.found_coll = 0;
 	copy = copy_data(map);
-	flood(&fill, map.start, tiles, copy);
+	flood(&fill, map.start, copy);
 	free_copy(copy);
 	return (fill.found_exit && (fill.found_coll == map.num_coll));
 }
