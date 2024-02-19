@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/05/24 00:21:56 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:03:41 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int32_t	main(int argc, char	**argv)
 	if (!mlx)
 		ft_error("mlx failed to init!\n");
 	mlx_set_window_size(mlx, mlx->width * 2, mlx->height * 2);
-	mlx_key_hook(mlx, sl_keys, NULL);
+	mlx_key_hook(mlx, sl_keys, mlx);
 	mlx_loop_hook(mlx, &sl_tick, mlx);
 	sl_init(mlx);
 	mlx_loop(mlx);
