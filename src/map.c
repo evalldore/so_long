@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 05:11:34 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/06 01:29:40 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:43:58 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_map	g_map;
 
 static bool	check_line(uint32_t index, char	*line, char *start)
 {
-	if (row_len(line) != g_map.dim_x)
+	if (row_len(line) != g_map.dim.x)
 		return (false);
 	while (*line && *line != '\n')
 	{
@@ -98,8 +98,8 @@ bool	map_load(char *path)
 	if (!list)
 		return (false);
 	curr = list;
-	g_map.dim_x = row_len(list->content);
-	g_map.dim_y = ft_lstsize(list);
+	g_map.dim.x = row_len(list->content);
+	g_map.dim.y = ft_lstsize(list);
 	while (curr)
 	{
 		if (check_line(index++, curr->content, curr->content))

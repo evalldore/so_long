@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/19 15:03:41 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:42:41 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int32_t	main(int argc, char	**argv)
 	if (!map_load(argv[1]))
 		ft_error("map is invalid!\n");
 	map = map_get();
-	dim.x = map.dim_x * TILE_SIZE;
-	dim.y = map.dim_y * TILE_SIZE;
+	dim = (t_uvec){map.dim.x * TILE_SIZE, map.dim.y * TILE_SIZE};
 	mlx = mlx_init(dim.x, dim.y, "So Long", true);
 	if (!mlx)
 		ft_error("mlx failed to init!\n");

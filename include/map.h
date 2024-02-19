@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:01:21 by evallee-          #+#    #+#             */
-/*   Updated: 2023/04/06 01:32:24 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:41:46 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ typedef struct s_map
 {
 	uint32_t	num_coll;
 	char		**data;
-	uint32_t	dim_x;
-	uint32_t	dim_y;
+	t_uvec		dim;
 	t_uvec		start;
 	t_uvec		end;
 }	t_map;

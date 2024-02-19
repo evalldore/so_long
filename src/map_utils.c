@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 19:59:36 by niceguy           #+#    #+#             */
-/*   Updated: 2023/05/24 00:55:08 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:42:41 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static bool	map_check_borders(t_map map, t_list *list)
 	{
 		content = list->content;
 		coords.x = 0;
-		while (coords.x < map.dim_x && content[coords.x])
+		while (coords.x < map.dim.x && content[coords.x])
 		{
 			if (content[coords.x] != '1')
 			{
-				if (coords.y == 0 || coords.y == (map.dim_y - 1))
+				if (coords.y == 0 || coords.y == (map.dim.y - 1))
 					return (false);
-				else if (coords.x == 0 || coords.x == (map.dim_x - 1))
+				else if (coords.x == 0 || coords.x == (map.dim.x - 1))
 					return (false);
 			}
 			coords.x++;
